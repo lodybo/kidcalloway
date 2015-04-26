@@ -23,7 +23,7 @@
     "grunt-contrib-watch": "~0.6.1",
     "grunt-contrib-connect": "~0.10.1",
     "grunt-scss-lint": "~0.3.4",
-    "grunt-sassdoc": "^2.0.0"
-    "node-neat": "1~.7.1"
+    "grunt-sassdoc": "^2.0.0",
+    "node-neat": "~1.7.1"
   }
 }
