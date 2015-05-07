@@ -7,3 +7,5 @@ node_modules/
 # Dev
 .sass-cache/
 build/
+docs/sassdoc
+docs/jsdoc
