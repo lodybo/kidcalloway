@@ -33,7 +33,7 @@ module.exports = function(grunt) {
     sassdoc: {
 	    options: {
 		    dest: ["docs/sassdoc/"]
-	    },
+	    },	    
 	    src: ["src/scss/**/*.scss"]
     },
     
@@ -69,8 +69,7 @@ module.exports = function(grunt) {
       scss: {
 	      files: ["src/scss/**/*.kit"],
 	      tasks: ["scss", "docs:sass"],
-      },
-      js: {}
+      }
     }
   });
 
