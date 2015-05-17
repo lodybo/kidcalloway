@@ -1,0 +1,30 @@
+// *** PALETTES
+$color-map: (
+	"background-color": #94BFBE,
+	"accent": #ACF7C1,
+	"link": #857C8D,
+	"linkHover": #61304B,
+	"linkVisited": #5C0029,
+	"light": #FFFFFF,
+	"dark": #000000
+);
+
+/// Color
+/// Function that returns a color value based on the given situation
+/// @param {String} situation - A situation where color is needed, like background or visited link
+/// @return {Color} A color that can be used in CSS.
+@function color($key) {
+	@if map-has-key($color-map, $key) {
+		@return map-get($color-map, $key);
+	}
+	@else {
+		@warn "#{$key} not found in color list.";
+	}
+}
+
+// *** FONTS
+// Set default font
+body {
+	font-family: 'Roboto', sans-serif;
+	color: #262626;
+}

@@ -1,0 +1,19 @@
+body {
+	background: color("background-color");
+}
+
+.top-bar {
+	height: 50px;
+	width: 100%;
+	background: color("accent");
+}
+
+.wrapper {
+	@include outer-container();
+	background: color("light");
+}
+
+.menu {
+	background: color("accent");
+	margin-bottom: 15px;
+}
