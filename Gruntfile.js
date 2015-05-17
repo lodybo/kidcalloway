@@ -4,8 +4,8 @@ module.exports = function(grunt) {
     // HTML
     codekit: {
 	    dist: {
-		    src: ["src/kit/**/*.kit"],
-		    dest: ["build/"]
+		    src: "src/kit/**/*.kit",
+		    dest: "build/"
 	    }
     },
     
@@ -16,8 +16,8 @@ module.exports = function(grunt) {
 		    includePaths: require("node-neat").includePaths
 	    },
 	    dist: {
-		    src: ["src/scss/kid.scss"],
-		    dest: ["build/css/styles.css"]
+		    src: ["src/scss/kidcalloway.scss"],
+		    dest: "build/css/kidcalloway.css"
 	    }
     },
     autoprefixer: {
@@ -26,25 +26,26 @@ module.exports = function(grunt) {
 		    map: true
 	    },
 	    dist: {
-		    src: ["<%= sass.dist.src %>"],
-		    dest: ["<%= sass.dist.src %>"]
+		    src: ["<%= sass.dist.dest %>"],
+		    dest: "<%= sass.dist.dest %>"
 	    }
     },
     sassdoc: {
-	    options: {
-		    dest: ["docs/sassdoc/"]
-	    },	    
-	    src: ["src/scss/**/*.scss"]
+	    docs: {
+		    src: ["src/scss/**/*.scss"],
+		    options: {
+				dest: "docs/sassdoc/"
+			}
+    	}
     },
     
     // JS
     
     // GENERIC
     clean: {
-	    build: ["build"],
-	    sassdoc: ["docs/sassdoc"],
-	    jsdoc: ["docs/jsdoc"],
-	    test: ["test"]
+	    build: "build",
+	    sassdoc: "docs/sassdoc",
+	    jsdoc: "docs/jsdoc"
     },
     connect: {
 	    build: {
@@ -67,7 +68,7 @@ module.exports = function(grunt) {
 	      tasks: ["kit"]
       },
       scss: {
-	      files: ["src/scss/**/*.kit"],
+	      files: ["src/scss/**/*.scss"],
 	      tasks: ["scss", "docs:sass"],
       }
     }
@@ -82,25 +83,27 @@ module.exports = function(grunt) {
   grunt.registerTask("js", []);
   
   grunt.registerTask("docs", function (mode) {
-	  var taskList = ["sassdoc", "jsdoc"];
+	  var docList = ["sassdoc", "jsdoc"];
 	  var cleanList = ["clean:sassdoc", "clean:jsdoc"];
+	  var TaskList = [];
 	  
 	  if (mode && mode === "sass")
 	  {
-		  taskList.pop();
+		  docList.pop();
 		  cleanList.pop();
 	  }
 	  else if (mode && mode === "js")
 	  {
-		  taskList.shift();
+		  docList.shift();
 		  cleanList.shift();
 	  }
-	  
-	  grunt.tasks.run(cleanList);
-	  grunt.tasks.run(taskList);
+  	  
+  	  taskList = cleanList.concat(docList);
+  	  
+	  grunt.task.run(taskList);
   });
   
-  grunt.registerTask("serve", ["connect:build", "watch"]);
+  grunt.registerTask("serve", ["connect", "watch"]);
   
   grunt.registerTask("default", ["serve"]);
 
