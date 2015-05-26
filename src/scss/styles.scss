@@ -1,6 +1,10 @@
 body {
-	background: color("background-color");
+	background: color("backgroundColor");
 }
+
+a {color: color("link");}
+a:hover {color: color("linkHover");}
+a:visited {color: color("linkVisited");}
 
 .top-bar {
 	height: 50px;
@@ -16,4 +20,54 @@ body {
 .menu {
 	background: color("accent");
 	margin-bottom: 15px;
+}
+
+.filler, .menu {
+	@include span-columns(12);
+}
+
+.filler {
+	text-align: center;
+}
+
+.agenda {
+	@include span-columns(10);
+	@include shift(1);
+	
+	@include pad("default");
+	
+	td {@include pad();}
+	
+	.date {font-weight: bold;}
+	
+	.venue small {
+		display:block;
+		color: color("backgroundColor");
+	}
+	
+	.details {
+		border-left: color("backgroundColor") solid 1px;
+		color: tint(color("dark"), 50);
+	}
+}
+
+.bio {
+	@include span-columns(12);
+	
+	@include pad("default");
+	
+	p {
+		@include span-columns(5 of 12);
+	}
+	
+	.helper {
+	    display: inline-block;
+	    height: 100%;
+	    vertical-align: middle;
+	}
+	
+	img {
+		@include span-columns(2 of 12);
+		vertical-align: middle;
+	}
 }

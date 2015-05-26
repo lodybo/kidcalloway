@@ -1,6 +1,16 @@
 // *** PALETTES
+
+/// Color map
+/// All colors for Kid Calloway is stored in this map
+/// @prop {Color} backgroundColor [#94BFBE] - Background color
+/// @prop {Color} accent [#ACF7C1] - Greenish
+/// @prop {Color} link [#857C8D] - Normal link color
+/// @prop {Color} linkHover [#61304B] - Hovering link 
+/// @prop {Color} linkVisited [#5C0029] - Color of the visited link
+/// @prop {Color} light [#FFFFFF] - Generic light color
+/// @prop {Color} dark [#000000] - Generic dark color
 $color-map: (
-	"background-color": #94BFBE,
+	"backgroundColor": #94BFBE,
 	"accent": #ACF7C1,
 	"link": #857C8D,
 	"linkHover": #61304B,
@@ -20,6 +30,24 @@ $color-map: (
 	@else {
 		@warn "#{$key} not found in color list.";
 	}
+}
+
+/// Slightly lighten a color
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function tint($color, $percentage) {
+  @return mix(color("light"), $color, $percentage);
+}
+
+/// Slightly darken a color
+/// @access public
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function shade($color, $percentage) {
+  @return mix(color("dark"), $color, $percentage);
 }
 
 // *** FONTS
