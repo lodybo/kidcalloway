@@ -8,7 +8,16 @@
 	// Now let's see what we're gonna do with our brand new shiny API
 	switch($_SERVER["REQUEST_METHOD"]) {
 		case "GET":
-			// Return all agenda items
+			// Check if there's an ID parameter present
+			$id = explode("/api/agenda/", $_SERVER["REQUEST_URI"]);
+			
+			if (isset($id[1])) {
+				// Yes, we only need to retrieve 1 item
+				$result = $agenda->get($id[1]);
+				break;
+			}
+			
+			// No, return all agenda items
 			$result = $agenda->getAll();
 			break;			
 	}
@@ -17,7 +26,8 @@
 	$json = json_encode($result);
 	
 	// Output
-	echo $json;
+	header('Content-Type: application/json');
 	header('HTTP/1.1 200 OK');
+	echo $json;
 	return;
 ?>
