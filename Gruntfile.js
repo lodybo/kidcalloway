@@ -40,6 +40,32 @@ module.exports = function(grunt) {
     },
     
     // JS
+    jshint: {
+	    all: ["Gruntfile.js", "src/js/**/*.js"]
+    },
+    jasmine: {
+	    js: {
+		    src: "src/js/scripts/*.js",
+		    options: {
+			    specs: "src/js/specs/*.js",
+			    outfile: "test/jasmine/index.html",
+			    vendor: [
+				    "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js",
+				    "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.min.js"
+			    ]
+		    }
+		}
+    },
+    uglify: {
+	    js: {
+		    options: {
+			    sourceMap: true
+		    },
+		    files: {
+			    "build/js/scripts.min.js" : ["src/js/scripts/*.js"]
+		    }
+	    }
+    },
     
     // GENERIC
     clean: {
@@ -70,6 +96,10 @@ module.exports = function(grunt) {
       scss: {
 	      files: ["src/scss/**/*.scss"],
 	      tasks: ["scss", "docs:sass"],
+      },
+      js: {
+	      files: ["src/js/**/*.js"],
+	      tasks: ["js"]
       }
     }
   });
@@ -80,7 +110,7 @@ module.exports = function(grunt) {
   
   grunt.registerTask("scss", ["sass", "autoprefixer"]);
   
-  grunt.registerTask("js", []);
+  grunt.registerTask("js", ["jshint", "jasmine", "uglify"]);
   
   grunt.registerTask("docs", function (mode) {
 	  var docList = ["sassdoc", "jsdoc"];
