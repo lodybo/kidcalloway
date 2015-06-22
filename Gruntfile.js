@@ -50,8 +50,9 @@ module.exports = function(grunt) {
 			    specs: "src/js/specs/*.js",
 			    outfile: "test/jasmine/index.html",
 			    vendor: [
-				    "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js",
-				    "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.min.js"
+				    "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js",
+				    "http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.min.js",
+				    "http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-mocks.js"
 			    ]
 		    }
 		}
@@ -133,7 +134,7 @@ module.exports = function(grunt) {
 	  grunt.task.run(taskList);
   });
   
-  grunt.registerTask("serve", ["connect", "watch"]);
+  grunt.registerTask("serve", ["connect", "watch:kit", "watch:scss"]);
   
   grunt.registerTask("default", ["serve"]);
 

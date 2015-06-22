@@ -1,11 +1,11 @@
 describe("Agenda functionality", function () {
-	beforeEach(function () {
-		module("agendaApp");
-	});
+	"use strict";
 	
 	var $rootScope;
 	var $controller;
 	var $scope;
+	
+	beforeEach(module("agendaApp"));
 	
 	beforeEach(inject(function(_$rootScope_, _$controller_) {
 		$rootScope = _$rootScope_;
@@ -21,6 +21,8 @@ describe("Agenda functionality", function () {
 	}));
 	
 	describe("Getting the controller", function() {
-		expect($scope.test).toBe("succeeded");
+		it ("should be able to reach the controller", function () {
+			expect($scope.test).toBe("succeeded");
+		});
 	});
 });
