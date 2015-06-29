@@ -24,6 +24,7 @@
     "node-neat": "~1.7.1",
     "grunt-scss-lint": "~0.3.6",
     "scss-lint": "0.0.0",
-    "grunt-codekit": "~1.0.0"
+    "grunt-codekit": "~1.0.0",
+    "grunt-contrib-copy": "~0.8.0"
   }
 }

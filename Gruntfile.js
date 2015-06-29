@@ -74,6 +74,16 @@ module.exports = function(grunt) {
 	    sassdoc: "docs/sassdoc",
 	    jsdoc: "docs/jsdoc"
     },
+    copy: {
+	    img: {
+		    files: [{
+			    expand: true,
+			    flatten: true,
+			    src: ["src/img/*"],
+			    dest: "build/img"
+			}]
+	    }
+    },
     connect: {
 	    build: {
 		    options: {
@@ -134,7 +144,7 @@ module.exports = function(grunt) {
 	  grunt.task.run(taskList);
   });
   
-  grunt.registerTask("serve", ["connect", "watch:kit", "watch:scss"]);
+  grunt.registerTask("serve", ["connect", "watch"]);
   
   grunt.registerTask("default", ["serve"]);
 
