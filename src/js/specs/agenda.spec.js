@@ -4,13 +4,15 @@ describe("Agenda functionality", function () {
 	var $rootScope;
 	var $controller;
 	var $scope;
+	var $httpBackend;
 	
 	beforeEach(module("agendaApp"));
 	
-	beforeEach(inject(function(_$rootScope_, _$controller_) {
+	beforeEach(inject(function(_$rootScope_, _$controller_, _$httpBackend_) {
 		$rootScope = _$rootScope_;
 		$scope = $rootScope.$new();
 		$controller = _$controller_;
+		$httpBackend = _$httpBackend_;
 		
 		var scopes = {
 			$rootScope: $rootScope,
