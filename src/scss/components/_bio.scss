@@ -1,0 +1,20 @@
+.bio {
+	@include span-columns(12);
+	
+	@include pad("default");
+	
+	p {
+		@include span-columns(5 of 12);
+	}
+	
+	.helper {
+	    display: inline-block;
+	    height: 100%;
+	    vertical-align: middle;
+	}
+	
+	img {
+		@include span-columns(2 of 12);
+		vertical-align: middle;
+	}
+}

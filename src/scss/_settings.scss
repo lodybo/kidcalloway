@@ -1,4 +1,15 @@
 // *** PALETTES
+$kidc_black: #000000;
+$kidc_red: #E62329;
+$kidc_orange: #EF7E1E;
+
+// 50% tint
+$kidc_red_50: tint($kidc_red, 50%);
+$kidc_orange_50: tint($kidc_orange, 50%);
+
+// 75% tint
+$kidc_red_75: tint($kidc_red, 75%);
+$kidc_orange_75: tint($kidc_orange, 75%);
 
 /// Color map
 /// All colors for Kid Calloway is stored in this map
@@ -10,11 +21,14 @@
 /// @prop {Color} light [#FFFFFF] - Generic light color
 /// @prop {Color} dark [#000000] - Generic dark color
 $color-map: (
-	"backgroundColor": #94BFBE,
-	"accent": #ACF7C1,
-	"link": #857C8D,
-	"linkHover": #61304B,
-	"linkVisited": #5C0029,
+	"backgroundColor": $kidc_black,
+	"textColor": #262626,
+	"accent": $kidc_orange,
+	"link": $kidc_red,
+	"linkHover": $kidc_orange,
+	"linkVisited": $kidc_red,
+	"menuBackground": $kidc_orange,
+	"menuColor": #666666,
 	"light": #FFFFFF,
 	"dark": #000000
 );
@@ -53,6 +67,11 @@ $color-map: (
 // *** FONTS
 // Set default font
 body {
+	font-family: Tahoma;
+	color: color("textColor");
+}
+
+h1, h2, h3, h4, h5, h6 {
 	font-family: 'Roboto', sans-serif;
-	color: #262626;
+	color: shade(color("textColor"), 10%);
 }

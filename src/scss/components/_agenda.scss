@@ -1,0 +1,26 @@
+.agenda {
+	@include span-columns(10);
+	@include shift(1);
+	
+	@include pad("default");
+	
+	td {@include pad();}
+	
+	$fg: flex-gutter();
+	$fg2: $fg * 2;
+	td.time {@include pad($fg $fg2 $fg $fg)};
+	
+	.date {font-weight: bold;}
+	
+	.venue small {
+		display:block;
+		color: color("backgroundColor");
+	}
+	
+	.details {
+		border-left: color("backgroundColor") solid 1px;
+		color: tint(color("dark"), 50);
+	}
+	
+	.links a {display: block;}
+}

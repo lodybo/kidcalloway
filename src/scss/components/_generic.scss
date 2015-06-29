@@ -1,0 +1,7 @@
+body {
+	background: color("backgroundColor");
+}
+
+a {color: color("link");}
+a:hover {color: color("linkHover");}
+a:visited {color: tint(color("linkVisited"), 50%);}

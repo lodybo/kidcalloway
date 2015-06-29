@@ -1,104 +1,20 @@
-body {
-	background: color("backgroundColor");
-}
+// Generic page styles
+@import "components/generic";
 
-a {color: color("link");}
-a:hover {color: color("linkHover");}
-a:visited {color: color("linkVisited");}
+// Header
+@import "components/header";
 
-.top-bar {
-	height: 50px;
-	width: 100%;
-	background: color("accent");
-}
+// Hero
+@import "components/hero";
 
-.wrapper {
-	@include outer-container();
-	background: color("light");
-}
+// Navigation
+@import "components/nav";
 
-.menu {
-	background: color("accent");
-	margin-bottom: 15px;
-	height: 50px;
-	
-	ul {
-		@include span-columns(10);
-		@include shift(1);
-	}
-	
-	li {
-		list-style: none;
-		display: inline;
-		margin-right: 25px;
-		
-		&:last-of-type {
-			margin-right: 0;
-		}
-	}
-	
-	a, h2 {display: inherit; text-decoration: inherit;}
-	h2 {margin: 0; padding: 0}
-}
+// Calendar
+@import "components/agenda";
 
-.filler, .menu {
-	@include span-columns(12);
-}
+// Bio
+@import "components/bio";
 
-.filler {
-	text-align: center;
-}
-
-.agenda {
-	@include span-columns(10);
-	@include shift(1);
-	
-	@include pad("default");
-	
-	td {@include pad();}
-	
-	$fg: flex-gutter();
-	$fg2: $fg * 2;
-	td.time {@include pad($fg $fg2 $fg $fg)};
-	
-	.date {font-weight: bold;}
-	
-	.venue small {
-		display:block;
-		color: color("backgroundColor");
-	}
-	
-	.details {
-		border-left: color("backgroundColor") solid 1px;
-		color: tint(color("dark"), 50);
-	}
-	
-	.links a {display: block;}
-}
-
-.bio {
-	@include span-columns(12);
-	
-	@include pad("default");
-	
-	p {
-		@include span-columns(5 of 12);
-	}
-	
-	.helper {
-	    display: inline-block;
-	    height: 100%;
-	    vertical-align: middle;
-	}
-	
-	img {
-		@include span-columns(2 of 12);
-		vertical-align: middle;
-	}
-}
-
-.contact {
-	@include span-columns(6);
-	@include shift(3);
-	text-align: center;
-}
+// Contact
+@import "components/contact";
