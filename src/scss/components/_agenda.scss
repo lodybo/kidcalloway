@@ -4,17 +4,27 @@
 	
 	@include pad("default");
 	
-	td {@include pad();}
+	td {
+		@include span-columns(2 of 10);
+		@include pad();
+	}
 	
 	$fg: flex-gutter();
 	$fg2: $fg * 2;
-	td.time {@include pad($fg $fg2 $fg $fg)};
+	td.time {
+		//@include pad($fg $fg2 $fg $fg);
+		@include span-columns(1 of 10);
+	};
 	
 	.date {font-weight: bold;}
 	
-	.venue small {
-		display:block;
-		color: color("backgroundColor");
+	.venue {
+		@include span-columns(3 of 10);
+		
+		small {
+			display:block;
+			color: color("backgroundColor");
+		}
 	}
 	
 	.details {
@@ -22,5 +32,9 @@
 		color: tint(color("dark"), 50);
 	}
 	
-	.links a {display: block;}
+	.links {
+		@include pad($fg $fg 0 $fg);
+		
+		a {display: block;}
+	}
 }

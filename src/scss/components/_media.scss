@@ -1,0 +1,9 @@
+.media {
+	@include span-columns(10);
+	@include shift(1);
+	
+	.bandcamp {
+		@include span-columns(8 of 10);
+		@include shift(1);
+	}
+}
