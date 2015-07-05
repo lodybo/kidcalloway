@@ -2,9 +2,18 @@ body {
 	background: color("backgroundColor");
 }
 
-a {color: color("link");}
-a:hover {color: color("linkHover");}
-a:visited {color: tint(color("linkVisited"), 50%);}
+a, a:visited {
+	color: color("link");
+	
+	text-decoration: none;
+	
+	border-bottom: tint(color("link"), 15%) solid 1px;
+	padding-bottom: 5px;
+}
+a:hover {
+	color: tint(color("linkHover"), 25%);
+	border-bottom-color: tint(color("linkHover"), 25%);
+}
 
 h1 {
 	text-transform: uppercase;
@@ -14,6 +23,11 @@ h1 {
 		
 		&:hover {
 			color: color("textColor");
+			border-bottom-color: tint(color("link"), 15%);
 		}
 	}
+}
+
+.menu, .agenda, .media, .contact {
+	margin-bottom: 35px;
 }

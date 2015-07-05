@@ -28,18 +28,43 @@
 		
 		small {
 			display:block;
-			color: color("backgroundColor");
+			color: shade(color("light"), 30);
 		}
 	}
 	
 	.details {
 		border-left: color("backgroundColor") solid 1px;
-		color: tint(color("dark"), 50);
+		color: shade(color("light"), 30);
 	}
 	
 	.links {
 		@include pad($fg $fg2 0 $fg);
 		
-		a {display: block}
+		a {
+			display: inline-block;
+			padding-bottom: 5px;
+			
+			&:last-of-type {
+				margin-top: 10px;
+			}
+		}
+	}
+	
+	.top {
+		@include span-columns(4 of 10);
+		@include shift(3);
+		text-align: center;
+		margin-bottom: 15px;
+	}
+	
+	@media screen and (max-width: 768px) {
+		@include span-columns(12);
+		@include shift(0);
+		
+		table {@include span-columns(12 of 12);}
+		td {@include span-columns(2 of 12);}
+		td.time {@include span-columns(1 of 12);}
+		.venue {@include span-columns(3 of 12);}
+		.top {@include span-columns(4 of 12);}
 	}
 }

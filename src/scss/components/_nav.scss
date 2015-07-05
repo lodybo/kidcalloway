@@ -1,11 +1,11 @@
 .menu {
-	background: tint(color("menuBackground"), 75%);
-	margin-bottom: 15px;
-	height: 50px;
+	border-bottom: shade(color("menuBackground"), 50%) solid 1px; 
 	
 	ul {
 		@include span-columns(12);
 		//@include shift(1);
+		margin: 0;
+		padding: 0;
 	}
 	
 	li {
@@ -14,19 +14,28 @@
 		padding-right: 25px;
 		text-align: center;
 		//width: 24%;
-		@include span-columns(3 of 12);
+		@include span-columns(4 of 12);
+		padding-top: 25px;
+		padding-bottom: 25px;
 		
 		text-transform: uppercase;
 		
 		&:last-of-type {
 			margin-right: 0;
 		}
+		
+		&:hover {
+			background-color: shade(color("menuBackground"), 10%);
+			a, h2 {
+				color: color("textColor");
+			}
+		}
 	}
 	
 	a, h2 {
 		display: inherit;
-		text-decoration: inherit;
 		color: color("menuColor");
+		border-bottom: none;
 	}
 	
 	h2 {

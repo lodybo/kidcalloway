@@ -1,11 +1,10 @@
 .wrapper {
 	@include outer-container();
-	background: color("light");
+	// background: color("light");
 }
 
 .logo {
-	width: 1258px;
-	height: 493px;
-	
+	max-width: 1258px;
+	height: auto;
 	margin: 25px auto;
 }
