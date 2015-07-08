@@ -14,7 +14,7 @@
 		padding-right: 25px;
 		text-align: center;
 		//width: 24%;
-		@include span-columns(4 of 12);
+		@include span-columns(6 of 12);
 		padding-top: 25px;
 		padding-bottom: 25px;
 		
@@ -41,6 +41,10 @@
 	h2 {
 		margin: 0;
 		padding: 0
+	}
+	
+	@media screen and (max-width: 480px) {
+		h2 {font-size: 1.2em}
 	}
 }
 

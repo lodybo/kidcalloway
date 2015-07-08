@@ -9,7 +9,12 @@ a, a:visited {
 	
 	border-bottom: tint(color("link"), 15%) solid 1px;
 	padding-bottom: 5px;
+	
+	@media screen and (max-width: 480px) {
+		padding-bottom: 0;
+	}
 }
+
 a:hover {
 	color: tint(color("linkHover"), 25%);
 	border-bottom-color: tint(color("linkHover"), 25%);
