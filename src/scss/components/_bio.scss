@@ -1,16 +1,10 @@
 .bio {
-	@include span-columns(12);
+	@include span-columns(10);
+	@include shift(1);
 	
 	@include pad("default");
 	
-	h1 {
-		@include span-columns(10);
-		@include shift(1);
-	}
-	
-	p {
-		@include span-columns(5 of 12);
-	}
+	text-align: center;
 	
 	.helper {
 	    display: inline-block;
