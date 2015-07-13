@@ -75,3 +75,6 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: 'Roboto', sans-serif;
 	color: shade(color("textColor"), 10%);
 }
+
+// *** MEDIA QUERIES
+$mobile: new-breakpoint(max-width 480px 4);
