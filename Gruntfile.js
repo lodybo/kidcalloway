@@ -121,7 +121,7 @@ module.exports = function(grunt) {
   
   grunt.registerTask("scss", ["sass", "autoprefixer"]);
   
-  grunt.registerTask("js", ["jshint", "jasmine", "uglify"]);
+  grunt.registerTask("js", ["test", "uglify"]);
   
   grunt.registerTask("docs", function (mode) {
 	  var docList = ["sassdoc", "jsdoc"];
@@ -145,6 +145,9 @@ module.exports = function(grunt) {
   });
   
   grunt.registerTask("serve", ["connect", "watch"]);
+  
+  grunt.registerTask("test", ["jshint", "jasmine"]);
+  grunt.registerTask("build", ["clean:build", "kit", "scss", "js", "copy"]);
   
   grunt.registerTask("default", ["serve"]);
 
