@@ -6,6 +6,7 @@ node_modules/
 
 # Dev
 .sass-cache/
+.idea/
 build/
 docs/sassdoc
 docs/jsdoc
