@@ -1,1 +1,1 @@
-put -rp "${HOME}/build" /public_html/codeship_test
+put -rp ${HOME}/build /public_html/codeship_test
