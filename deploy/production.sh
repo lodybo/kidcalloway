@@ -1,1 +1,1 @@
-put -rp /home/rof/clone/build/* home/lodybo1b/public_html/codeship_test
+put -rp /home/rof/clone/build/* public_html/codeship_test
