@@ -1,1 +1,1 @@
-put -rp ${HOME}/clone/build/* public_html/staging/kidcalloway
+put -rp "${HOME}/clone/build/*" public_html/staging/kidcalloway
