@@ -16,7 +16,7 @@ $kidc_orange_75: tint($kidc_orange, 75%);
 /// @prop {Color} backgroundColor [#94BFBE] - Background color
 /// @prop {Color} accent [#ACF7C1] - Greenish
 /// @prop {Color} link [#857C8D] - Normal link color
-/// @prop {Color} linkHover [#61304B] - Hovering link 
+/// @prop {Color} linkHover [#61304B] - Hovering link
 /// @prop {Color} linkVisited [#5C0029] - Color of the visited link
 /// @prop {Color} light [#FFFFFF] - Generic light color
 /// @prop {Color} dark [#000000] - Generic dark color
@@ -69,6 +69,7 @@ $color-map: (
 body {
 	font-family: Tahoma, Verdana, Geneva, sans-serif;
 	color: color("textColor");
+	line-height: 1.5;
 }
 
 h1, h2, h3, h4, h5, h6 {
