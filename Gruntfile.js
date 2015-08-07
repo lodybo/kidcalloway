@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 		    dest: "build/"
 	    }
     },
-    
+
     // Sass
     sass: {
 	    options: {
@@ -20,9 +20,13 @@ module.exports = function(grunt) {
 		    dest: "build/css/kidcalloway.css"
 	    }
     },
-    autoprefixer: {
+    postcss: {
 	    options: {
-		    browsers: ['last 3 versions', 'ie9', 'ie10'],
+        processors: [
+          require('autoprefixer-core')({
+            browsers: ['last 3 versions', 'ie 9', 'ie 10']
+          })
+        ],
 		    map: true
 	    },
 	    dist: {
@@ -38,7 +42,7 @@ module.exports = function(grunt) {
 			}
     	}
     },
-    
+
     // JS
     jshint: {
 	    all: ["Gruntfile.js", "src/js/**/*.js"]
@@ -67,7 +71,7 @@ module.exports = function(grunt) {
 		    }
 	    }
     },
-    
+
     // GENERIC
     clean: {
 	    build: "build",
@@ -118,16 +122,16 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
 
   grunt.registerTask("kit", ["codekit"]);
-  
-  grunt.registerTask("scss", ["sass", "autoprefixer"]);
-  
+
+  grunt.registerTask("scss", ["sass", "postcss"]);
+
   grunt.registerTask("js", ["test", "uglify"]);
-  
+
   grunt.registerTask("docs", function (mode) {
 	  var docList = ["sassdoc", "jsdoc"];
 	  var cleanList = ["clean:sassdoc", "clean:jsdoc"];
 	  var TaskList = [];
-	  
+
 	  if (mode && mode === "sass")
 	  {
 		  docList.pop();
@@ -138,17 +142,17 @@ module.exports = function(grunt) {
 		  docList.shift();
 		  cleanList.shift();
 	  }
-  	  
+
   	  taskList = cleanList.concat(docList);
-  	  
+
 	  grunt.task.run(taskList);
   });
-  
+
   grunt.registerTask("serve", ["connect", "watch"]);
-  
+
   grunt.registerTask("test", ["jshint", "jasmine"]);
   grunt.registerTask("build", ["clean:build", "kit", "scss", "js", "copy"]);
-  
+
   grunt.registerTask("default", ["serve"]);
 
-}; 
+};
