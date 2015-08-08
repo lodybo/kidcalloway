@@ -1,1 +1,1 @@
-put -rp /home/rof/clone/build/* public_html/kidcalloway
+put -rp /home/rof/clone/build/* public_html/kidcalloway/
