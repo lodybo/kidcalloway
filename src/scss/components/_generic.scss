@@ -4,12 +4,12 @@ body {
 
 a, a:visited {
 	color: color("link");
-	
+
 	text-decoration: none;
-	
+
 	border-bottom: tint(color("link"), 15%) solid 1px;
-	padding-bottom: 5px;
-	
+	padding-bottom: 3px;
+
 	@media screen and (max-width: 480px) {
 		padding-bottom: 0;
 	}
@@ -22,17 +22,13 @@ a:hover {
 
 h1 {
 	text-transform: uppercase;
-	
+
 	a {
 		color: color("textColor");
-		
+
 		&:hover {
 			color: color("textColor");
 			border-bottom-color: tint(color("link"), 15%);
 		}
 	}
-}
-
-.menu, .agenda, .media, .contact {
-	margin-bottom: 35px;
 }
