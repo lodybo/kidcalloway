@@ -8,6 +8,7 @@
 		@include span-columns(10 of 10);
 		@include shift(0);
 		display: table;
+		border-collapse: separate;
 	}
 
 	td {
@@ -68,9 +69,17 @@
 		@include shift(0);
 
 		table {@include span-columns(12 of 12);}
-		td {@include span-columns(2 of 12);}
-		td.time {@include span-columns(1 of 12);}
-		.venue {@include span-columns(3 of 12);}
-		.top {@include span-columns(12 of 12);}
+		td {@include span-columns(2 of 12, "table");}
+		td.time {@include span-columns(1 of 12, "table");}
+		.venue {@include span-columns(3 of 12, "table");}
+		.details {@include span-columns(3 of 12, "table");}
+		.links {@include span-columns(1 of 12, "table");}
+		.top {@include span-columns(12 of 12, "table");}
+	}
+
+	@media screen and (max-width: 480px) {
+		.venue {@include span-columns(6 of 12, "table");}
+		.details {@include span-columns(10 of 12, "table");}
+		.links {@include span-columns(1 of 12, "table");}
 	}
 }
