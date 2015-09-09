@@ -1,10 +1,6 @@
 {
   "name": "band-site",
-<<<<<<< HEAD
-  "version": "1.5.5",
-=======
   "version": "1.6.2",
->>>>>>> dev
   "private": true,
   "description": "Band website",
   "main": "Gruntfile.js",
