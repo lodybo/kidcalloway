@@ -6,6 +6,7 @@
 
 	table {
 		@include span-columns(10 of 10);
+		@include shift(0);
 		display: table;
 	}
 
@@ -33,16 +34,20 @@
 	}
 
 	.details {
+		@include span-columns(3 of 10);
 		border-left: color("backgroundColor") solid 1px;
 		color: shade(color("light"), 30);
 	}
 
 	.links {
-		@include pad($fg $fg2 0 $fg);
+		//@include pad($fg $fg2 0 $fg);
+		@include span-columns(1 of 10);
+		text-align: right;
 
 		a {
 			display: inline-block;
 			padding-bottom: 5px;
+			border-bottom: none;
 
 			&:last-of-type {
 				margin-top: 10px;
@@ -54,7 +59,8 @@
 		@include span-columns(10 of 10); // 4 of 10
 		@include shift(0); // 3
 		text-align: center;
-		margin-bottom: 15px;
+		margin-bottom: 30px;
+		float:none;
 	}
 
 	@media screen and (max-width: 768px) {
