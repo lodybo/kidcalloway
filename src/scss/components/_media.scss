@@ -2,13 +2,8 @@
 	@include span-columns(10);
 	@include shift(1);
 	
-	.bandcamp {
-		@include span-columns(8 of 10);
-		@include shift(1);
-	}
 	
 	h1 {
-		@include span-columns(10 of 10);
 		text-align: center;
 	}
 }

@@ -83,8 +83,14 @@ module.exports = function(grunt) {
 		    files: [{
 			    expand: true,
 			    flatten: true,
-			    src: ["src/img/*", "src/assets/flexslider/*.png"],
+			    src: ["src/assets/flexslider/*.png"],
 			    dest: "build/img"
+			}, {
+				expand: true,
+				flatten: false,
+				cwd: "src/img/studio-hoogeloon/",
+				src: "**/*",
+				dest: "build/img/gallery/"
 			}]
 	    },
 	    assets: {
@@ -102,7 +108,7 @@ module.exports = function(grunt) {
 			    expand: true,
 			    flatten: true,
 			    src: ["src/assets/**/*.eot", "src/assets/**/*.svg", "src/assets/**/*.ttf", "src/assets/**/*.woff"],
-			    dest: "build/css/font"
+			    dest: "build/css/fonts"
 		    }]
 	    }
     },
