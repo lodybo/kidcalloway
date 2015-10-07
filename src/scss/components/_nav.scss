@@ -1,48 +1,55 @@
 .menu {
-	border-bottom: shade(color("menuBackground"), 50%) solid 1px; 
-	
+	border-bottom: shade(color("menuBackground"), 50%) solid 1px;
+
 	ul {
 		@include span-columns(12);
 		//@include shift(1);
 		margin: 0;
 		padding: 0;
 	}
-	
+
 	li {
 		list-style: none;
 		display: inline-block;
 		padding-right: 25px;
 		text-align: center;
-		//width: 24%;
-		@include span-columns(6 of 12);
+		width: 24%;
 		padding-top: 25px;
 		padding-bottom: 25px;
-		
+
 		text-transform: uppercase;
-		
+
 		&:last-of-type {
 			margin-right: 0;
 		}
-		
+
 		&:hover {
 			background-color: shade(color("menuBackground"), 10%);
 			a, h2 {
 				color: color("textColor");
 			}
 		}
+
+		@media screen and (max-width: 768px) {
+			padding-right: 0;
+		}
+
+		@media screen and (max-width: 480px) {
+			width: 49%;
+		}
 	}
-	
+
 	a, h2 {
 		display: inherit;
 		color: color("menuColor");
 		border-bottom: none;
 	}
-	
+
 	h2 {
 		margin: 0;
 		padding: 0
 	}
-	
+
 	@media screen and (max-width: 480px) {
 		h2 {font-size: 1.2em}
 	}
