@@ -1,1 +1,1 @@
-Hello World!\n
+Repository for the Kid Calloway website
