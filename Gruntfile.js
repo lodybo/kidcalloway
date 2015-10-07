@@ -90,14 +90,14 @@ module.exports = function(grunt) {
 				flatten: false,
         ext: ".jpg",
 				cwd: "src/img/studio-hoogeloon/",
-				src: "*/*",
+				src: "*",
 				dest: "build/img/gallery/"
 			}, {
 				expand: true,
 				flatten: false,
         ext: ".jpg",
 				cwd: "src/img/studio-hoogeloon/thumbs",
-				src: "*/*",
+				src: "*",
 				dest: "build/img/gallery/thumbs"
 			}]
 	    },
