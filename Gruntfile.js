@@ -88,6 +88,7 @@ module.exports = function(grunt) {
 			}, {
 				expand: true,
 				flatten: false,
+        ext: ".jpg",
 				cwd: "src/img/studio-hoogeloon/",
 				src: "**/*",
 				dest: "build/img/gallery/"
