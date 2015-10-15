@@ -1,20 +1,60 @@
 .brands {
 	.record-label {
-		img {
-			margin: 0 auto;
-		    width: 245px;
-		    display: block;
-		}
+		@include span-columns(12 of 12);
 		
 		background-color: #FFFFFF;
-		padding-top: 25px;
-		padding-bottom: 25px;
+		height: 150px;
+		
+		a, a:hover {
+			text-align: left;
+			border-bottom: none;
+			display: block;
+			width: 700px;
+			height: 150px;
+			margin: 0 auto;
+			
+			@media screen and (max-width: 768px) {
+				text-align: center;
+				height: auto;
+			}
+		}
+		
+		span {
+			display: inline;
+			text-transform: uppercase;
+			margin-right: 10px;
+			color: #000;
+			font-weight: bold;
+			font-size: 1.5em;
+			line-height: 150px;
+			
+			@media screen and (max-width: 768px) {
+				line-height: normal;
+				display: block;
+				margin: 20px auto;
+			}
+		}
+		
+		img {
+		    vertical-align: middle;
+		}
+		
+		@media screen and (max-width: 768px) {
+			height: auto;
+		}
 	}
 	
 	.instruments {
+		@include span-columns(10 of 12);
+		@include shift(1);
+		
 		li {
 			display: inline;
 			margin-right: 5px;
+		}
+		
+		img {
+			vertical-align: middle;
 		}
 	}
 }
