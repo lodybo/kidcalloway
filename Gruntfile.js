@@ -88,18 +88,23 @@ module.exports = function(grunt) {
 			}, {
 				expand: true,
 				flatten: false,
-        filter: "isFile",
-        ext: ".jpg",
+		        filter: "isFile",
+		        ext: ".jpg",
 				cwd: "src/img/studio-hoogeloon/",
 				src: "*",
 				dest: "build/img/gallery/"
 			}, {
 				expand: true,
 				flatten: false,
-        ext: ".jpg",
+				ext: ".jpg",
 				cwd: "src/img/studio-hoogeloon/thumbs",
 				src: "*",
 				dest: "build/img/gallery/thumbs"
+			}, {
+			    expand: true,
+			    cwd: "src/img/brands/",
+			    src: "*.jpg",
+			    dest: "build/img/brands"
 			}]
 	    },
 	    assets: {
