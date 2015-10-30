@@ -83,3 +83,31 @@
 		.links {@include span-columns(1 of 12, "table");}
 	}
 }
+
+.channels {
+	// @include outer-container;
+	margin: 25px auto 25px;
+	width: 75%;
+	text-align: center;
+
+	li {
+		// @include span-columns(1);
+		// @include omega(4n);
+		display: inline-block;
+		margin: 0 25px;
+		text-align: center;
+	}
+
+	a {
+		border-bottom: none;
+	}
+
+	.icon img {
+		height: 75px;
+		width: auto;
+	}
+
+	h2 {
+		margin: 0;
+	}
+}

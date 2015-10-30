@@ -83,7 +83,7 @@ module.exports = function(grunt) {
 		    files: [{
 			    expand: true,
 			    flatten: true,
-			    src: ["src/assets/flexslider/*.png", "src/img/*.jpg"],
+			    src: ["src/assets/flexslider/*.png", "src/img/*.jpg", "src/img/*.png"],
 			    dest: "build/img"
 			}, {
 				expand: true,
