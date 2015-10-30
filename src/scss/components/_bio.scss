@@ -1,17 +1,17 @@
 .bio {
-	@include span-columns(10);
-	@include shift(1);
-	
+	@include span-columns(12);
+	@include shift(0);
+
 	@include pad("default");
-	
+
 	text-align: center;
-	
+
 	.helper {
 	    display: inline-block;
 	    height: 100%;
 	    vertical-align: middle;
 	}
-	
+
 	img {
 		@include span-columns(2 of 12);
 		vertical-align: middle;

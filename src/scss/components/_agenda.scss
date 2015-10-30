@@ -1,3 +1,13 @@
+.live {
+	// background-color: $kidc_red;
+	display: inline-block;
+	width: 100%;
+
+	a {
+		border-bottom-color: $kidc_orange;
+	}
+}
+
 .agenda {
 	@include span-columns(10);
 	@include shift(1);
@@ -44,6 +54,7 @@
 		//@include pad($fg $fg2 0 $fg);
 		@include span-columns(1 of 10);
 		text-align: right;
+		color: #FFF !important;
 
 		a {
 			display: inline-block;
