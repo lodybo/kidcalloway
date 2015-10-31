@@ -1,10 +1,10 @@
 .brands {
 	.record-label {
 		@include span-columns(12 of 12);
-		
+
 		background-color: #FFFFFF;
 		height: 150px;
-		
+
 		a, a:hover {
 			text-align: left;
 			border-bottom: none;
@@ -12,13 +12,13 @@
 			max-width: 700px;
 			height: 150px;
 			margin: 0 auto;
-			
+
 			@media screen and (max-width: 768px) {
 				text-align: center;
 				height: auto;
 			}
 		}
-		
+
 		span {
 			display: inline;
 			text-transform: uppercase;
@@ -27,34 +27,49 @@
 			font-weight: bold;
 			font-size: 1.5em;
 			line-height: 150px;
-			
+
 			@media screen and (max-width: 768px) {
 				line-height: normal;
 				display: block;
 				margin: 20px auto;
 			}
 		}
-		
+
 		img {
 		    vertical-align: middle;
 		}
-		
+
 		@media screen and (max-width: 768px) {
 			height: auto;
 		}
 	}
-	
+
 	.instruments {
-		@include span-columns(10 of 12);
-		@include shift(1);
-		
-		li {
-			display: inline;
-			margin-right: 5px;
+		@include span-columns(12 of 12);
+		@include shift(0);
+
+		@media screen and (min-width: 550px) {
+			@include span-columns(10 of 12);
+			@include shift(2);
 		}
-		
+
+		li {
+			line-height: 100px;
+
+			@media screen and (min-width: 768px) {
+				@include span-columns(2);
+	  		@include omega(5n);
+			}
+		}
+
 		img {
 			vertical-align: middle;
 		}
 	}
+}
+
+.epilogue {
+	background-color: #000;
+	z-index: 101;
+	position: relative;
 }

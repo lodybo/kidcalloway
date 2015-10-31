@@ -1,5 +1,6 @@
 .menu {
-	border-bottom: shade(color("menuBackground"), 50%) solid 1px;
+	background-color: shade(color("menuBackground"), 20%);
+	z-index: 100;
 
 	ul {
 		@include span-columns(12);
@@ -8,14 +9,20 @@
 		padding: 0;
 	}
 
+	i {
+		margin-right: 10px;
+		color: shade(color("menuBackground"), 20%);
+		transition: color 1s, margin-right 0.5s;
+	}
+
 	li {
 		list-style: none;
 		display: inline-block;
 		padding-right: 25px;
 		text-align: center;
 		width: 24%;
-		padding-top: 25px;
-		padding-bottom: 25px;
+		padding-top: 12px;
+		padding-bottom: 12px;
 
 		text-transform: uppercase;
 
@@ -24,9 +31,14 @@
 		}
 
 		&:hover {
-			background-color: shade(color("menuBackground"), 10%);
+			background-color: shade(color("menuBackground"), 20%);
 			a, h2 {
-				color: color("textColor");
+				color: #FFFFFF;
+			}
+
+			i {
+				margin-right: 20px;
+				color: #FFF;
 			}
 		}
 
@@ -41,7 +53,7 @@
 
 	a, h2 {
 		display: inherit;
-		color: color("menuColor");
+		color: shade(color("menuColor"), 10%);
 		border-bottom: none;
 	}
 
@@ -57,6 +69,11 @@
 
 .filler, .menu {
 	@include span-columns(12);
+}
+
+.menu {
+	transition: opacity 0.2s;
+	opacity: 0;
 }
 
 .filler {

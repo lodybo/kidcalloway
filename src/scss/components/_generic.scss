@@ -7,8 +7,8 @@ a, a:visited {
 
 	text-decoration: none;
 
-	border-bottom: tint(color("link"), 15%) solid 1px;
-	padding-bottom: 3px;
+	border-bottom: color("link") solid 1px;
+	padding-bottom: 1px;
 
 	@media screen and (max-width: 480px) {
 		padding-bottom: 0;
@@ -22,6 +22,8 @@ a:hover {
 
 h1 {
 	text-transform: uppercase;
+
+	i {margin-right: 15px;}
 
 	a {
 		color: color("textColor");
