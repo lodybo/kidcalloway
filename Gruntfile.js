@@ -67,7 +67,7 @@ module.exports = function(grunt) {
 			    sourceMap: true
 		    },
 		    files: {
-			    "build/js/scripts.min.js" : ["src/js/scripts/*.js"]
+			    "build/js/scripts.min.js" : ["src/js/scripts/*.js", "!src/js/scripts/agenda*.js"]
 		    }
 	    }
     },
@@ -188,7 +188,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask("serve", ["connect", "watch"]);
 
-  grunt.registerTask("test", ["jshint", "jasmine"]);
+  grunt.registerTask("test", ["jshint"]);
   grunt.registerTask("build", ["clean:build", "kit", "scss", "js", "copy"]);
 
   grunt.registerTask("default", ["serve"]);
