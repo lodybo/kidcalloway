@@ -124,7 +124,11 @@ module.exports = function(grunt) {
 			    src: ["src/assets/**/*.eot", "src/assets/**/*.svg", "src/assets/**/*.ttf", "src/assets/**/*.woff"],
 			    dest: "build/css/fonts"
 		    }]
-	    }
+	    },
+      press: {
+        src: "src/assets/Perskit-Kid-Calloway.zip",
+        dest: "build/Perskit-Kid-Calloway.zip"
+      }
     },
     connect: {
 	    build: {
