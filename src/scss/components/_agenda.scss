@@ -121,4 +121,20 @@
 	h2 {
 		margin: 0;
 	}
+
+	blockquote {
+		position: relative;
+
+		font-style: italic;
+		font-size: 1.1em;
+		color: shade(color("light"), 30);
+
+		text-align: center;
+
+		margin-bottom: 25px;
+
+		small {
+			display: block;
+		}
+	}
 }
