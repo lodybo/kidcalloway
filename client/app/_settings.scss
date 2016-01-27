@@ -1,0 +1,81 @@
+// *** PALETTES
+$kidc_black: #000000;
+$kidc_red: #E62329;
+$kidc_orange: #EF7E1E;
+
+// 50% tint
+$kidc_red_50: tint($kidc_red, 50%);
+$kidc_orange_50: tint($kidc_orange, 50%);
+
+// 75% tint
+$kidc_red_75: tint($kidc_red, 75%);
+$kidc_orange_75: tint($kidc_orange, 75%);
+
+/// Color map
+/// All colors for Kid Calloway is stored in this map
+/// @prop {Color} backgroundColor [#94BFBE] - Background color
+/// @prop {Color} accent [#ACF7C1] - Greenish
+/// @prop {Color} link [#857C8D] - Normal link color
+/// @prop {Color} linkHover [#61304B] - Hovering link
+/// @prop {Color} linkVisited [#5C0029] - Color of the visited link
+/// @prop {Color} light [#FFFFFF] - Generic light color
+/// @prop {Color} dark [#000000] - Generic dark color
+$color-map: (
+  "backgroundColor": $kidc_black,
+  "textColor": #eeeeee,
+  "accent": $kidc_orange,
+  "link": $kidc_red,
+  "linkHover": $kidc_orange,
+  "linkVisited": $kidc_red,
+  "menuBackground": $kidc_red,
+  "menuColor": #FFFFFF,
+  "light": #FFFFFF,
+  "dark": #000000
+);
+
+/// Color
+/// Function that returns a color value based on the given situation
+/// @param {String} situation - A situation where color is needed, like background or visited link
+/// @return {Color} A color that can be used in CSS.
+@function color($key) {
+  @if map-has-key($color-map, $key) {
+    @return map-get($color-map, $key);
+  }
+  @else {
+    @warn "#{$key} not found in color list.";
+  }
+}
+
+/// Slightly lighten a color
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function tint($color, $percentage) {
+  @return mix(color("light"), $color, $percentage);
+}
+
+/// Slightly darken a color
+/// @access public
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function shade($color, $percentage) {
+  @return mix(color("dark"), $color, $percentage);
+}
+
+// *** FONTS
+// Set default font
+body {
+  font-family: Tahoma, Verdana, Geneva, sans-serif;
+  color: color("textColor");
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+  color: shade(color("textColor"), 10%);
+}
+
+// *** MEDIA QUERIES
+$mobile: new-breakpoint(max-width 480px 4);
