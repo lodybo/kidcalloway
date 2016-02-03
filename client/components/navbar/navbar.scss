@@ -1,0 +1,82 @@
+.navbar {
+  background-color: shade(color("menuBackground"), 20%);
+  border: none;
+  z-index: 100;
+
+  .navbar-nav {
+    //@include span-columns(12);
+    //@include shift(1);
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar-nav i {
+    margin-right: 10px;
+    color: shade(color("menuBackground"), 20%);
+    transition: color 1s, margin-right 0.5s;
+  }
+
+  .navbar-nav li {
+    list-style: none;
+    display: inline-block;
+    padding-right: 25px;
+    text-align: center;
+    width: 24%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    text-transform: uppercase;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    &:hover {
+      background-color: shade(color("menuBackground"), 20%);
+      a, h2 {
+        color: #FFFFFF;
+      }
+
+      i {
+        margin-right: 20px;
+        color: #FFF;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      padding-right: 0;
+    }
+
+    @media screen and (max-width: 480px) {
+      width: 49%;
+    }
+  }
+
+  a, h2 {
+    display: inherit;
+    color: shade(color("menuColor"), 10%);
+    border-bottom: none;
+  }
+
+  h2 {
+    margin: 0;
+    padding: 0
+  }
+
+  @media screen and (max-width: 480px) {
+    h2 {font-size: 1.2em}
+  }
+}
+
+.filler, .menu {
+  //@include span-columns(12);
+}
+
+.menu {
+  transition: opacity 0.2s;
+  opacity: 0;
+}
+
+.filler {
+  text-align: center;
+}

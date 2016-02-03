@@ -7,6 +7,10 @@ angular.module('kidCallowayApp')
       currentUser = User.get();
     }
 
+    var roles = [
+      'contributor'
+    ];
+
     return {
 
       /**
@@ -141,6 +145,44 @@ angular.module('kidCallowayApp')
        */
       getToken: function() {
         return $cookieStore.get('token');
+      },
+
+	    /**
+       * Check restrictions
+       *
+       * @param {String} role - The role to check restrictions for
+       *
+       * @returns {Boolean}
+       */
+      checkRestriction: function (role) {
+        // Check a few conditions:
+        switch(role) {
+          case "all":
+            // This is visible for everyone so we return yes
+            return true;
+
+          case "loggedIn":
+            // This should be visible only when logged in
+            return this.isLoggedIn();
+
+          case "admin":
+            // This should only be able to users with admin role
+            return this.isAdmin();
+
+          default:
+            // Custom roles should end up here, let's see if the role is known
+            if (roles.indexOf(role) > -1) {
+              // Role is found, let's return yes!
+              return true;
+            }
+
+            // Nothing is found, let's output a warning and let the function handle this further
+            console.warn("While checking restrictions, role" + role + " has not been found in the collection of roles.");
+            console.warn("Roles: ", roles);
+        }
+
+        // Our role is not present in our checking system, so for security reasons let's return false;
+        return false;
       }
     };
   });

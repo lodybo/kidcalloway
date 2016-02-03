@@ -1,0 +1,36 @@
+body {
+  background: color("backgroundColor");
+}
+
+a, a:visited {
+  color: color("link");
+
+  text-decoration: none;
+
+  border-bottom: color("link") solid 1px;
+  padding-bottom: 1px;
+
+  @media screen and (max-width: 480px) {
+    padding-bottom: 0;
+  }
+}
+
+a:hover {
+  color: tint(color("linkHover"), 25%);
+  border-bottom-color: tint(color("linkHover"), 25%);
+}
+
+h1 {
+  text-transform: uppercase;
+
+  i {margin-right: 15px;}
+
+  a {
+    color: color("textColor");
+
+    &:hover {
+      color: color("textColor");
+      border-bottom-color: tint(color("link"), 15%);
+    }
+  }
+}
