@@ -64,4 +64,32 @@ angular.module('kidCallowayApp')
     $scope.isActive = function(route) {
       return route === $location.path();
     };
+
+    // STICKY MENU
+    var sticky = {
+      el: angular.element(".navbar"),
+      stuck: false,
+      stickPoint: 0
+    };
+
+    $scope.getDistance = function () {
+      return sticky.el.offset().top;
+    };
+
+    sticky.stickPoint = $scope.getDistance();
+
+    $window.onscroll = function () {
+      var distance = $scope.getDistance() - $window.pageYOffset;
+      var offset = $window.pageYOffset;
+      if ( (distance <= 0) && !sticky.stuck) {
+        sticky.el.css("position",'fixed');
+        sticky.el.css("top", '0');
+        sticky.el.css("opacity", "1");
+        sticky.stuck = true;
+      } else if (sticky.stuck && (offset <= sticky.stickPoint)) {
+        sticky.el.css("position", 'static');
+        sticky.el.css("opacity", "0");
+        sticky.stuck = false;
+      }
+    };
   });

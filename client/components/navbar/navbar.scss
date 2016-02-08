@@ -2,6 +2,9 @@
   background-color: shade(color("menuBackground"), 20%);
   border: none;
   z-index: 100;
+  width: 100%;
+  transition: opacity 0.2s;
+  opacity: 0;
 
   .navbar-nav {
     margin: 0;
@@ -12,13 +15,13 @@
     margin-right: 10px;
     color: #FFFFFF;
 
-    @media screen and (min-width: 1024px) {
+    @media screen and (min-width: 1000px) {
       margin-right: 10px;
       color: shade(color("menuBackground"), 20%);
       transition: color 1s, margin-right 0.5s;
     }
 
-    @media screen and (min-width: 769px) and (max-width: 1023px) {
+    @media screen and (min-width: 769px) and (max-width: 1000px) {
       display:none;
     }
   }
@@ -50,7 +53,7 @@
       padding-right: 25px;
     }
 
-    @media screen and (min-width: 1024px) {
+    @media screen and (min-width: 1000px) {
       &:hover i {
         margin-right: 25px;
       }
@@ -70,15 +73,20 @@
   }
 
   @media screen and (max-width: 550px) {
-    h2 {font-size: 1.4em}
+    h2 {
+      font-size: 1.4em
+    }
   }
-}
-
-.menu {
-  transition: opacity 0.2s;
-  opacity: 0;
 }
 
 .filler {
   text-align: center;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: tint(color("menuHamburger"), 50%);
+
+  .icon-bar {
+    background-color: tint(color("menuHamburger"), 50%);
+  }
 }
