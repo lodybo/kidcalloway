@@ -12,7 +12,7 @@
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
         <li ng-repeat="item in menu" ng-show="checkRestriction(item.restriction)" ng-class="{active: isActive(item.link)}">
-            <a ng-href="{{item.link}}"><i ng-class="['fa', 'fa-{{item.icon}}', {'fa-2x' : overBorder}]"></i> <h2>{{item.title}}</h2></a>
+            <a ng-href="{{item.link}}"><i ng-class="['fa', 'fa-{{item.icon}}', {'fa-2x' : overWindowBorder}]"></i> <h2>{{item.title}}</h2></a>
         </li>
         <li ng-show="checkRestriction('admin')" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
       </ul>

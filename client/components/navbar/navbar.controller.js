@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kidCallowayApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth, $window) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, $window, $timeout) {
     $scope.menu = [{
       'title': 'Live',
       'link': '#live',
@@ -35,17 +35,20 @@ angular.module('kidCallowayApp')
     $scope.checkRestriction = Auth.checkRestriction;
 
     // Check the window (inner)width and see if we're over our CSS border of 550px
-    $scope.overBorder = false;
-    $(window).on("resize.doResize", function (){
-      $scope.$apply(function(){
+    $scope.overWindowBorder = false;
+    $scope.checkWindowBorder = function () {
+      $timeout(function () {
         if ($window.innerWidth > 549) {
-          $scope.overBorder = true;
+          $scope.overWindowBorder = true;
         } else {
-          $scope.overBorder = false;
+          $scope.overWindowBorder = false;
         }
-
-        console.log($scope.overBorder);
       });
+    };
+    $scope.checkWindowBorder();
+
+    $(window).on("resize.doResize", function (){
+      $scope.checkWindowBorder();
     });
 
     // When we destroy our scope, we need to remove this listener otherwise we'll get a lot of issues.
