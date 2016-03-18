@@ -1,5 +1,4 @@
 .live {
-	// background-color: $kidc_red;
 	display: inline-block;
 	width: 100%;
 
@@ -9,25 +8,15 @@
 }
 
 .agenda {
-	// @include span-columns(10);
-	// @include shift(1);
-
-	// @include pad("default");
-
 	table {
-		// @include span-columns(10 of 10);
-		// @include shift(0);
 		display: table;
 		border-collapse: separate;
 	}
 
 	td {
-		// @include span-columns(2 of 10);
-		// @include pad();
+		border-top: 0 !important;
 	}
 
-	// $fg: flex-gutter();
-	// $fg2: $fg * 2;
 	td.time {
 		//@include pad($fg $fg2 $fg $fg);
 		// @include span-columns(1 of 10);
