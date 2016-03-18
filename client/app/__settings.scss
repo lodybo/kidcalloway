@@ -67,6 +67,11 @@ $color-map: (
 
 // *** FONTS
 // Set default font
+html, body {
+  font-size: 100%;
+  font-size: 1em;
+}
+
 body {
   font-family: Tahoma, Verdana, Geneva, sans-serif;
   color: color("textColor");
