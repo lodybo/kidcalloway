@@ -89,4 +89,12 @@
   .icon-bar {
     background-color: tint(color("menuHamburger"), 50%);
   }
+  
+  &:hover {
+      background-color: tint(color("menuHamburger"), 50%);
+      
+      .icon-bar {
+          background-color: color("light");
+      }
+  }
 }
