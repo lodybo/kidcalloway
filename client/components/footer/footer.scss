@@ -1,5 +1,11 @@
 footer {
     background: inherit;
+    
+    .container {
+        background-color: #000;
+        z-index: 99;
+        position: relative;
+    }
 }
 
 .brands {
@@ -55,10 +61,4 @@ footer {
 			vertical-align: middle;
 		}
 	}
-}
-
-.epilogue {
-	background-color: #000;
-	z-index: 101;
-	position: relative;
 }
