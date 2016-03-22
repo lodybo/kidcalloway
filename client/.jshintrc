@@ -32,6 +32,8 @@
     "expect": true,
     "browser": true,
     "element": true,
-    "by": true
+    "by": true,
+    "xdescribe": true,
+    "xit": true
   }
 }
