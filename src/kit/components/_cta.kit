@@ -35,12 +35,48 @@
                  het enige wat je hiervoor moet doen is simpelweg het formulier hieronder invullen!
             </p>
             
-            <p class="disclaimer">
-                Kid Calloway verkoopt de gegevens die worden verzameld niet aan derden.
-            </p>
-            
             <form action="php-scripts" method="post">
+                <div class="form-left">
+                    <label class="error">
+                        <p>Naam</p>
+                        <input type="text" name="name" />
+                    </label>
+                    
+                    <label>
+                        <p>E-mailadres</p>
+                        <input type="email" name="email" />
+                    </label>
+                    
+                    <label>
+                        <p>Aantal</p>
+                        <input type="number" name="amount" value="1" />
+                    </label>
+                </div>
                 
+                <div class="form-right">
+                    <label>
+                        <p>Adres</p>
+                        <textarea name="address"></textarea>
+                    </label>
+                    
+                    <p class="disclaimer">
+                        Kid Calloway verkoopt de gegevens die worden verzameld niet aan derden.
+                    </p>
+                </div>
+                
+                <div class="form-left">
+                    &nbsp;<input class="winniethepooh" type="text" name="winniethepooh" />
+                </div>
+                
+                <div class="form-right">
+                    <button>Ik wil 'm!</button>
+                </div>
+                
+                <div class="form-bottom form-result">
+                    <div class="loader"></div>
+                    <p class="success">Het formulier is verstuurd, je krijgt snel een mail van ons!</p>
+                    <p class="error">Er is iets fouts gegaan bij het versturen van het formulier</p>
+                </div>
             </form>
         </div>
 </div>

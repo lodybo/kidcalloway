@@ -18,16 +18,29 @@ $kidc_orange_75: tint($kidc_orange, 75%);
 /// @prop {Color} link [#857C8D] - Normal link color
 /// @prop {Color} linkHover [#61304B] - Hovering link
 /// @prop {Color} linkVisited [#5C0029] - Color of the visited link
+/// @prop {Color} menuBackground [#5C0029] - Background color of the menu/nav bar
+/// @prop {Color} buttonBGColor [#5C0029] - Color of the background of buttons
+/// @prop {Color} buttonBGHover [#FFFFFF] - Color of the background of a button when hovered over
+/// @prop {Color} buttonColor [#FFFFFF] - Color of the text within a button
+/// @prop {Color} buttonHover [#5C0029] - Color of the text within a button when hovered over
+/// @prop {Color} success [#97A73A] - User feedback color when something is a success
+/// @prop {Color} error [#5C0029] - User feedback color when something failed
 /// @prop {Color} light [#FFFFFF] - Generic light color
 /// @prop {Color} dark [#000000] - Generic dark color
 $color-map: (
 	"backgroundColor": $kidc_black,
-	"textColor": #eeeeee,
+	"textColor": #EEEEEE,
 	"accent": $kidc_orange,
 	"link": $kidc_red,
 	"linkHover": $kidc_orange,
 	"linkVisited": $kidc_red,
 	"menuBackground": $kidc_red,
+    "buttonBGColor": $kidc_red,
+    "buttonBGHover": #FFFFFF,
+    "buttonColor": #FFFFFF,
+    "buttonHover": $kidc_red,
+    "success": #97A73A,
+    "error": $kidc_red,
 	"menuColor": #FFFFFF,
 	"light": #FFFFFF,
 	"dark": #000000

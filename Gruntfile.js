@@ -123,7 +123,12 @@ module.exports = function(grunt) {
 			    flatten: true,
 			    src: ["src/assets/**/*.eot", "src/assets/**/*.svg", "src/assets/**/*.ttf", "src/assets/**/*.woff"],
 			    dest: "build/css/fonts"
-		    }]
+		    }, {
+                expand: true,
+                flatten: true,
+                src: ["src/assets/**/*.php"],
+                dest: "build/php-scripts"
+            }]
 	    },
       press: {
         src: "src/assets/Perskit-Kid-Calloway.zip",

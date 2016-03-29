@@ -52,4 +52,93 @@
         font-size: 0.8em;
         color: #999;
     }
+    
+    form {
+        @include row();
+        
+        .form-left, .form-right {
+            @include span-columns(6);
+        }
+        
+        .form-right {
+            @include omega();
+        }
+        
+        .form-bottom {
+            @include span-columns(12);
+            margin-top: 30px;
+            position: relative;
+        }
+        
+        input, textarea {
+            width: 100%;
+        }
+        
+        textarea {
+            min-height: 75px;
+        }
+        
+        .winniethepooh {
+            display: none;
+        }
+        
+        button {
+            margin-top: 25px;
+        }
+    }
+    
+    .success {
+        color: color("success");
+    }
+    
+    .error {
+        color: color("error");
+    }
+    
+    .form-left, .form-right {
+        input {
+            border: solid 3px transparent;
+        }
+        
+        .success {
+            input {
+                border-color: color("success");
+            }
+        }
+        
+        .error {
+            input {
+                border-color: color("error");
+            }
+        }
+    }
+    
+    .form-result {
+        .success, .error {
+            border: solid 1px color("light");
+            padding: 15px 35px;
+            font-size: 1.2em;
+            
+            &:before {
+                font-family: "FontAwesome";
+                margin-right: 15px;
+            } 
+        }
+        
+        .success {
+            border-color: color("success");
+            
+            &:before {
+                content: "\f00c";
+            }
+        }
+        
+        .error {
+            border-color: color("error");
+            
+            &:before {
+                content: "\f12a";
+            }
+        }
+    }
 }
