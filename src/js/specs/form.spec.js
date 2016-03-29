@@ -1,4 +1,4 @@
-describe("Agenda functionality", function () {
+describe("Form Controller functionality", function () {
 	"use strict";
 
 	var $rootScope;
@@ -19,12 +19,12 @@ describe("Agenda functionality", function () {
 			$scope: $scope
 		};
 
-		$controller("agendaCtrl", scopes);
+		$controller("formController", scopes);
 	}));
 
 	describe("Getting the controller", function() {
 		it ("should be able to reach the controller", function () {
-			expect(true).toBe(true);
+			expect(true).toBe(true); 
 		});
 	});
 });

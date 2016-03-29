@@ -49,9 +49,9 @@ module.exports = function(grunt) {
     },
     jasmine: {
 	    js: {
-		    src: "src/js/scripts/*.js",
+		    src: ["src/js/scripts/app.js", "src/js/scripts/*.controller.js"],
 		    options: {
-			    specs: "src/js/specs/*.js",
+			    specs: "src/js/specs/*.spec.js",
 			    outfile: "test/jasmine/index.html",
 			    vendor: [
 				    "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js",
@@ -162,6 +162,10 @@ module.exports = function(grunt) {
       js: {
 	      files: ["src/js/**/*.js"],
 	      tasks: ["js"]
+      },
+      spec: {
+          files: ["src/js/specs/*.spec.js"],
+          tasks: ["jasmine"]
       }
     }
   });
