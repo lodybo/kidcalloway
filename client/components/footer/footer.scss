@@ -1,11 +1,8 @@
 footer {
     background: inherit;
-    
-    .container {
-        background-color: #000;
-        z-index: 99;
-        position: relative;
-    }
+    z-index: 99;
+    background-color: #000;
+    position: relative;
 }
 
 .brands {
