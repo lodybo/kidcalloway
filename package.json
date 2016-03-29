@@ -1,6 +1,6 @@
 {
   "name": "kid-calloway",
-  "version": "3.9.12",
+  "version": "3.9.13",
   "main": "server/app.js",
   "dependencies": {
     "express": "~4.0.0",
