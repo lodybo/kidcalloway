@@ -67,7 +67,7 @@ module.exports = function(grunt) {
 			    sourceMap: true
 		    },
 		    files: {
-			    "build/js/scripts.min.js" : ["src/js/scripts/*.js", "!src/js/scripts/agenda*.js"]
+			    "build/js/scripts.min.js" : ["src/js/scripts/**/*.js", "!src/js/scripts/agenda*.js"]
 		    }
 	    }
     },
@@ -160,8 +160,12 @@ module.exports = function(grunt) {
 	      tasks: ["scss", "docs:sass"],
       },
       js: {
-	      files: ["src/js/**/*.js"],
+          files: ["!src/js/scripts/*.controller.js", "!src/js/specs/*.spec.js", "src/js/**/*.js"],
 	      tasks: ["js"]
+      },
+      controller: {
+	      files: ["src/js/scripts/*.controller.js"],
+	      tasks: ["jasmine", "js"]
       },
       spec: {
           files: ["src/js/specs/*.spec.js"],

@@ -25,7 +25,7 @@
             </blockquote>
         </div>
         
-        <div>
+        <div ng-controller="formController">
             <h1>Of bestel de Limited Edition</h1>
             
             <img src="img/promo-pic-BaM.jpg" />
@@ -35,28 +35,28 @@
                  het enige wat je hiervoor moet doen is simpelweg het formulier hieronder invullen!
             </p>
             
-            <form action="php-scripts" method="post">
+            <form name="orderForm" action="php-scripts" method="post">
                 <div class="form-left">
                     <label class="error">
                         <p>Naam</p>
-                        <input type="text" name="name" />
+                        <input type="text" name="name" ng-model="formInput.name" />
                     </label>
                     
                     <label>
                         <p>E-mailadres</p>
-                        <input type="email" name="email" />
+                        <input type="email" name="email" ng-model="formInput.email" />
                     </label>
                     
                     <label>
                         <p>Aantal</p>
-                        <input type="number" name="amount" value="1" />
+                        <input type="number" name="amount" value="1" ng-model="formInput.amount" />
                     </label>
                 </div>
                 
                 <div class="form-right">
                     <label>
                         <p>Adres</p>
-                        <textarea name="address"></textarea>
+                        <textarea name="address" ng-model="formInput.address"></textarea>
                     </label>
                     
                     <p class="disclaimer">
@@ -73,9 +73,9 @@
                 </div>
                 
                 <div class="form-bottom form-result">
-                    <div class="loader"></div>
-                    <p class="success">Het formulier is verstuurd, je krijgt snel een mail van ons!</p>
-                    <p class="error">Er is iets fouts gegaan bij het versturen van het formulier</p>
+                    <div class="loader" ng-show="showToggles.loader"></div>
+                    <p class="success" ng-show="showToggles.success">Het formulier is verstuurd, je krijgt snel een mail van ons!</p>
+                    <p class="error" ng-show="showToggles.error">Er is iets fouts gegaan bij het versturen van het formulier</p>
                 </div>
             </form>
         </div>

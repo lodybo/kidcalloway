@@ -22,9 +22,15 @@ describe("Form Controller functionality", function () {
 		$controller("formController", scopes);
 	}));
 
-	describe("Getting the controller", function() {
-		it ("should be able to reach the controller", function () {
-			expect(true).toBe(true); 
+	describe("Doing the validation", function() {
+		it("should test if form inputs are not empty", function () {
+			$scope.formInput.email = "lody@lody.nl";
+            
+            var resultEmpty = $scope.isNotEmpty($scope.formInput.name);
+            var resultNotEmpty = $scope.isNotEmpty($scope.formInput.email);
+            
+            expect(resultEmpty).toBe(false);
+            expect(resultNotEmpty).toBe(true); 
 		});
 	});
 });
