@@ -62,14 +62,24 @@ module.exports = function(grunt) {
 		}
     },
     uglify: {
-	    js: {
+	    production: {
 		    options: {
 			    sourceMap: true
 		    },
 		    files: {
 			    "build/js/scripts.min.js" : ["src/js/scripts/**/*.js", "!src/js/scripts/agenda*.js"]
 		    }
-	    }
+	    },
+        debug: {
+            options: {
+                beautify: true,
+                mangle: false,
+                compress: false
+            },
+            files: {
+			    "build/js/scripts.min.js" : ["src/js/scripts/**/*.js", "!src/js/scripts/agenda*.js"]
+		    }
+        }
     },
 
     // GENERIC
@@ -180,7 +190,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask("scss", ["sass", "postcss"]);
 
-  grunt.registerTask("js", ["test", "uglify"]);
+  grunt.registerTask("js", ["test", "uglify:production"]);
 
   grunt.registerTask("docs", function (mode) {
 	  var docList = ["sassdoc", "jsdoc"];
