@@ -49,10 +49,17 @@
 	    
 	    mail($to, $subject, $message, "From: bestelformulier @ Kid Calloway <bestelformulier@KidC>");
 	    
-	    echo ["Success"];
+	    $response = ["status" => "success"];
+        header('HTTP/1.1 200 OK');
 	}
 	else
 	{
-		echo ["Failure", $errors];
+        $response = ["status" => "error", "errors" => $errors];
+        header('HTTP/1.1 400 Bad request');
 	}
+    
+    $json = json_encode($response);
+    header('Content-Type: application/json');
+    echo $json;
+    result;
 ?>

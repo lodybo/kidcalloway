@@ -63,6 +63,83 @@ describe("Form Controller functionality", function () {
                 expect($scope.validationErrors.wrongFields.length).toBe(1);
                 expect($scope.validationErrors.wrongFields[0]).toBe("email");
             });
+            
+            it("should go to the validation error handler when the mail script returns an error because of a missing field", function () {
+                $scope.formInput = {
+                    name: "",
+                    email: "lody@lody.nl",
+                    amount: 1,
+                    address: "asd"
+                };
+                
+                $scope.orderForm = {
+                    email: {
+                        $valid: true
+                    }
+                };
+                
+                spyOn($scope, "validationErrorHandler").and.callThrough();
+                $httpBackend.expectPOST("php-scripts/mailer.php", $scope.formInput).respond(400, {status: "error", errors: ["Missing parameters"]});
+                $scope.validationSuccessHandler();
+                $httpBackend.flush();
+                
+                expect($scope.validationErrorHandler).toHaveBeenCalledWith(["Missing parameters"]);
+                $httpBackend.verifyNoOutstandingExpectation();
+                $httpBackend.verifyNoOutstandingRequest();
+            });
+            
+            it("should go to the validation error handler when the mail script returns an error because of a wrong emailaddress", function () {
+                $scope.formInput = {
+                    name: "lody",
+                    email: "lody@lody",
+                    amount: 1,
+                    address: "asd"
+                };
+                
+                $scope.orderForm = {
+                    email: {
+                        $valid: true
+                    }
+                };
+                
+                spyOn($scope, "validationErrorHandler").and.callThrough();
+                $httpBackend.expectPOST("php-scripts/mailer.php", $scope.formInput).respond(400, {status: "error", errors: ["Incorrect mailadres"]});
+                $scope.validationSuccessHandler();
+                $httpBackend.flush();
+                
+                expect($scope.validationErrorHandler).toHaveBeenCalledWith(["Incorrect mailadres"]);
+                $httpBackend.verifyNoOutstandingExpectation();
+                $httpBackend.verifyNoOutstandingRequest();
+            });
+        });
+        
+        describe("sending the input when validating successfully", function () {
+            afterEach(function () {
+                $httpBackend.verifyNoOutstandingExpectation();
+                $httpBackend.verifyNoOutstandingRequest();
+            });
+            
+            it("should go to the validation success handler and send the input when everything's correct", function () {
+                $scope.formInput = {
+                    name: "lody",
+                    email: "lody@lody.nl",
+                    amount: 1,
+                    address: "asd"
+                };
+                
+                $scope.orderForm = {
+                    email: {
+                        $valid: true
+                    }
+                };
+                
+                spyOn($scope, "validationSuccessHandler").and.callThrough();
+                $httpBackend.expectPOST("php-scripts/mailer.php", $scope.formInput).respond(200, {status: "success"});
+                $scope.validate();
+                $httpBackend.flush();
+                
+                expect($scope.validationSuccessHandler).toHaveBeenCalled();
+            });
         });
 	});
 });

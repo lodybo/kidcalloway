@@ -1,4 +1,4 @@
-angular.module("KidC_App").controller("formController", ["$scope", "$timeout", function ($scope, $timeout) {
+angular.module("KidC_App").controller("formController", ["$scope", "$http", function ($scope, $http) {
     // Models for the form input
     $scope.formInput = {
         name: "",
@@ -111,13 +111,28 @@ angular.module("KidC_App").controller("formController", ["$scope", "$timeout", f
         $scope.showToggles.animateLoader = true;
         $scope.showToggles.form = false;
         
-        // For now, mimick a long request
-        $timeout(function () {
+        // Send the input to our mailer script
+        $http({
+            method: "POST",
+            url: "php-scripts/mailer.php",
+            data: {
+                name: $scope.formInput.name,
+                email: $scope.formInput.email,
+                amount: $scope.formInput.amount,
+                address: $scope.formInput.address
+            }
+        }).then(function (success) {
             // Done!
-        $scope.showToggles.success = true;
-        $scope.showToggles.loader = false;
-        $scope.showToggles.animateLoader = false;
-        }, 2000);
+            $scope.showToggles.success = true;
+            $scope.showToggles.loader = false;
+            $scope.showToggles.animateLoader = false;
+        }, function (error) {
+            $scope.showToggles.loader = false;
+            $scope.showToggles.animateLoader = false;
+            
+            // Mailer script returned an error, so let's call the validation error handler
+            $scope.validationErrorHandler(error.data.errors);
+        });
     };
     
     // This function sorts out the errors and gives the appropriate visual cues back to the user
