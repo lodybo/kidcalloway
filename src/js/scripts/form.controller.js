@@ -114,7 +114,7 @@ angular.module("KidC_App").controller("formController", ["$scope", "$http", func
         // Send the input to our mailer script
         $http({
             method: "POST",
-            url: "http://ikben.lodybo.nl/mailer.php",
+            url: "php-scripts/mailer.php",
             data: {
                 name: $scope.formInput.name,
                 email: $scope.formInput.email,
