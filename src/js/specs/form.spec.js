@@ -79,7 +79,7 @@ describe("Form Controller functionality", function () {
                 };
                 
                 spyOn($scope, "validationErrorHandler").and.callThrough();
-                $httpBackend.expectPOST("php-scripts/mailer.php", $scope.formInput).respond(400, {status: "error", errors: ["Missing parameters"]});
+                $httpBackend.expectPOST("http://ikben.lodybo.nl/mailer.php", $scope.formInput).respond(400, {status: "error", errors: ["Missing parameters"]});
                 $scope.validationSuccessHandler();
                 $httpBackend.flush();
                 
@@ -103,7 +103,7 @@ describe("Form Controller functionality", function () {
                 };
                 
                 spyOn($scope, "validationErrorHandler").and.callThrough();
-                $httpBackend.expectPOST("php-scripts/mailer.php", $scope.formInput).respond(400, {status: "error", errors: ["Incorrect mailadres"]});
+                $httpBackend.expectPOST("http://ikben.lodybo.nl/mailer.php", $scope.formInput).respond(400, {status: "error", errors: ["Incorrect mailadres"]});
                 $scope.validationSuccessHandler();
                 $httpBackend.flush();
                 
@@ -134,7 +134,7 @@ describe("Form Controller functionality", function () {
                 };
                 
                 spyOn($scope, "validationSuccessHandler").and.callThrough();
-                $httpBackend.expectPOST("php-scripts/mailer.php", $scope.formInput).respond(200, {status: "success"});
+                $httpBackend.expectPOST("http://ikben.lodybo.nl/mailer.php", $scope.formInput).respond(200, {status: "success"});
                 $scope.validate();
                 $httpBackend.flush();
                 
