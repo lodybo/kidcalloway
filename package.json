@@ -1,6 +1,10 @@
 {
   "name": "band-site",
+<<<<<<< HEAD
   "version": "2.6.12",
+=======
+  "version": "2.4.3",
+>>>>>>> parent of 198b1e5... Updated live section.
   "private": true,
   "description": "Band website",
   "main": "Gruntfile.js",
