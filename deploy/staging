@@ -1,1 +1,1 @@
-put -rp /home/rof/clone/build/* public_html/staging/kidcalloway
+rsync -avz -e "ssh -oPort=4000" /home/rof/clone/build/* public_html/staging/kidcalloway
