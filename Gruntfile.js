@@ -216,7 +216,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask("serve", ["connect", "watch"]);
 
-  grunt.registerTask("test", ["jshint"]);
+  grunt.registerTask("test", ["jshint", "jasmine"]);
   grunt.registerTask("build", ["clean:build", "kit", "scss", "js", "copy"]);
 
   grunt.registerTask("default", ["serve"]);
