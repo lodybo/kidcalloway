@@ -61,5 +61,5 @@
     $json = json_encode($response);
     header('Content-Type: application/json');
     echo $json;
-    result;
+    return;
 ?>
