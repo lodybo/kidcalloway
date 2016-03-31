@@ -1,1 +1,1 @@
-put -rp /home/rof/clone/build/* public_html/staging/kidcalloway
+rsync -avz -e "ssh" /home/rof/clone/build/* public_html/staging/kidcalloway
