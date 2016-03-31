@@ -59,9 +59,12 @@ button {
     background-size: contain;
     width: 134px;
     height: 134px;
-    animation: loader-animation-pulse 3s 20 linear, loader-animation-rotate 6s 10 linear;
-    transform: translateZ(0); /* For performance */
     z-index: 5;
+    
+    &.animate {
+        animation: loader-animation-pulse 3s 20 linear, loader-animation-rotate 6s 10 linear;
+        transform: translateZ(0); /* For performance */
+    }
 }
 
 @keyframes loader-animation-pulse {

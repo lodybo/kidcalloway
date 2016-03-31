@@ -55,6 +55,7 @@
     
     form {
         @include row();
+        min-height: 200px;
         
         .form-left, .form-right {
             @include span-columns(6);

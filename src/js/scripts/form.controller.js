@@ -1,4 +1,4 @@
-angular.module("KidC_App").controller("formController", ["$scope", function ($scope) {
+angular.module("KidC_App").controller("formController", ["$scope", "$timeout", function ($scope, $timeout) {
     // Models for the form input
     $scope.formInput = {
         name: "",
@@ -10,6 +10,7 @@ angular.module("KidC_App").controller("formController", ["$scope", function ($sc
     // Toggles for the loader icon, success result and error result and the order form
     $scope.showToggles = {
         loader: false,
+        animateLoader: false,
         success: false,
         error: false,
         form: true
@@ -99,9 +100,24 @@ angular.module("KidC_App").controller("formController", ["$scope", function ($sc
             return;
         }
         
-        // Nope, nothing found, so we can show the success banner!
-        $scope.showToggles.success = true;
+        // Nope, nothing found, so we can send the form!
+        $scope.validationSuccessHandler();
+    };
+    
+    // This function takes care of sending the form input, and setting all the success cues
+    $scope.validationSuccessHandler = function() {
+        // First: show the loader and hide the form while we're making a request to the mailer script
+        $scope.showToggles.loader = true;
+        $scope.showToggles.animateLoader = true;
         $scope.showToggles.form = false;
+        
+        // For now, mimick a long request
+        $timeout(function () {
+            // Done!
+        $scope.showToggles.success = true;
+        $scope.showToggles.loader = false;
+        $scope.showToggles.animateLoader = false;
+        }, 2000);
     };
     
     // This function sorts out the errors and gives the appropriate visual cues back to the user

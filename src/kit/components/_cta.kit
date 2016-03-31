@@ -75,7 +75,7 @@
                 </div>
                 
                 <div class="form-bottom form-result">
-                    <div class="loader" ng-show="showToggles.loader"></div>
+                    <div class="loader" ng-class="{animate : showToggles.animateLoader}" ng-show="showToggles.loader"></div>
                     <p class="success" ng-show="showToggles.success">Het formulier is verstuurd, je krijgt snel een mail van ons! <span ng-click="showForm()">Ik wil er nog eentje bestellen!</span></p>
                     <div class="error" ng-show="showToggles.error">
                         Er is iets fouts gegaan bij het versturen van het formulier:
