@@ -100,14 +100,8 @@
             border: solid 3px transparent;
         }
         
-        .success {
-            input {
-                border-color: color("success");
-            }
-        }
-        
         .error {
-            input {
+            input, textarea {
                 border-color: color("error");
             }
         }
@@ -130,6 +124,16 @@
             
             &:before {
                 content: "\f00c";
+            }
+            
+            span {
+                cursor: pointer;
+                font-weight: bold;
+                color: color("link");
+                
+                &:hover {
+                    color: color("linkHover");
+                }
             }
         }
         

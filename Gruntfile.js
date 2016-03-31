@@ -56,7 +56,8 @@ module.exports = function(grunt) {
 			    vendor: [
 				    "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js",
 				    "http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.min.js",
-				    "http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-mocks.js"
+				    "http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-mocks.js",
+                    "http://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.3/angular-messages.min.js"
 			    ]
 		    }
 		}

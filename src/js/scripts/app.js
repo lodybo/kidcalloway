@@ -1,1 +1,1 @@
-angular.module("KidC_App", ["ngResource"]);
+angular.module("KidC_App", ["ngResource", "ngMessages"]);

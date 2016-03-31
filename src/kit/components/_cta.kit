@@ -36,46 +36,54 @@
             </p>
             
             <form name="orderForm" action="php-scripts" method="post">
-                <div class="form-left">
-                    <label class="error">
-                        <p>Naam</p>
-                        <input type="text" name="name" ng-model="formInput.name" />
-                    </label>
+                <div ng-show="showToggles.form">
+                    <div class="form-left">
+                        <label ng-class="{error : isWrongField('name')}">
+                            <p>Naam</p>
+                            <input type="text" name="name" ng-model="formInput.name" />
+                        </label>
+                        
+                        <label ng-class="{error : isWrongField('email')}">
+                            <p>E-mailadres</p>
+                            <input type="email" name="email" ng-model="formInput.email" ng-pattern="/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/" />
+                        </label>
+                        
+                        <label ng-class="{error : isWrongField('amount')}">
+                            <p>Aantal</p>
+                            <input type="number" name="amount" value="1" ng-model="formInput.amount" />
+                        </label>
+                    </div>
                     
-                    <label>
-                        <p>E-mailadres</p>
-                        <input type="email" name="email" ng-model="formInput.email" ng-pattern="/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/" />
-                    </label>
+                    <div class="form-right">
+                        <label ng-class="{error : isWrongField('address')}">
+                            <p>Adres</p>
+                            <textarea name="address" ng-model="formInput.address"></textarea>
+                        </label>
+                        
+                        <p class="disclaimer">
+                            Kid Calloway verkoopt de gegevens die worden verzameld niet aan derden.
+                        </p>
+                    </div>
                     
-                    <label>
-                        <p>Aantal</p>
-                        <input type="number" name="amount" value="1" ng-model="formInput.amount" />
-                    </label>
-                </div>
-                
-                <div class="form-right">
-                    <label>
-                        <p>Adres</p>
-                        <textarea name="address" ng-model="formInput.address"></textarea>
-                    </label>
+                    <div class="form-left">
+                        &nbsp;<input class="winniethepooh" type="text" name="winniethepooh" />
+                    </div>
                     
-                    <p class="disclaimer">
-                        Kid Calloway verkoopt de gegevens die worden verzameld niet aan derden.
-                    </p>
-                </div>
-                
-                <div class="form-left">
-                    &nbsp;<input class="winniethepooh" type="text" name="winniethepooh" />
-                </div>
-                
-                <div class="form-right">
-                    <button type="button" ng-click="validate()">Ik wil 'm!</button>
+                    <div class="form-right">
+                        <button type="button" ng-click="validate()">Ik wil 'm!</button>
+                    </div>
                 </div>
                 
                 <div class="form-bottom form-result">
                     <div class="loader" ng-show="showToggles.loader"></div>
-                    <p class="success" ng-show="showToggles.success">Het formulier is verstuurd, je krijgt snel een mail van ons!</p>
-                    <p class="error" ng-show="showToggles.error">Er is iets fouts gegaan bij het versturen van het formulier</p>
+                    <p class="success" ng-show="showToggles.success">Het formulier is verstuurd, je krijgt snel een mail van ons! <span ng-click="showForm()">Ik wil er nog eentje bestellen!</span></p>
+                    <div class="error" ng-show="showToggles.error">
+                        Er is iets fouts gegaan bij het versturen van het formulier:
+                        <ul ng-messages="validationErrors" ng-messages-multiple>
+                            <li ng-message="missingParameters">Sommige velden zijn niet ingevuld</li>
+                            <li ng-message="incorrectMailaddress">Er is een verkeerd e-mailadres ingevuld</li>
+                        </ul>
+                    </div>
                 </div>
             </form>
         </div>
