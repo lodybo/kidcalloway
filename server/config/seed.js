@@ -5,31 +5,11 @@
 
 'use strict';
 
-var Thing = require('../api/thing/thing.model');
+// Get Classes and Objects from the Data Models
 var User = require('../api/user/user.model');
+var Agenda = require("../api/agenda/agenda.model");
 
-Thing.find({}).remove(function() {
-  Thing.create({
-    name : 'Development Tools',
-    info : 'Integration with popular tools such as Bower, Grunt, Karma, Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, Stylus, Sass, CoffeeScript, and Less.'
-  }, {
-    name : 'Server and Client integration',
-    info : 'Built with a powerful and fun stack: MongoDB, Express, AngularJS, and Node.'
-  }, {
-    name : 'Smart Build System',
-    info : 'Build system ignores `spec` files, allowing you to keep tests alongside code. Automatic injection of scripts and styles into your index.html'
-  },  {
-    name : 'Modular Structure',
-    info : 'Best practice client and server structures allow for more code reusability and maximum scalability'
-  },  {
-    name : 'Optimized Build',
-    info : 'Build process packs up your templates as a single JavaScript payload, minifies your scripts/css/images, and rewrites asset names for caching.'
-  },{
-    name : 'Deployment Ready',
-    info : 'Easily deploy your app to Heroku or Openshift with the heroku and openshift subgenerators'
-  });
-});
-
+// Fill the Database
 User.find({}).remove(function() {
   User.create({
     provider: 'local',
@@ -46,4 +26,63 @@ User.find({}).remove(function() {
       console.log('finished populating users');
     }
   );
+});
+
+Agenda.find({}).remove(function() {
+    Agenda.create({
+        provider: "local",
+        venueName: "Kaffee Lambiek",
+        venueAddress: "Wilhelminapark 66, 5041 ED Tilburg, Netherlands",
+        details: "Kid Calloway speelt samen met Endfield bij Kaffee Lambiek!",
+        fbEvent: "https://www.facebook.com/events/1666492276937175/",
+        ticketLink: "",
+        date: Date("2016-04-16"),
+        time: "20:00",
+        played: false,
+        cancelled: false
+    }, {
+        provider: "local",
+        venueName: "Kingsday at the <a href='http://www.bluecollarhotel.nl/'>Blue Collar Hotel</a>",
+        venueAddress: "Klokgebouw 10 Strijp S Eindhoven",
+        details: "Kom met Kid Calloway Koningsdag 2016 vieren in de parkeergarage tegenover het Blue Collar Hotel!",
+        fbEvent: "https://www.facebook.com/events/443752132491052/",
+        ticketLink: "",
+        date: Date("2016-04-27"),
+        time: "Tussen 14:00 en 16:00",
+        played: false,
+        cancelled: false
+    }, {
+        provider: "local",
+        venueName: "Velvet Music IN STORE",
+        venueAddress: "Torenallee 60-02 unit 8, 5617 BD Eindhoven",
+        details: "28 maart viert Velvet Music Pasen in haar splinternieuwe zaak in de Urban Shopper op Strijp-S en Kid Calloway is erbij, met wel een heel speciaal optreden!",
+        fbEvent: "https://www.facebook.com/events/1740638226152484/",
+        ticketLink: "",
+        date: Date("2016-03-28"),
+        time: "15:00",
+        played: true,
+        cancelled: false
+    }, {
+        provider: "local",
+        venueName: "Stage Music Cafe",
+        venueAddress: "Stratumseind 25, 5611 EN Eindhoven",
+        details: "Kid Calloway doet mee aan de 3e Rocktocht Eindhoven 2016",
+        fbEvent: "https://www.facebook.com/events/922352567860696/",
+        ticketLink: "",
+        date: Date("2016-03-06"),
+        time: "16:30",
+        played: true,
+        cancelled: false
+    }, {
+        provider: "local",
+        venueName: "Cafe 't Spektakel",
+        venueAddress: "Prins Bernhardstraat 44, 5721 GC Asten",
+        details: "Kid Calloway viert het weekend in Cafe 't Spektakel",
+        fbEvent: "https://www.facebook.com/events/1678462842424757/",
+        ticketLink: "",
+        date: Date("2016-02-20"),
+        time: "21:30",
+        played: false,
+        cancelled: false
+    });
 });
