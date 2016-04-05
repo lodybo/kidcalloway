@@ -9,13 +9,11 @@ angular.module('kidCallowayApp')
     // *** Public methods
     var _getAll = function() {
         // Get all records and return them
-        return endpoint.get({}).then(function (response) {
-            return response.data;
-        });
+        return endpoint.query().$promise;
     };
     
     // Return public functions
     return {
-        get: getAll
+        get: _getAll
     };
   });

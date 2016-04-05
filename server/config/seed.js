@@ -36,7 +36,7 @@ Agenda.find({}).remove(function() {
         details: "Kid Calloway speelt samen met Endfield bij Kaffee Lambiek!",
         fbEvent: "https://www.facebook.com/events/1666492276937175/",
         ticketLink: "",
-        date: Date("2016-04-16"),
+        date: {raw: new Date("2016-04-16")},
         time: "20:00",
         played: false,
         cancelled: false
@@ -47,7 +47,7 @@ Agenda.find({}).remove(function() {
         details: "Kom met Kid Calloway Koningsdag 2016 vieren in de parkeergarage tegenover het Blue Collar Hotel!",
         fbEvent: "https://www.facebook.com/events/443752132491052/",
         ticketLink: "",
-        date: Date("2016-04-27"),
+        date: {raw: new Date("2016-04-27")},
         time: "Tussen 14:00 en 16:00",
         played: false,
         cancelled: false
@@ -58,7 +58,7 @@ Agenda.find({}).remove(function() {
         details: "28 maart viert Velvet Music Pasen in haar splinternieuwe zaak in de Urban Shopper op Strijp-S en Kid Calloway is erbij, met wel een heel speciaal optreden!",
         fbEvent: "https://www.facebook.com/events/1740638226152484/",
         ticketLink: "",
-        date: Date("2016-03-28"),
+        date: {raw: new Date("2016-03-28")},
         time: "15:00",
         played: true,
         cancelled: false
@@ -69,7 +69,7 @@ Agenda.find({}).remove(function() {
         details: "Kid Calloway doet mee aan de 3e Rocktocht Eindhoven 2016",
         fbEvent: "https://www.facebook.com/events/922352567860696/",
         ticketLink: "",
-        date: Date("2016-03-06"),
+        date: {raw: new Date("2016-03-06")},
         time: "16:30",
         played: true,
         cancelled: false
@@ -80,9 +80,11 @@ Agenda.find({}).remove(function() {
         details: "Kid Calloway viert het weekend in Cafe 't Spektakel",
         fbEvent: "https://www.facebook.com/events/1678462842424757/",
         ticketLink: "",
-        date: Date("2016-02-20"),
+        date: {raw: new Date("2016-02-20")},
         time: "21:30",
         played: false,
         cancelled: false
+    }, function () {
+        console.log("Finished populating agenda");
     });
 });
