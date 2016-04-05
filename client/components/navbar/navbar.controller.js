@@ -6,26 +6,37 @@ angular.module('kidCallowayApp')
       'title': 'Live',
       'link': '#live',
       'restriction': 'all',
-      'icon': 'music'
+      'icon': 'music',
     }, {
       'title': 'Birth',
       'link': '#birth',
       'restriction': 'all',
-      'icon': 'mars'
+      'icon': 'mars',
     }, {
       'title': 'Experience',
       'link': '#experience',
       'restriction': 'all',
-      'icon': 'play'
+      'icon': 'play',
     }, {
       'title': 'Contact',
       'link': '#contact',
       'restriction': 'all',
-      'icon': 'envelope'
+      'icon': 'envelope',
     }, {
       'title': 'Agenda',
       'link': '/agenda',
-      'restriction': 'loggedIn'
+      'restriction': 'loggedIn',
+      'icon': 'calendar',
+    }, {
+      'title': 'Reviews',
+      'link': '/reviews',
+      'restriction': 'loggedIn',
+      'icon': 'commenting',
+    }, {
+      'title': 'Site settings',
+      'link': '/site-settings',
+      'restriction': 'loggedIn',
+      'icon': 'cogs',
     }];
 
     $scope.isCollapsed = true;
@@ -67,7 +78,7 @@ angular.module('kidCallowayApp')
 
     // STICKY MENU
     var sticky = {
-      el: angular.element(".navbar"),
+      el: angular.element(".navbar.navbar-static-top"),
       stuck: false,
       stickPoint: 0
     };

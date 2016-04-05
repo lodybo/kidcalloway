@@ -18,6 +18,10 @@ $kidc_orange_75: tint($kidc_orange, 75%);
 /// @prop {Color} link [#857C8D] - Normal link color
 /// @prop {Color} linkHover [#61304B] - Hovering link
 /// @prop {Color} linkVisited [#5C0029] - Color of the visited link
+/// @prop {Color} menuBackground [#EF7E1E] - Background of the menu
+/// @prop {Color} menuColor [#FFFFFF] - Color of the links in the menu
+/// @prop {Color} menuHamburger [#EF7E1E] - Color of the hamburger in the menu
+/// @prop {Color} menuActive [#EF7E1E] - Color of the active link in the menu
 /// @prop {Color} light [#FFFFFF] - Generic light color
 /// @prop {Color} dark [#000000] - Generic dark color
 $color-map: (
@@ -30,6 +34,7 @@ $color-map: (
   "menuBackground": $kidc_red,
   "menuColor": #FFFFFF,
   "menuHamburger": $kidc_orange,
+  "menuActive": $kidc_orange,
   "light": #FFFFFF,
   "dark": #000000
 );
