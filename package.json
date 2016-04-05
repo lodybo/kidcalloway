@@ -1,6 +1,6 @@
 {
   "name": "kid-calloway",
-  "version": "3.10.3",
+  "version": "3.10.4",
   "main": "server/app.js",
   "dependencies": {
     "body-parser": "~1.5.0",
