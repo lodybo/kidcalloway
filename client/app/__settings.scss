@@ -22,6 +22,12 @@ $kidc_orange_75: tint($kidc_orange, 75%);
 /// @prop {Color} menuColor [#FFFFFF] - Color of the links in the menu
 /// @prop {Color} menuHamburger [#EF7E1E] - Color of the hamburger in the menu
 /// @prop {Color} menuActive [#EF7E1E] - Color of the active link in the menu
+/// @prop {Color} buttonBGColor [#5C0029] - Color of the background of buttons
+/// @prop {Color} buttonBGHover [#FFFFFF] - Color of the background of a button when hovered over
+/// @prop {Color} buttonColor [#FFFFFF] - Color of the text within a button
+/// @prop {Color} buttonHover [#5C0029] - Color of the text within a button when hovered over
+/// @prop {Color} success [#97A73A] - User feedback color when something is a success
+/// @prop {Color} error [#5C0029] - User feedback color when something failed
 /// @prop {Color} light [#FFFFFF] - Generic light color
 /// @prop {Color} dark [#000000] - Generic dark color
 $color-map: (
@@ -35,6 +41,12 @@ $color-map: (
   "menuColor": #FFFFFF,
   "menuHamburger": $kidc_orange,
   "menuActive": $kidc_orange,
+  "buttonBGColor": $kidc_red,
+  "buttonBGHover": #FFFFFF,
+  "buttonColor": #FFFFFF,
+  "buttonHover": $kidc_red,
+  "success": #97A73A,
+  "error": $kidc_red,
   "light": #FFFFFF,
   "dark": #000000
 );

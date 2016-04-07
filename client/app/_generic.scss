@@ -34,3 +34,16 @@ h1 {
     }
   }
 }
+
+button {
+    border: 0;
+    padding: 10px 25px;
+    background-color: color("buttonBGColor");
+    color: color("buttonColor");
+    font-size: 1.2em;
+    
+    &:hover {
+        background-color: color("buttonBGHover");
+        color: color("buttonHover");
+    }
+}
