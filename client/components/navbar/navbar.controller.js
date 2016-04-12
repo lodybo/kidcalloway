@@ -4,22 +4,22 @@ angular.module('kidCallowayApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth, $window, $timeout) {
     $scope.menu = [{
       'title': 'Live',
-      'link': '#live',
+      'link': '!#live',
       'restriction': 'all',
       'icon': 'music',
     }, {
       'title': 'Birth',
-      'link': '#birth',
+      'link': '!#birth',
       'restriction': 'all',
       'icon': 'mars',
     }, {
       'title': 'Experience',
-      'link': '#experience',
+      'link': '!#experience',
       'restriction': 'all',
       'icon': 'play',
     }, {
       'title': 'Contact',
-      'link': '#contact',
+      'link': '!#contact',
       'restriction': 'all',
       'icon': 'envelope',
     }, {
