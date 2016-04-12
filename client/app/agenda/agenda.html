@@ -8,7 +8,7 @@
         </div>
         
         <div class="form col-xs-12">
-            <button class="btn btn-lg center-block" ng-click="toggleForm()">Optreden toevoegen</button>
+            <button class="center-block" ng-click="toggleForm()">Optreden toevoegen</button>
             
             <form class="agendaForm" ng-show="showForm">
                 <div class="col-xs-12 col-sm-6 col-lg-4">
@@ -20,7 +20,7 @@
                         
                         <label class="form-group col-xs-6 col-sm-12">
                             <p>Tijd</p>
-                            <input class="form-control" type="time" name="time" />
+                            <input class="form-control" type="text" name="time" />
                         </label>
                     </div>
                     
@@ -69,13 +69,22 @@
                     <td class="timecol-sm-1" ng-bind="gig.time"></td>
                     <td class="details hidden-xs col-sm-5" ng-bind="gig.details"></td>
                     <td class="links hidden-xs col-sm-1">
-                        <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                        <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
                     </td>
                 </tr>
                 <tr class="visible-xs">
                     <td class="details" colspan="2" ng-bind="gig.details"></td>
                     <td class="links">
-                        <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                        <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <div class="row context-buttons">
+                            <button class="col-xs-12 col-sm-4">Bewerken</button>
+                            <button class="col-xs-6 col-sm-4">Verwijderen</button>
+                            <button class="col-xs-6 col-sm-4">Annuleren</button>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -93,13 +102,21 @@
                     <td class="timecol-sm-1" ng-bind="gig.time"></td>
                     <td class="details hidden-xs col-sm-5" ng-bind="gig.details"></td>
                     <td class="links hidden-xs col-sm-1">
-                        <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                        <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
                     </td>
                 </tr>
                 <tr class="visible-xs">
                     <td class="details" colspan="2" ng-bind="gig.details"></td>
                     <td class="links">
-                        <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                        <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <div class="row context-buttons">
+                            <button class="col-xs-12 col-sm-6">Bewerken</button>
+                            <button class="col-xs-12 col-sm-6">Verwijderen</button>
+                        </div>
                     </td>
                 </tr>
             </tbody>

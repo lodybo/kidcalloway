@@ -63,6 +63,10 @@
 		margin-bottom: 30px;
 		float:none;
 	}
+    
+    .context-buttons button {
+        margin: 5px 0;
+    }
 
 	@media screen and (max-width: 768px) {
 		// @include span-columns(12);
@@ -85,6 +89,8 @@
 }
 
 .agendaForm {
+    margin-top: 15px;
+    
     label {
         display: block;
     }
