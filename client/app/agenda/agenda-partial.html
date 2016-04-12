@@ -30,7 +30,7 @@
         <h3 class="col-xs-12">Recente shows</h3>
         <table class="table col-xs-12">
             <table class="table col-xs-12">
-            <tbody ng-repeat="gig in gigs | filter:{played: true}">
+            <tbody ng-repeat="gig in gigs | filter:{played: true} | limitTo: 1">
                 <tr>
                     <td class="date col-sm-2" ng-bind="gig.date.formatted"></td>
                     <td class="venue col-sm-3" >

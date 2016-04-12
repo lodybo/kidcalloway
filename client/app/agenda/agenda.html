@@ -1,77 +1,111 @@
+<!-- Load navigation -->
+<div ng-include="'components/navbar/navbar.html'"></div>
+
 <div id="live" class="container">
-    <div class="agenda row">
+    <div class="agenda row" ng-controller="AgendaCtrl">
         <div class="top col-xs-12">
             <h1><i class="fa fa-music"></i>Live</h1>
+        </div>
+        
+        <div class="form col-xs-12">
+            <button class="btn btn-lg center-block" ng-click="toggleForm()">Optreden toevoegen</button>
+            
+            <form class="agendaForm" ng-show="showForm">
+                <div class="col-xs-12 col-sm-6 col-lg-4">
+                    <div class="row">
+                        <label class="form-group col-xs-6 col-sm-12">
+                            <p>Datum</p>
+                            <input class="form-control" type="date" name="date" />
+                        </label>
+                        
+                        <label class="form-group col-xs-6 col-sm-12">
+                            <p>Tijd</p>
+                            <input class="form-control" type="time" name="time" />
+                        </label>
+                    </div>
+                    
+                    <label class="form-group">
+                        <p>Locatie</p>
+                        <input class="form-control" type="text" name="venue" />
+                    </label>
+                </div>
+                
+                <div class="col-xs-12 col-sm-6 col-lg-4">
+                    <label class="form-group">
+                        <p>Adres (voor o.m. in Google Maps)</p>
+                        <input class="form-control" type="text" name="address" />
+                    </label>
+                    
+                    <label class="form-group">
+                        <p>Facebook Event link</p>
+                        <input class="form-control" type="text" name="fb_event" />
+                    </label>
+                    
+                    <label class="form-group">
+                        <p>Ticket link</p>
+                        <input class="form-control" type="text" name="ticket" />
+                    </label>
+                </div>
+                
+                <div class="col-xs-12 col-sm-12 col-lg-4">
+                    <label class="form-group">
+                        <p>Details</p>
+                        <textarea class="form-control" rows="3"></textarea>
+                    </label>
+                    
+                    <button ng-bind="submitButtonCaption"></button>
+                </div>
+            </form>
         </div>
 
         <h3 class="col-xs-12">Aankomende shows</h3>
         <table class="table col-xs-12">
-            <tr>
-                <td class="date col-sm-2">28 maart 2016</td>
-                <td class="venue col-sm-3">Velvet Music IN STORE <small><a href="http://maps.google.com/?q=Torenallee 60-02 unit 8, 5617 BD Eindhoven, Noord-Brabant" target="_blank">Torenallee 60-02 unit 8, 5617 BD Eindhoven</a></small></td>
-                <td class="timecol-sm-1">15:00</td>
-                <td class="details hidden-xs col-sm-5">28 maart viert Velvet Music Pasen in haar splinternieuwe zaak in de Urban Shopper op Strijp-S en Kid Calloway is erbij, met wel een heel speciaal optreden!</td>
-                <td class="links hidden-xs col-sm-1">
-                    <a href="https://www.facebook.com/events/1740638226152484/" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
-                </td>
-            </tr>
-            <tr class="visible-xs">
-                <td class="details" colspan="2">28 maart viert Velvet Music Pasen in haar splinternieuwe zaak in de Urban Shopper op Strijp-S en Kid Calloway is erbij, met wel een heel speciaal optreden!</td>
-                <td class="links">
-                    <a href="https://www.facebook.com/events/1740638226152484/" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="date col-sm-2">27 nov 2015</td>
-                <td class="venue col-sm-3">Cafe Wilhelmina <small><a href="http://maps.google.com/?q=Wilhelminaplein 6, 5611 HE Eindhoven" target="_blank">Wilhelminaplein 6, 5611 HE Eindhoven</a></small></td>
-                <td class="timecol-sm-1">20:00u</td>
-                <td class="details hidden-xs col-sm-5">"Born Again Man" Release Party in Cafe Wilhelmina. <br /> Ft. Kenji</td>
-                <td class="links hidden-xs col-sm-1">
-                    <a href="https://www.facebook.com/events/508401149336944/" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
-                </td>
-            </tr>
-            <tr class="visible-xs">
-                <td class="details" colspan="2">"Born Again Man" Release Party in Cafe Wilhelmina. <br /> Ft. Kenji</td>
-                <td class="links">
-                    <a href="https://www.facebook.com/events/508401149336944/" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
-                </td>
-            </tr>
+            <tbody ng-repeat="gig in gigs | filter:{played: false}">
+                <tr>
+                    <td class="date col-sm-2" ng-bind="gig.date.formatted"></td>
+                    <td class="venue col-sm-3" >
+                        <span ng-bind-html="gig.venueName"></span> <small><a ng-href="https://www.google.com/maps/place/{{gig.venueAddress}}" target="_blank" ng-bind="gig.venueAddress"></a></small>
+                    </td>
+                    <td class="timecol-sm-1" ng-bind="gig.time"></td>
+                    <td class="details hidden-xs col-sm-5" ng-bind="gig.details"></td>
+                    <td class="links hidden-xs col-sm-1">
+                        <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                    </td>
+                </tr>
+                <tr class="visible-xs">
+                    <td class="details" colspan="2" ng-bind="gig.details"></td>
+                    <td class="links">
+                        <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                    </td>
+                </tr>
+            </tbody>
         </table>
         
         <h3 class="col-xs-12">Recente shows</h3>
         <table class="table col-xs-12">
-            <tr>
-                <td class="date col-sm-2">20 sept 2015</td>
-                <td class="venue col-sm-3">Cafe 't Spektakel <small><a href="http://maps.google.com/?q=Prins Bernhardstraat 44, Asten" target="_blank">Prins Bernhardstraat 44, Asten</a></small></td>
-                <td class="timecol-sm-1">18:00u</td>
-                <td class="details hidden-xs col-sm-5">Kid Calloway & Kenji in 't Spektakel!</td>
-                <td class="links hidden-xs col-sm-1">
-                    <a href="https://www.facebook.com/events/674273989380719/" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
-                </td>
-            </tr>
-            <tr class="visible-xs">
-                <td class="details" colspan="2">Kid Calloway & Kenji in 't Spektakel!</td>
-                <td class="links">
-                    <a href="https://www.facebook.com/events/674273989380719/" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="date col-sm-2">4 sept 2015</td>
-                <td class="venue col-sm-3">Cafe 't Moest <small><a href="http://maps.google.com/?q=Hoogstraat 109, Eindhoven" target="_blank">Hoogstraat 109, Eindhoven</a></small></td>
-                <td class="timecol-sm-1">20:00u</td>
-                <td class="details hidden-xs col-sm-5">Kid Calloway & Kenji, Cafe 't Moest</td>
-                <td class="links hidden-xs col-sm-1">
-                    <a href="https://www.facebook.com/events/1484202965208478/" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
-                </td>                
-            </tr>
-            <tr class="visible-xs">
-                <td class="details" colspan="2">Kid Calloway & Kenji, Cafe 't Moest</td>
-                <td class="links">
-                    <a href="https://www.facebook.com/events/1484202965208478/" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
-                </td>
-            </tr>
+            <table class="table col-xs-12">
+            <tbody ng-repeat="gig in gigs | filter:{played: true}">
+                <tr>
+                    <td class="date col-sm-2" ng-bind="gig.date.formatted"></td>
+                    <td class="venue col-sm-3" >
+                        <span ng-bind-html="gig.venueName"></span> <small><a ng-href="https://www.google.com/maps/place/{{gig.venueAddress}}" target="_blank" ng-bind="gig.venueAddress"></a></small>
+                    </td>
+                    <td class="timecol-sm-1" ng-bind="gig.time"></td>
+                    <td class="details hidden-xs col-sm-5" ng-bind="gig.details"></td>
+                    <td class="links hidden-xs col-sm-1">
+                        <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                    </td>
+                </tr>
+                <tr class="visible-xs">
+                    <td class="details" colspan="2" ng-bind="gig.details"></td>
+                    <td class="links">
+                        <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>
+
+<!-- Load footer with links and more info -->
+<div ng-include="'components/footer/footer.html'"></div>
