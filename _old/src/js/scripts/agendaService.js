@@ -13,7 +13,9 @@ angular.module("agendaApp").factory("agendaService", ["$resource", function ($re
 		return agenda.query();
 	};
 	
-	var _addItems = function () {};
+	var _addItems = function (gig) {
+        var agenda = $resource()
+    };
 	
 	var _updateItems = function () {};
 	

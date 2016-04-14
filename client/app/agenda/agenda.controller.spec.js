@@ -46,4 +46,199 @@ describe('Controller: AgendaCtrl', function () {
     });
   });
   
+  describe("Validating adding a new gig to the list", function () {
+      beforeEach(function () {
+        // Catch api request
+        httpBackend.expectGET("/api/agenda").respond(200, response);
+        httpBackend.flush();
+        
+        // Set form data
+        scope.agendaForm = {
+            date: {
+                $required: true,
+                $valid: true
+            },
+            time: {
+                $required: true,
+                $valid: true
+            },
+            venue: {
+                $required: true,
+                $valid: true
+            },
+            address: {
+                $required: true,
+                $valid: true
+            },
+            fbEvent: {
+                $required: false,
+                $valid: true
+            },
+            ticket: {
+                $required: false,
+                $valid: true
+            },
+            details: {
+                $required: false,
+                $valid: true
+            }
+        };
+      });
+      
+      describe("When asking for field data", function () {
+          it("should return the values of the asked field", function() {
+              var formVenueString = JSON.stringify(scope.agendaForm.venue);
+              var outputVenueString = JSON.stringify(scope.getFieldData("venue"));
+              
+              expect(formVenueString).toEqual(outputVenueString);
+          });
+      });
+      
+      describe("When checking the field input to not be empty", function () {
+          it("should return true with a not-empty output", function () {
+              var checkResult = scope.isNotEmpty(scope.formData.venue);
+              
+              expect(checkResult).toBe(true);
+          });
+          
+          it("should return false given an empty input", function () {
+              var checkResult = scope.isNotEmpty(scope.formData.details);
+              
+              expect(checkResult).toBe(false);
+          });
+          
+          it("should return false and not throw an error when the input is undefined", function () {
+              var checkResult = scope.isNotEmpty(undefined);
+              
+              expect(checkResult).toBe(false);
+          });
+      });
+      
+      describe("When adding fields to the wrongFields collection", function () {
+          it("should add a field", function () {
+              expect(scope.errors.wrongFields.length).toBe(0);
+              
+              scope.addErrorField("venue");
+              
+              expect(scope.errors.wrongFields.length).toBe(1);
+              expect(scope.errors.wrongFields[0]).toBe("venue");
+          });
+          
+          it("should not add a field when it's already present in the wrongFields collection", function () {
+              expect(scope.errors.wrongFields.length).toBe(0);
+              
+              scope.addErrorField("venue");
+              
+              expect(scope.errors.wrongFields.length).toBe(1);
+              expect(scope.errors.wrongFields[0]).toBe("venue");
+              
+              // Add it again..
+              scope.addErrorField("venue");
+              
+              expect(scope.errors.wrongFields.length).toBe(1);
+              expect(scope.errors.wrongFields[0]).toBe("venue");
+          });
+      });
+      
+      describe("What the visual toggles should do when validating", function () {
+          it("should hide the form and show (and animate) the loader when preparing to send", function () {
+              scope.prepareToSend();
+              
+              expect(scope.showToggles.form).toBe(false);
+              expect(scope.showToggles.loader).toBe(true);
+              expect(scope.showToggles.animateLoader).toBe(true);
+          });
+          
+          it ("should show the form and hide (and stop) the loader when stopping send", function() {
+              scope.prepareToSend();
+              
+              expect(scope.showToggles.form).toBe(false);
+              expect(scope.showToggles.loader).toBe(true);
+              expect(scope.showToggles.animateLoader).toBe(true);
+              
+              scope.stopPrepareToSend();
+              
+              expect(scope.showToggles.form).toBe(true);
+              expect(scope.showToggles.loader).toBe(false);
+              expect(scope.showToggles.animateLoader).toBe(false);
+          });
+          
+          describe("Showing a cue based on the status of the stop prepare", function () {
+              it("should show the success message when everything is 'fine'", function () {
+                  expect(scope.showToggles.success).toBe(false);
+                  scope.stopPrepareToSend("success");
+                  expect(scope.showToggles.success).toBe(true);
+              });
+              
+              it("should show the error message when something is 'wrong'", function () {
+                  expect(scope.showToggles.error).toBe(false);
+                  scope.stopPrepareToSend("error");
+                  expect(scope.showToggles.error).toBe(true);
+              });
+          });
+      });
+      
+      describe("Running the validation function", function () {
+          beforeEach(function () {
+              spyOn(scope, "prepareToSend");
+              spyOn(scope, "stopPrepareToSend");
+          });
+          
+          it("should end with an error when a required field has not been filled in", function () {
+              scope.formData.venue = "";
+              
+              scope.validate();
+              
+              expect(scope.prepareToSend).toHaveBeenCalled();
+              expect(scope.stopPrepareToSend).toHaveBeenCalledWith("error");
+              expect(scope.errors.missingParameters).toBe(true);
+              expect(scope.errors.wrongFields[0]).toEqual("venue");
+          });
+          
+          it("should end with an error when a field is not valid", function () {
+              scope.agendaForm.venue.$valid = false;
+              
+              scope.validate();
+              
+              expect(scope.prepareToSend).toHaveBeenCalled();
+              expect(scope.stopPrepareToSend).toHaveBeenCalledWith("error");
+              expect(scope.errors.wrongInput).toBe(true);
+              expect(scope.errors.wrongFields[0]).toEqual("venue");
+          });
+          
+          describe("Sending correct input to the server", function () {
+              it("should end with a success message when nothing goes wrong at the server's end", function () {
+                function encodeUriQuery(val, pctEncodeSpaces) {
+                    return encodeURIComponent(val).
+                        replace(/%40/gi, '@').
+                        replace(/%3A/gi, ':').
+                        replace(/%24/g, '$').
+                        replace(/%2C/gi, ',').
+                        replace(/%3B/gi, ';').
+                        replace(/%20/g, '%20').
+                        replace(/%2B/g, '+'); 
+                }
+                
+                var uriDa = encodeUriQuery(scope.formData.date);
+                var uriT = encodeUriQuery(scope.formData.time);
+                var uriV = encodeUriQuery(scope.formData.venue);
+                var uriA = encodeUriQuery(scope.formData.address);
+                var urifb = encodeUriQuery(scope.formData.fbEvent);
+                var urit = encodeUriQuery(scope.formData.ticket);
+                var uriDe = encodeUriQuery(scope.formData.details);
+                httpBackend.expectPOST("/api/agenda/date/" + uriDa + "/time/" + uriT + "/venue/" + uriV + "/address/" + uriA + "/fbEvent/" + urifb + "/ticket/" + urit + "/details" + uriDe).respond(200, "success");
+                
+                scope.validate();
+                
+                httpBackend.flush();
+                
+                timeout(function () {
+                    expect(scope.stopPrepareToSend).toHaveBeenCalledWith("success");
+                    expect(scope.showToggles.success).toBe(true);
+                }, 0);
+              });
+          });
+      });
+  });
+  
 });

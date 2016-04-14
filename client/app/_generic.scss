@@ -47,3 +47,30 @@ button {
         color: color("buttonHover");
     }
 }
+
+.loader {
+    position: absolute;
+    top: 20%;
+
+    background-image: url("../img/KidC_beeldmerk.jpg");
+    background-size: contain;
+    width: 134px;
+    height: 134px;
+    z-index: 5;
+    
+    &.animate {
+        animation: loader-animation-pulse 3s 20 linear, loader-animation-rotate 6s 10 linear;
+        transform: translateZ(0); /* For performance */
+    }
+}
+
+@keyframes loader-animation-pulse {
+	0%   { opacity: 0.25; }
+	50% { opacity: 0.50; }
+	100% { opacity: 0.25; }
+}
+
+@keyframes loader-animation-rotate {
+	0% { transform: rotate(0deg);}
+	100% { transform: rotate(360deg);}
+}
