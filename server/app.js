@@ -28,5 +28,22 @@ server.listen(config.port, config.ip, function () {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
 
+// Setup scheduler for the agenda
+var scheduler = require("node-schedule");
+var Agenda = require('./agenda.model');
+var moment = require('moment');
+
+var schedule = scheduler.scheduleJob("0 0 0 1/1 * ? *", function () {
+  // Find everything from one day back
+  var today = new Date();
+  var yesterday = today.getDate() - 1;
+  
+  Agenda.find({
+    "date.raw": {$gte: {yesterday}, $lt(today)}
+  }, {
+    played: true
+  });
+});
+
 // Expose app
 exports = module.exports = app;
