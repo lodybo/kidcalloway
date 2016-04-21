@@ -14,7 +14,12 @@ angular.module('kidCallowayApp')
     };
     
     var _addGig = function (gig) {
-        var endpoint = $resource(apiURL + "date/:date/time/:time/venue/:venue/address/:address/fbEvent/:fbEvent/ticket/:ticket/details/:details", {
+        // First: if 'ticket' and 'details' are null, change that to a string form. We'll strip it on the server
+        var ticket, details;
+        ticket = gig.ticket === null ? "null" : gig.ticket;
+        details = gig.details === null ? "null" : gig.details;
+        
+        var endpoint = $resource(apiURL + "date/:date/time/:time/venueName/:venue/venueAddress/:address/fbEvent/:fbEvent/ticketLink/:ticket/details/:details", {
             date: "@date",
             time: "@time",
             venue: "@venue",
@@ -30,8 +35,8 @@ angular.module('kidCallowayApp')
             venue: gig.venue,
             address: gig.address,
             fbEvent: gig.fbEvent,
-            ticket: gig.ticket,
-            details: gig.details
+            ticket: ticket,
+            details: details
         }).$promise;
     };
     

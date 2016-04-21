@@ -18,8 +18,8 @@ angular.module('kidCallowayApp')
         venue: "Cafe De Kroeg",
         address: "Kroegseweg 12, Eindhoven",
         fbEvent: "http://www.facebook.com/",
-        details: "",
-        ticket: ""
+        details: null,
+        ticket: null
     };
     
     // Toggles for the loader icon, success result and error result and the order form

@@ -22,7 +22,23 @@ exports.show = function(req, res) {
 
 // Creates a new agenda in the DB.
 exports.create = function(req, res) {
-  Agenda.create(req.body, function(err, agenda) {
+  // var rawDate = {raw: req.params.date};
+  // req.params.date = rawDate;
+  // Remove the string "null" and change it into an actual null
+  // For both the ticketLink as the details
+  if (req.params.ticketLink === "null") {
+    req.params.ticketLink = null;
+  }
+  
+  if (req.params.details === "null") {
+    req.params.details = null;
+  }
+  
+  // Add 'played' and 'cancelled' flags, set them to 'false'
+  req.params.played = false;
+  req.params.cancelled = false;
+  console.log("AGENDA -- CREATE: ", req.params);
+  Agenda.create(req.params, function(err, agenda) {
     if(err) { return handleError(res, err); }
     return res.json(201, agenda);
   });
