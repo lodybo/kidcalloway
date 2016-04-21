@@ -30,7 +30,7 @@ angular.module('kidCallowayApp')
         });
         
         return endpoint.save({
-            date: gig.date,
+            date: gig.date.toDateString(),
             time: gig.time,
             venue: gig.venue,
             address: gig.address,

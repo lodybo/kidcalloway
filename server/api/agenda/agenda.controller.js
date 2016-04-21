@@ -22,8 +22,8 @@ exports.show = function(req, res) {
 
 // Creates a new agenda in the DB.
 exports.create = function(req, res) {
-  // var rawDate = {raw: req.params.date};
-  // req.params.date = rawDate;
+  var rawDate = {raw: req.params.date};
+  req.params.date = rawDate;
   // Remove the string "null" and change it into an actual null
   // For both the ticketLink as the details
   if (req.params.ticketLink === "null") {
