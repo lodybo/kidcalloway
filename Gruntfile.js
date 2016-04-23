@@ -49,27 +49,38 @@ module.exports = function(grunt) {
     },
     jasmine: {
 	    js: {
-		    src: "src/js/scripts/*.js",
+		    src: ["src/js/scripts/app.js", "src/js/scripts/*.controller.js"],
 		    options: {
-			    specs: "src/js/specs/*.js",
+			    specs: "src/js/specs/*.spec.js",
 			    outfile: "test/jasmine/index.html",
 			    vendor: [
 				    "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js",
 				    "http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.min.js",
-				    "http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-mocks.js"
+				    "http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-mocks.js",
+                    "http://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.3/angular-messages.min.js"
 			    ]
 		    }
 		}
     },
     uglify: {
-	    js: {
+	    production: {
 		    options: {
 			    sourceMap: true
 		    },
 		    files: {
-			    "build/js/scripts.min.js" : ["src/js/scripts/*.js", "!src/js/scripts/agenda*.js"]
+			    "build/js/scripts.min.js" : ["src/js/scripts/**/*.js", "!src/js/scripts/agenda*.js"]
 		    }
-	    }
+	    },
+        debug: {
+            options: {
+                beautify: true,
+                mangle: false,
+                compress: false
+            },
+            files: {
+			    "build/js/scripts.min.js" : ["src/js/scripts/**/*.js", "!src/js/scripts/agenda*.js"]
+		    }
+        }
     },
 
     // GENERIC
@@ -123,7 +134,12 @@ module.exports = function(grunt) {
 			    flatten: true,
 			    src: ["src/assets/**/*.eot", "src/assets/**/*.svg", "src/assets/**/*.ttf", "src/assets/**/*.woff"],
 			    dest: "build/css/fonts"
-		    }]
+		    }, {
+                expand: true,
+                flatten: true,
+                src: ["src/assets/**/*.php"],
+                dest: "build/php-scripts"
+            }]
 	    },
       press: {
         src: "src/assets/Perskit-Kid-Calloway.zip",
@@ -155,8 +171,16 @@ module.exports = function(grunt) {
 	      tasks: ["scss", "docs:sass"],
       },
       js: {
-	      files: ["src/js/**/*.js"],
+          files: ["!src/js/scripts/*.controller.js", "!src/js/specs/*.spec.js", "src/js/**/*.js"],
 	      tasks: ["js"]
+      },
+      controller: {
+	      files: ["src/js/scripts/*.controller.js"],
+	      tasks: ["jasmine", "js"]
+      },
+      spec: {
+          files: ["src/js/specs/*.spec.js"],
+          tasks: ["jasmine"]
       }
     }
   });
@@ -167,7 +191,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask("scss", ["sass", "postcss"]);
 
-  grunt.registerTask("js", ["test", "uglify"]);
+  grunt.registerTask("js", ["test", "uglify:production"]);
 
   grunt.registerTask("docs", function (mode) {
 	  var docList = ["sassdoc", "jsdoc"];
@@ -192,7 +216,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask("serve", ["connect", "watch"]);
 
-  grunt.registerTask("test", ["jshint"]);
+  grunt.registerTask("test", ["jshint", "jasmine"]);
   grunt.registerTask("build", ["clean:build", "kit", "scss", "js", "copy"]);
 
   grunt.registerTask("default", ["serve"]);

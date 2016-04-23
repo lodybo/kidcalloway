@@ -2,22 +2,6 @@
 	margin: 25px auto;
 	position: relative;
 
-	.loader {
-		@include span-columns(2 of 12);
-		@include shift(5);
-
-		position: absolute;
-		top: 20%;
-
-		background-image: url("../img/KidC_beeldmerk.jpg");
-	  background-size: contain;
-	  width: 134px;
-	  height: 134px;
-	  animation: loader-animation-pulse 3s 20 linear, loader-animation-rotate 6s 10 linear;
-	  transform: translateZ(0); /* For performance */
-		z-index: 5;
-	}
-
 	.embed-container {
 		position: relative;
 		padding-bottom: 56.25%;
@@ -40,15 +24,4 @@
 		height: 20px;
 		margin: 25px auto;
 	}
-}
-
-@keyframes loader-animation-pulse {
-	0%   { opacity: 0.25; }
-	50% { opacity: 0.50; }
-	100% { opacity: 0.25; }
-}
-
-@keyframes loader-animation-rotate {
-	0% { transform: rotate(0deg);}
-	100% { transform: rotate(360deg);}
 }
