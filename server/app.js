@@ -38,6 +38,11 @@ var schedule = scheduler.scheduleJob("0 0 0 1/1 * ? *", function () {
   var today = moment().format("YYYY-MM-DD");
   var yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
   
+  updateAgenda(yesterday, today);
+});
+
+// Logic for updating the agenda
+function updateAgenda(yesterday, today) {
   Agenda.update({
     "date.raw": {$gte: new Date(yesterday), $lt: new Date(today)}, "played": false
   }, {
@@ -53,7 +58,20 @@ var schedule = scheduler.scheduleJob("0 0 0 1/1 * ? *", function () {
     
     console.log("Succeeded in updating played gigs. Mongo's response: ", response);
   });
-});
+}
+
+// For testing the agenda updating logic...
+// console.log("******** Preparing to update agenda...");
+// var timeOut = setTimeout(function () {
+//   console.log("******** Setup for updating agenda...");
+//   var today = moment().format("YYYY-MM-DD");
+//   var yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
+//   console.log("yesterday: " + yesterday, "today: " + today);
+//   updateAgenda(yesterday, today);
+//   // Agenda.find({"date.raw": {$gte: new Date(yesterday), $lt: new Date(today)}, "played": false}, {}, function (err, res) {
+//   //   console.log("* Agenda.find", err, res);
+//   // });
+// }, 5000);
 
 // Expose app
 exports = module.exports = app;

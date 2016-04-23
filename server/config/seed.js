@@ -31,6 +31,17 @@ User.find({}).remove(function() {
 Agenda.find({}).remove(function() {
     Agenda.create({
         provider: "local",
+        venueName: "Kaffee Kroeg",
+        venueAddress: "Kroegseweg 12 Nederland",
+        details: "Kid Calloway @ Kroeg",
+        fbEvent: "https://www.facebook.com/events/1666492276937175/",
+        ticketLink: "",
+        date: {raw: new Date("2016-04-22")},
+        time: "20:00",
+        played: false,
+        cancelled: false
+    },{
+        provider: "local",
         venueName: "Kaffee Lambiek",
         venueAddress: "Wilhelminapark 66, 5041 ED Tilburg, Netherlands",
         details: "Kid Calloway speelt samen met Endfield bij Kaffee Lambiek!",
