@@ -10,8 +10,5 @@ node_modules/
 build/
 docs/sassdoc
 docs/jsdoc
-<<<<<<< HEAD
 .vscode/
-=======
 test/
->>>>>>> c35855bf3bb61dc0e95abff2d4c513a3786ade19
