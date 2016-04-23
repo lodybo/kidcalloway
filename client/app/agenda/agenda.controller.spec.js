@@ -208,7 +208,7 @@ describe('Controller: AgendaCtrl', function () {
           
           describe("Sending correct input to the server", function () {
               it("should end with a success message when nothing goes wrong at the server's end", function () {
-                function encodeUriQuery(val, pctEncodeSpaces) {
+                function encodeUriQuery(val) {
                     return encodeURIComponent(val).
                         replace(/%40/gi, '@').
                         replace(/%3A/gi, ':').
@@ -226,7 +226,7 @@ describe('Controller: AgendaCtrl', function () {
                 var urifb = encodeUriQuery(scope.formData.fbEvent);
                 var urit = encodeUriQuery(scope.formData.ticket);
                 var uriDe = encodeUriQuery(scope.formData.details);
-                httpBackend.expectPOST("/api/agenda/date/" + uriDa + "/time/" + uriT + "/venue/" + uriV + "/address/" + uriA + "/fbEvent/" + urifb + "/ticket/" + urit + "/details" + uriDe).respond(200, "success");
+                httpBackend.expectPOST("/api/agenda/date/" + uriDa + "/time/" + uriT + "/venueName/" + uriV + "/venueAddress/" + uriA + "/fbEvent/" + urifb + "/ticketLink/" + urit + "/details/" + uriDe).respond(200, "success");
                 
                 scope.validate();
                 

@@ -35,6 +35,7 @@
     "by": true,
     "xdescribe": true,
     "xit": true,
-    "afterEach": true
+    "afterEach": true,
+    "spyOn": true
   }
 }

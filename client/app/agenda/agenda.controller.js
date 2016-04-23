@@ -58,7 +58,7 @@ angular.module('kidCallowayApp')
     
     // Check if field is not empty
     $scope.isNotEmpty = function (input) {
-        if (input === undefined) {
+        if (input === undefined || input === null) {
             input = "";
         }
         
