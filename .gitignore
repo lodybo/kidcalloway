@@ -10,4 +10,5 @@ node_modules/
 build/
 docs/sassdoc
 docs/jsdoc
+.vscode/
 test/

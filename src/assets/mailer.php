@@ -1,18 +1,19 @@
 <?php
 	// Get the POST variables
-	$name = $_POST['name'];
-	$email = $_POST['email'];
-    $address = $_POST['address'];
-	$amount = $_POST['amount'];
-    $token = $_POST['token'];
+	$name = isset($_POST['name']) ? $_POST['name'] : "";
+	$email = isset($_POST['email']) ? $_POST['email'] : "";
+    $address = isset($_POST['address']) ? $_POST['address'] : "";
+	$amount = isset($_POST['amount']) ? $_POST['amount'] : "";
     
     // First see if a token has been send, otherwise we can consider this a faulty send attempt
-    if (!$token) {
-        echo "Error: faulty send attempt!";
-    }
-	
+    // if (!isset($_POST['token'])) {
+    //     echo "Error: faulty send attempt!";
+    // } else {
+    //     $token = $_POST['token'];
+    // }
+    
 	// Get an error object to sum up every error that passes through the JS validation
-	$errors = new array();
+	$errors = [];
 	
 	// First test: is everything filled in?
 	if (strlen($name) == 0 || strlen($email) == 0 || strlen($amount) == 0 || strlen($address) == 0)
@@ -46,6 +47,12 @@
 	    $message .= "E-mail: " . $email . "\n";
 	    $message .= "Aantal: " . $amount . "\n";
         $message .= "Adres: " . $address;
+        
+        // Set Mail Server
+        ini_set("SMTP","mail.kidcalloway.nl");
+
+        // SMTP Port.
+        ini_set("smtp_port","26");
 	    
 	    mail($to, $subject, $message, "From: bestelformulier @ Kid Calloway <bestelformulier@KidC>");
 	    
