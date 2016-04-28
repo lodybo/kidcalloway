@@ -33,10 +33,13 @@ var scheduler = require("node-schedule");
 var Agenda = require("./api/agenda/agenda.model");
 var moment = require("moment");
 
+console.log(">> Setting up scheduler..");
 var schedule = scheduler.scheduleJob("0 0 0 1/1 * ? *", function () {
   // Find everything from one day back
   var today = moment().format("YYYY-MM-DD");
   var yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
+  
+  console.log(">> Running scheduler.. generated days: [yesterday: " + yesterday + ", today: " + today + "]");
   
   updateAgenda(yesterday, today);
 });
@@ -52,11 +55,11 @@ function updateAgenda(yesterday, today) {
   }, function (err, response) {
     // Check for errors
     if (err) {
-      console.log("Error updating played gigs: ", err);
+      console.log(">> Error updating played gigs: ", err);
       return;
     }
     
-    console.log("Succeeded in updating played gigs. Mongo's response: ", response);
+    console.log(">> Succeeded in updating played gigs. Mongo's response: ", response);
   });
 }
 
