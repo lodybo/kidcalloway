@@ -34,7 +34,11 @@ var Agenda = require("./api/agenda/agenda.model");
 var moment = require("moment");
 
 console.log(">> Setting up scheduler..");
-var schedule = scheduler.scheduleJob("0 0 0 1/1 * ? *", function () {
+var schedule = new scheduler.RecurrenceRule();
+schedule.hour = 0;
+schedule.minute = 1;
+
+var cron = scheduler.scheduleJob(schedule, function () {
   // Find everything from one day back
   var today = moment().format("YYYY-MM-DD");
   var yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
@@ -66,14 +70,14 @@ function updateAgenda(yesterday, today) {
 // For testing the agenda updating logic...
 // console.log("******** Preparing to update agenda...");
 // var timeOut = setTimeout(function () {
-//   console.log("******** Setup for updating agenda...");
-//   var today = moment().format("YYYY-MM-DD");
-//   var yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
-//   console.log("yesterday: " + yesterday, "today: " + today);
-//   updateAgenda(yesterday, today);
-//   // Agenda.find({"date.raw": {$gte: new Date(yesterday), $lt: new Date(today)}, "played": false}, {}, function (err, res) {
-//   //   console.log("* Agenda.find", err, res);
-//   // });
+  // console.log("******** Setup for updating agenda...");
+  // var today = moment().format("YYYY-MM-DD");
+  // var yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
+  // console.log("yesterday: " + yesterday, "today: " + today);
+  // updateAgenda(yesterday, today);
+  // Agenda.find({"date.raw": {$gte: new Date(yesterday), $lt: new Date(today)}, "played": false}, {}, function (err, res) {
+  //   console.log("* Agenda.find", err, res);
+  // });
 // }, 5000);
 
 // Expose app
