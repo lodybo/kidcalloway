@@ -35,8 +35,9 @@ var moment = require("moment");
 
 console.log(">> Setting up scheduler..");
 var schedule = new scheduler.RecurrenceRule();
-schedule.hour = 0;
-schedule.minute = 1;
+// schedule.hour = 0;
+// schedule.minute = 1;
+schedule.second = [0, 10, 20, 30, 40, 50];
 
 var cron = scheduler.scheduleJob(schedule, function () {
   // Find everything from one day back
