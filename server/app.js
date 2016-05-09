@@ -44,9 +44,14 @@ var cron = scheduler.scheduleJob(schedule, function () {
   var today = moment().format("YYYY-MM-DD");
   var yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
   
-  console.log(">> Running scheduler.. generated days: [yesterday: " + yesterday + ", today: " + today + "]");
+  // Now set the times for both days to 0:00
+  // For this, we're doing a "dirty"" string concatenation
+  var todayMidnightString = today + "T00:00:00.000Z";
+  var yesterdayMidnightString = yesterday + "T00:00:00.000Z";
   
-  updateAgenda(yesterday, today);
+  console.log(">> Running scheduler.. generated days: [yesterday: " + yesterdayMidnightString + ", today: " + todayMidnightString + "]");
+  
+  updateAgenda(yesterdayMidnightString, todayMidnightString);
 });
 
 // Logic for updating the agenda
