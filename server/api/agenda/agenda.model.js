@@ -12,7 +12,7 @@ var AgendaSchema = new Schema({
   fbEvent: String,
   ticketLink: String,
   date: {
-    raw: {type: Date, default: Date.now()}
+    raw: {type: Date}
   },
   time: String,
   played: Boolean,

@@ -36,7 +36,7 @@ Agenda.find({}).remove(function() {
         details: "Kid Calloway @ Kroeg",
         fbEvent: "https://www.facebook.com/events/1666492276937175/",
         ticketLink: "",
-        date: {raw: new Date("2016-04-22")},
+        date: {raw: "2016-05-08"},
         time: "20:00",
         played: false,
         cancelled: false
