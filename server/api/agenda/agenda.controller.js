@@ -22,7 +22,12 @@ exports.show = function(req, res) {
 
 // Creates a new agenda in the DB.
 exports.create = function(req, res) {
+  // Depending on the environment, we need to use different ways to add a date
   var rawDate = {raw: req.params.date};
+  if (process.env.NODE_ENV === "production") {
+    rawDate = {raw: {"$date": req.params.date}};
+  }
+  
   req.params.date = rawDate;
   // Remove the string "null" and change it into an actual null
   // For both the ticketLink as the details

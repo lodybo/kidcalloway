@@ -219,7 +219,9 @@ describe('Controller: AgendaCtrl', function () {
                         replace(/%2B/g, '+'); 
                 }
                 
-                var uriDa = encodeUriQuery(scope.formData.date);
+                var gigDate = new Date(scope.formData.date);
+                
+                var uriDa = encodeUriQuery(gigDate.toISOString());
                 var uriT = encodeUriQuery(scope.formData.time);
                 var uriV = encodeUriQuery(scope.formData.venue);
                 var uriA = encodeUriQuery(scope.formData.address);
