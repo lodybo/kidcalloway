@@ -8,7 +8,7 @@
         </div>
         
         <div class="form col-xs-12">
-            <button class="center-block" ng-click="toggleForm()">Optreden toevoegen</button>
+            <button class="center-block" ng-click="showToggles.form = !showToggles.form" ng-show="isLoggedIn()">Optreden toevoegen</button>
             
             <form name="agendaForm" class="agendaForm" ng-show="showToggles.form">
                 <div class="col-xs-12 col-sm-6 col-lg-4">
@@ -81,7 +81,7 @@
                 </tr>
                 <tr>
                     <td colspan="5">
-                        <div class="row context-buttons">
+                        <div class="row context-buttons" ng-show="isLoggedIn()">
                             <button class="col-xs-12 col-sm-4">Bewerken</button>
                             <button class="col-xs-6 col-sm-4">Verwijderen</button>
                             <button class="col-xs-6 col-sm-4">Annuleren</button>
@@ -114,7 +114,7 @@
                 </tr>
                 <tr>
                     <td colspan="5">
-                        <div class="row context-buttons">
+                        <div class="row context-buttons" ng-show="isLoggedIn()">
                             <button class="col-xs-12 col-sm-6">Bewerken</button>
                             <button class="col-xs-12 col-sm-6">Verwijderen</button>
                         </div>

@@ -28,7 +28,7 @@ angular.module('kidCallowayApp')
         animateLoader: false,
         success: false,
         error: false,
-        form: true
+        form: false
     };
     
     // State of the editing form: new or edit.
