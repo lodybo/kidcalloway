@@ -31,6 +31,12 @@ angular.module('kidCallowayApp')
         form: false
     };
     
+    $scope.sortByDate = function (date) {
+        var offTheJedi = new Date(date.date.raw);
+        
+        return offTheJedi; // Haha!
+    };
+    
     // State of the editing form: new or edit.
     // Caption of the submit button adjusts to this state
     $scope.formState = "new";

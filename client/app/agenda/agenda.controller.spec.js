@@ -44,6 +44,22 @@ describe('Controller: AgendaCtrl', function () {
             done();
         }, 0);
     });
+    
+    it("should fetch the date from the response for orderBy functionality", function () {
+        httpBackend.expectGET("/api/agenda").respond(200, response);
+        httpBackend.flush();
+        
+        var date = new Date();
+        var dateISOString = date.toISOString();
+        var dateObj = {
+            date: {
+                raw: date
+            }
+        };
+        
+        var expectation = scope.sortByDate(dateObj);
+        expect(expectation).toEqual(date);
+    });
   });
   
   describe("Validating adding a new gig to the list", function () {
