@@ -51,7 +51,7 @@ angular.module('kidCallowayApp')
     $scope.getAllGigs = function () {
         AgendaService.get().then(function (gigs) {
             $scope.gigs = gigs;
-        }, function (errors) {
+        }, function () {
             $scope.errors.serviceError = true;
         });
     };

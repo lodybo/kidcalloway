@@ -50,7 +50,6 @@ describe('Controller: AgendaCtrl', function () {
         httpBackend.flush();
         
         var date = new Date();
-        var dateISOString = date.toISOString();
         var dateObj = {
             date: {
                 raw: date
