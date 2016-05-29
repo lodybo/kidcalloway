@@ -9,7 +9,8 @@ angular.module('kidCallowayApp')
     $scope.errors = {
         missingParameters: false,
         wrongInput: false,
-        wrongFields: []
+        wrongFields: [],
+        serviceError: false
     };
     
     $scope.formData = {
@@ -51,7 +52,7 @@ angular.module('kidCallowayApp')
         AgendaService.get().then(function (gigs) {
             $scope.gigs = gigs;
         }, function (errors) {
-            $scope.errors = errors;
+            $scope.errors.serviceError = true;
         });
     };
     $scope.getAllGigs();
