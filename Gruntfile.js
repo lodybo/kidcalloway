@@ -390,8 +390,8 @@ module.exports = function (grunt) {
       heroku: {
         options: {
           remote: 'https://git.heroku.com/kidcalloway-staging.git',
-          login: "hi@lodybo.nl",
           branch: 'master',
+          remoteBranch: "master",
           tag: '<%= pkg.version %>'
         }
       },
