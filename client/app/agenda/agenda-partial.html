@@ -1,0 +1,59 @@
+<div id="live" class="container">
+    <div class="agenda row" ng-controller="AgendaCtrl">
+        <div class="top col-xs-12">
+            <h1><i class="fa fa-music"></i>Live</h1>
+        </div>
+
+        <div class="col-xs-12 errors text-center" ng-show=errors.serviceError>
+            Er is iets fout gegaan met het ophalen van de shows. Maar niet getreurd: <a href="https://www.facebook.com/kidcallowaymusic/events?_rdr" target="_blank">je kan ze hier vinden</a>!
+        </div>
+        
+        <div class="row" ng-hide=errors.serviceError>
+            <h3 class="col-xs-12">Aankomende shows</h3>
+            <table class="table col-xs-12">
+                <tbody ng-repeat="gig in gigs | filter: {played: false} | orderBy: -sortByDate : true">
+                    <tr>
+                        <td class="date col-sm-2" ng-bind="gig.date.formatted"></td>
+                        <td class="venue col-sm-3" >
+                            <span ng-bind-html="gig.venueName"></span> <small><a ng-href="https://www.google.com/maps/place/{{gig.venueAddress}}" target="_blank" ng-bind="gig.venueAddress"></a></small>
+                        </td>
+                        <td class="timecol-sm-1" ng-bind="gig.time"></td>
+                        <td class="details hidden-xs col-sm-5" ng-bind="gig.details"></td>
+                        <td class="links hidden-xs col-sm-1">
+                            <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                        </td>
+                    </tr>
+                    <tr class="visible-xs">
+                        <td class="details" colspan="2" ng-bind="gig.details"></td>
+                        <td class="links">
+                            <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3 class="col-xs-12">Recente shows</h3>
+            <table class="table col-xs-12">
+                <tbody ng-repeat="gig in gigs | filter:{played: true} | limitTo: 5 | orderBy: sortByDate: true">
+                    <tr>
+                        <td class="date col-sm-2" ng-bind="gig.date.formatted"></td>
+                        <td class="venue col-sm-3" >
+                            <span ng-bind-html="gig.venueName"></span> <small><a ng-href="https://www.google.com/maps/place/{{gig.venueAddress}}" target="_blank" ng-bind="gig.venueAddress"></a></small>
+                        </td>
+                        <td class="timecol-sm-1" ng-bind="gig.time"></td>
+                        <td class="details hidden-xs col-sm-5" ng-bind="gig.details"></td>
+                        <td class="links hidden-xs col-sm-1">
+                            <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                        </td>
+                    </tr>
+                    <tr class="visible-xs">
+                        <td class="details" colspan="2" ng-bind="gig.details"></td>
+                        <td class="links">
+                            <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

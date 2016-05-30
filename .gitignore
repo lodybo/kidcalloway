@@ -1,14 +1,20 @@
-# NodeJS
-node_modules/
-
-# Grunt
-.grunt/
-
-# Dev
-.sass-cache/
+node_modules
+public
+.tmp
+.sass-cache
+.idea
+client/bower_components
+dist
+/server/config/local.env.js
 .idea/
+<<<<<<< HEAD
 build/
 docs/sassdoc
 docs/jsdoc
 .vscode/
 test/
+=======
+.vscode/
+typings/
+jsconfig.json
+>>>>>>> mean

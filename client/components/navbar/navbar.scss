@@ -1,0 +1,142 @@
+.navbar {
+  background-color: shade(color("menuBackground"), 20%);
+  border: none;
+  z-index: 100;
+  width: 100%;
+  transition: opacity 0.2s;
+  opacity: 0;
+  
+  @media screen and (min-width: 768px) {
+      z-index: 98;
+  }
+
+  .navbar-nav {
+    margin: 0;
+    padding: 0;
+    
+    @media screen and (min-width: 1200px) {
+        float: none;
+    }
+  }
+
+  &.navbar-static-top .navbar-nav i {
+    margin-right: 10px;
+    color: #FFFFFF;
+
+    @media screen and (min-width: 1000px) {
+      margin-right: 10px;
+      color: shade(color("menuBackground"), 20%);
+      transition: color 1s, margin-right 0.5s;
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 1000px) {
+      display:none;
+    }
+  }
+
+  .navbar-nav li {
+    list-style: none;
+    display: inline-block;
+    padding-right: 0;
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 49%;
+
+    text-transform: uppercase;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    &:hover {
+      background-color: shade(color("menuBackground"), 20%);
+      a, h2, i {
+        color: #FFFFFF;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      width: auto;
+      padding-right: 25px;
+    }
+
+    @media screen and (min-width: 1000px) {
+      &:hover i {
+        margin-right: 25px;
+      }
+    }
+    
+    @media screen and (min-width: 1200px) {
+        width: 23%;
+        padding-right: 0;
+    }
+  }
+
+  a, h2 {
+    display: inherit;
+    color: shade(color("menuColor"), 10%);
+    border-bottom: none;
+  }
+
+  h2 {
+    margin: 0;
+    padding: 0;
+    display:inline-block;
+  }
+
+  @media screen and (max-width: 550px) {
+    h2 {
+      font-size: 1.4em
+    }
+  }
+}
+
+.navbar.navbar-fixed-bottom {
+    opacity:1;
+}
+
+.navbar-default .navbar-nav > .active > a {
+    color: color("menuActive");
+    background-color: transparent;
+    
+    &:hover {
+        color: #FFFFFF;
+        background-color: transparent;
+    }
+}
+
+.navbar.navbar-fixed-bottom .navbar-nav li:hover i {
+    margin-right: 0;
+}
+
+.navbar-fixed-bottom .navbar-nav li {
+    @media screen and (min-width: 768px) {
+      width: auto;
+      padding-right: 65px;
+    }
+    
+    &:last-of-type {
+        padding-right: 0;
+    }
+}
+
+.filler {
+  text-align: center;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: tint(color("menuHamburger"), 50%);
+
+  .icon-bar {
+    background-color: tint(color("menuHamburger"), 50%);
+  }
+  
+  &:hover {
+      background-color: tint(color("menuHamburger"), 50%);
+      
+      .icon-bar {
+          background-color: color("light");
+      }
+  }
+}
