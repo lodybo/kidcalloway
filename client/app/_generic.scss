@@ -1,0 +1,75 @@
+body {
+  background: color("backgroundColor");
+}
+
+a, a:visited {
+  color: color("link");
+  
+  border-bottom: color("link") solid 1px;
+  padding-bottom: 1px;
+
+  @media screen and (max-width: 480px) {
+    padding-bottom: 0;
+  }
+}
+
+a:hover {
+  color: tint(color("linkHover"), 25%);
+  border-bottom-color: tint(color("linkHover"), 25%);
+  text-decoration: none;
+}
+
+h1 {
+  text-transform: uppercase;
+
+  i {margin-right: 15px;}
+
+  a {
+    color: color("textColor");
+
+    &:hover {
+      color: color("textColor");
+      border-bottom-color: tint(color("link"), 15%);
+    }
+  }
+}
+
+button {
+    border: 0;
+    padding: 10px 25px;
+    background-color: color("buttonBGColor");
+    color: color("buttonColor");
+    font-size: 1.2em;
+    
+    &:hover {
+        background-color: color("buttonBGHover");
+        color: color("buttonHover");
+    }
+}
+
+.loader {
+    position: absolute;
+    top: 20%;
+
+    background-image: url("../img/KidC_beeldmerk.jpg");
+    background-size: contain;
+    width: 134px;
+    height: 134px;
+    z-index: 5;
+    
+    &.animate {
+        animation: loader-animation-pulse 3s 20 linear, loader-animation-rotate 6s 10 linear;
+        transform: translateZ(0); /* For performance */
+    }
+}
+
+@keyframes loader-animation-pulse {
+	0%   { opacity: 0.25; }
+	50% { opacity: 0.50; }
+	100% { opacity: 0.25; }
+}
+
+@keyframes loader-animation-rotate {
+	0% { transform: rotate(0deg);}
+	100% { transform: rotate(360deg);}
+}

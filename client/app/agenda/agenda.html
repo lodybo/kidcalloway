@@ -1,0 +1,134 @@
+<!-- Load navigation -->
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div id="live" class="container">
+    <div class="agenda row" ng-controller="AgendaCtrl">
+        <div class="top col-xs-12">
+            <h1><i class="fa fa-music"></i>Live</h1>
+        </div>
+        
+        <div class="form col-xs-12">
+            <button class="center-block" ng-click="showToggles.form = !showToggles.form" ng-show="isLoggedIn()">Optreden toevoegen</button>
+            
+            <form name="agendaForm" class="agendaForm" ng-show="showToggles.form">
+                <div class="col-xs-12 col-sm-6 col-lg-4">
+                    <div class="row">
+                        <label class="form-group col-xs-6 col-sm-12">
+                            <p>Datum (*)</p>
+                            <input class="form-control" type="date" name="date" ng-model="formData.date" ng-required="true" />
+                        </label>
+                        
+                        <label class="form-group col-xs-6 col-sm-12">
+                            <p>Tijd (*)</p>
+                            <input class="form-control" type="text" name="time" ng-model="formData.time" ng-required="true" />
+                        </label>
+                    </div>
+                    
+                    <label class="form-group">
+                        <p>Locatie (*)</p>
+                        <input class="form-control" type="text" name="venue" ng-model="formData.venue" ng-required="true" />
+                    </label>
+                </div>
+                
+                <div class="col-xs-12 col-sm-6 col-lg-4">
+                    <label class="form-group">
+                        <p>Adres (voor o.m. in Google Maps) (*)</p>
+                        <input class="form-control" type="text" name="address" ng-model="formData.address" ng-required="true" />
+                    </label>
+                    
+                    <label class="form-group">
+                        <p>Facebook Event link</p>
+                        <input class="form-control" type="text" name="fbEvent" ng-model="formData.fbEvent" />
+                    </label>
+                    
+                    <label class="form-group">
+                        <p>Ticket link</p>
+                        <input class="form-control" type="text" name="ticket" ng-model="formData.ticket" />
+                    </label>
+                </div>
+                
+                <div class="col-xs-12 col-sm-12 col-lg-4">
+                    <label class="form-group">
+                        <p>Details</p>
+                        <textarea class="form-control" rows="3" name="details" ng-model="formData.details"></textarea>
+                    </label>
+                    
+                    <button ng-bind="submitButtonCaption" ng-click="validate()"></button>
+                </div>
+            </form>
+            <div class="loader" ng-class="{animate : showToggles.animateLoader}" ng-show="showToggles.loader"></div>
+        </div>
+
+        <div class="col-xs-12 errors text-center" ng-show=errors.serviceError>
+            Er is iets fout gegaan met het ophalen van de shows. Maar niet getreurd: <a href="https://www.facebook.com/kidcallowaymusic/events?_rdr" target="_blank">je kan ze hier vinden</a>!
+        </div>
+        
+        <div class="row" ng-hide=errors.serviceError>
+            <h3 class="col-xs-12">Aankomende shows</h3>
+            <table class="table col-xs-12">
+                <tbody ng-repeat="gig in gigs | filter:{played: false} | orderBy: -sortByDate : true">
+                    <tr>
+                        <td class="date col-sm-2" ng-bind="gig.date.formatted"></td>
+                        <td class="venue col-sm-3" >
+                            <span ng-bind-html="gig.venueName"></span> <small><a ng-href="https://www.google.com/maps/place/{{gig.venueAddress}}" target="_blank" ng-bind="gig.venueAddress"></a></small>
+                        </td>
+                        <td class="timecol-sm-1" ng-bind="gig.time"></td>
+                        <td class="details hidden-xs col-sm-5" ng-bind="gig.details"></td>
+                        <td class="links hidden-xs col-sm-1">
+                            <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                        </td>
+                    </tr>
+                    <tr class="visible-xs">
+                        <td class="details" colspan="2" ng-bind="gig.details"></td>
+                        <td class="links">
+                            <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <div class="row context-buttons" ng-show="isLoggedIn()">
+                                <button class="col-xs-12 col-sm-4">Bewerken</button>
+                                <button class="col-xs-6 col-sm-4">Verwijderen</button>
+                                <button class="col-xs-6 col-sm-4">Annuleren</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3 class="col-xs-12">Recente shows</h3>
+            <table class="table col-xs-12">
+                <tbody ng-repeat="gig in gigs | filter:{played: true} | orderBy: sortByDate : true">
+                    <tr>
+                        <td class="date col-sm-2" ng-bind="gig.date.formatted"></td>
+                        <td class="venue col-sm-3" >
+                            <span ng-bind-html="gig.venueName"></span> <small><a ng-href="https://www.google.com/maps/place/{{gig.venueAddress}}" target="_blank" ng-bind="gig.venueAddress"></a></small>
+                        </td>
+                        <td class="timecol-sm-1" ng-bind="gig.time"></td>
+                        <td class="details hidden-xs col-sm-5" ng-bind="gig.details"></td>
+                        <td class="links hidden-xs col-sm-1">
+                            <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                        </td>
+                    </tr>
+                    <tr class="visible-xs">
+                        <td class="details" colspan="2" ng-bind="gig.details"></td>
+                        <td class="links">
+                            <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <div class="row context-buttons" ng-show="isLoggedIn()">
+                                <button class="col-xs-12 col-sm-6">Bewerken</button>
+                                <button class="col-xs-12 col-sm-6">Verwijderen</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Load footer with links and more info -->
+<div ng-include="'components/footer/footer.html'"></div>

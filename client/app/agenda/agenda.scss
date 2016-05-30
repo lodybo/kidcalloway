@@ -1,0 +1,94 @@
+#live {	
+	.errors {
+		margin-bottom: 50px;
+	}
+}
+
+.agenda {
+	table {
+		display: table;
+		border-collapse: separate;
+	}
+
+	td {
+		border-top: 0 !important;
+	}
+
+	td.time {
+		//@include pad($fg $fg2 $fg $fg);
+		// @include span-columns(1 of 10);
+	};
+
+	.date {font-weight: bold;}
+
+	.venue {
+		// @include span-columns(3 of 10);
+
+		small {
+			display:block;
+			color: shade(color("light"), 30);
+		}
+	}
+
+	.details {
+		// @include span-columns(3 of 10);
+		border-left: color("backgroundColor") solid 1px;
+		color: shade(color("light"), 30);
+	}
+
+	.links {
+		//@include pad($fg $fg2 0 $fg);
+		// @include span-columns(1 of 10);
+		text-align: right;
+		color: #FFF !important;
+
+		a {
+			display: inline-block;
+			padding-bottom: 5px;
+			border-bottom: none;
+
+			&:last-of-type {
+				margin-top: 10px;
+			}
+		}
+	}
+
+	.top {
+		// @include span-columns(10 of 10); // 4 of 10
+		// @include shift(0); // 3
+		text-align: center;
+		margin-bottom: 30px;
+		float:none;
+	}
+    
+    .context-buttons button {
+        margin: 5px 0;
+    }
+
+	@media screen and (max-width: 768px) {
+		// @include span-columns(12);
+		// @include shift(0);
+
+		// table {@include span-columns(12 of 12);}
+		// td {@include span-columns(2 of 12, "table");}
+		// td.time {@include span-columns(1 of 12, "table");}
+		// .venue {@include span-columns(3 of 12, "table");}
+		// .details {@include span-columns(3 of 12, "table");}
+		// .links {@include span-columns(1 of 12, "table");}
+		// .top {@include span-columns(12 of 12, "table");}
+	}
+
+	@media screen and (max-width: 480px) {
+		// .venue {@include span-columns(6 of 12, "table");}
+		// .details {@include span-columns(10 of 12, "table");}
+		// .links {@include span-columns(1 of 12, "table");}
+	}
+}
+
+.agendaForm {
+    margin-top: 15px;
+    
+    label {
+        display: block;
+    }
+}
