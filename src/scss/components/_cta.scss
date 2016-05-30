@@ -1,0 +1,149 @@
+.channels {
+	margin: 25px auto 25px;
+	text-align: center;
+
+	li {
+		display: inline-block;
+		margin: 0 25px;
+		text-align: center;
+	}
+
+	a {
+		border-bottom: none;
+	}
+
+	.icon img {
+		height: 75px;
+		width: auto;
+	}
+
+	h2 {
+		margin: 0;
+	}
+
+	blockquote {
+		position: relative;
+
+		font-style: italic;
+		font-size: 1.1em;
+		color: shade(color("light"), 30);
+
+		text-align: center;
+
+		margin-bottom: 25px;
+
+		small {
+			display: block;
+		}
+	}
+}
+
+.cta {
+	@include span-columns(10);
+	@include shift(1);
+
+	@include pad("default");
+    
+    img {
+        width: 100%;
+    }
+    
+    .disclaimer {
+        font-size: 0.8em;
+        color: #999;
+    }
+    
+    form {
+        @include row();
+        min-height: 200px;
+        
+        .form-left, .form-right {
+            @include span-columns(6);
+        }
+        
+        .form-right {
+            @include omega();
+        }
+        
+        .form-bottom {
+            @include span-columns(12);
+            margin-top: 30px;
+            position: relative;
+        }
+        
+        input, textarea {
+            width: 100%;
+        }
+        
+        textarea {
+            min-height: 75px;
+        }
+        
+        .winniethepooh {
+            display: none;
+        }
+        
+        button {
+            margin-top: 25px;
+        }
+    }
+    
+    .success {
+        color: color("success");
+    }
+    
+    .error {
+        color: color("error");
+    }
+    
+    .form-left, .form-right {
+        input {
+            border: solid 3px transparent;
+        }
+        
+        .error {
+            input, textarea {
+                border-color: color("error");
+            }
+        }
+    }
+    
+    .form-result {
+        .success, .error {
+            border: solid 1px color("light");
+            padding: 15px 35px;
+            font-size: 1.2em;
+            
+            &:before {
+                font-family: "FontAwesome";
+                margin-right: 15px;
+            } 
+        }
+        
+        .success {
+            border-color: color("success");
+            
+            &:before {
+                content: "\f00c";
+            }
+            
+            span {
+                cursor: pointer;
+                font-weight: bold;
+                color: color("link");
+                
+                &:hover {
+                    color: color("linkHover");
+                }
+            }
+        }
+        
+        .error {
+            border-color: color("error");
+            
+            &:before {
+                content: "\f12a";
+            }
+        }
+    }
+}
