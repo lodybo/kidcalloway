@@ -66,7 +66,7 @@
         <div class="row" ng-hide=errors.serviceError>
             <h3 class="col-xs-12">Aankomende shows</h3>
             <table class="table col-xs-12">
-                <tbody ng-repeat="gig in gigs | filter:{played: false} | orderBy: -sortByDate : true">
+                <tbody ng-repeat="gig in gigs | filter:{played: false} | orderBy: sortByDate : true">
                     <tr>
                         <td class="date col-sm-2" ng-bind="gig.date.formatted"></td>
                         <td class="venue col-sm-3" >
