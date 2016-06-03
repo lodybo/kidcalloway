@@ -1,6 +1,6 @@
 {
   "name": "kid-calloway",
-  "version": "3.12.36",
+  "version": "3.12.37",
   "main": "server/app.js",
   "dependencies": {
     "body-parser": "~1.5.0",
@@ -52,6 +52,7 @@
     "grunt-node-inspector": ">=0.1.5",
     "grunt-nodemon": "~0.2.0",
     "grunt-open": "~0.2.3",
+    "grunt-pagespeed": "^2.0.0",
     "grunt-protractor-runner": "^1.1.0",
     "grunt-rev": "~0.1.0",
     "grunt-sass": "^1.1.0",
@@ -74,6 +75,7 @@
     "karma-phantomjs-launcher": "~0.1.4",
     "karma-requirejs": "~0.2.1",
     "karma-script-launcher": "~0.1.0",
+    "ngrok": "^2.1.8",
     "open": "~0.0.4",
     "phantomjs-polyfill": "0.0.2",
     "requirejs": "~2.1.11",
