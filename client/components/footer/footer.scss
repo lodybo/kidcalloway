@@ -60,5 +60,9 @@ footer {
 		img {
 			vertical-align: middle;
 		}
+		
+		[class*="block-grid-"] {
+			padding: 0;
+		}
 	}
 }
