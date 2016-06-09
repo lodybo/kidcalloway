@@ -35,7 +35,7 @@ angular.module('kidCallowayApp')
     }, {
       'title': 'Site settings',
       'link': '/site-settings',
-      'restriction': 'loggedIn',
+      'restriction': 'admin',
       'icon': 'cogs',
     }];
 
