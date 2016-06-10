@@ -92,7 +92,7 @@ angular.module('kidCallowayApp')
       var currentScrollPosition = $window.pageYOffset;
       
       // Get the navbar
-      var navbar = angular.element(".navbar.navbar-static-top");
+      var navbar = angular.element(".navbar.navbar-fixed-top");
       
       // Check if we've passed the threshold in our current scroll position
       if (currentScrollPosition > logo.threshold) {
