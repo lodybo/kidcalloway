@@ -167,7 +167,6 @@ angular.module('kidCallowayApp')
 
           case "admin":
             // This should only be able to users with admin role
-            debugger;
             return this.isLoggedIn() && this.isAdmin();
 
           default:
