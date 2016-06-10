@@ -116,6 +116,9 @@ angular.module('kidCallowayApp')
         // No errors, let's send!
         AgendaService.addGig($scope.formData).then(function() {
             $scope.stopPrepareToSend("success");
+            // Let's get the new gig list
+            $scope.gigs = [];
+            $scope.getAllGigs();
         }, function (errors) {
             $scope.errors = errors;
             $scope.stopPrepareToSend("error");
