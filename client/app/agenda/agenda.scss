@@ -62,9 +62,13 @@
 		float:none;
 	}
     
-    .context-buttons button {
-        margin: 5px 0;
-    }
+    .context-buttons {
+			margin-bottom: 50px;
+			
+			button {
+					margin: 5px 0;
+			}
+		}
 
 	@media screen and (max-width: 768px) {
 		// @include span-columns(12);
