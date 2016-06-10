@@ -77,30 +77,38 @@ angular.module('kidCallowayApp')
     };
 
     // STICKY MENU
-    var sticky = {
-      el: angular.element(".navbar.navbar-static-top"),
-      stuck: false,
-      stickPoint: 0
-    };
-
-    $scope.getDistance = function () {
-      return sticky.el.offset().top;
-    };
-
-    sticky.stickPoint = $scope.getDistance();
 
     $window.onscroll = function () {
-      var distance = $scope.getDistance() - $window.pageYOffset;
-      var offset = $window.pageYOffset;
-      if ( (distance <= 0) && !sticky.stuck) {
-        sticky.el.css("position",'fixed');
-        sticky.el.css("top", '0');
-        sticky.el.css("opacity", "1");
-        sticky.stuck = true;
-      } else if (sticky.stuck && (offset <= sticky.stickPoint)) {
-        sticky.el.css("position", 'static');
-        sticky.el.css("opacity", "0");
-        sticky.stuck = false;
+      // We want the menu to show after the user has scrolled past the logo
+      // So we need to know the position and height of the logo, the current scroll position and whether we've passed the threshold with the logo
+      var logo = {
+        el: angular.element(".kidc-logo"),
+      };
+      logo.top = logo.el.position().top;
+      logo.height = logo.el.height();
+      logo.threshold = logo.top + logo.height;
+      
+      // Get the current scroll position
+      var currentScrollPosition = $window.pageYOffset;
+      
+      // Get the navbar
+      var navbar = angular.element(".navbar.navbar-static-top");
+      
+      // Check if we've passed the threshold in our current scroll position
+      if (currentScrollPosition > logo.threshold) {
+        navbar.css("opacity", "1");
+      } else {
+        navbar.css("opacity", "0");
       }
+      
+      // var distance = $scope.getDistance() - $window.pageYOffset;
+      // var offset = $window.pageYOffset;
+      // var elHeight = sticky.el.height();
+      // var offsetHeightDiff = elHeight - offset;
+      // if (offsetHeightDiff < offset) {
+      //   sticky.el.css("opacity", "1");
+      // } else {
+      //   sticky.el.css("opacity", "0");
+      // }
     };
   });
