@@ -5,12 +5,30 @@ angular.module('kidCallowayApp')
     var apiURL = "/api/agenda/";
     
     // *** Private methods
+    // Switch between get and getAll based on args
+    var __get = function (id) {
+        if (id) {
+            return _getOne(id);
+        }
+        
+        return _getAll();
+    };
     
     // *** Public methods
     var _getAll = function() {
         // Get all records and return them
         var endpoint = $resource(apiURL);
         return endpoint.query().$promise;
+    };
+    
+    var _getOne = function (gigID) {
+        var endpoint = $resource(apiURL + ":id", {
+            id: "@id"
+        });
+        
+        return endpoint.get({
+            id: gigID
+        }).$promise;
     };
     
     var _addGig = function (gig) {
@@ -42,7 +60,7 @@ angular.module('kidCallowayApp')
     
     // Return public functions
     return {
-        get: _getAll,
+        get: __get,
         addGig: _addGig
     };
   });

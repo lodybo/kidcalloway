@@ -58,6 +58,32 @@ angular.module('kidCallowayApp')
     $scope.getAllGigs();
     
     // *** ADD OR EDIT GIGS
+    $scope.editGig = function (gigID) {
+        if (!$scope.showToggles.form) {
+            $scope.showToggles.form = true;
+        }
+        
+        AgendaService.get(gigID).then(function (gig) {
+            $scope.formData = {
+                date: new Date(gig.date.raw),
+                time: gig.time,
+                venue: gig.venueName,
+                address: gig.venueAddress,
+                fbEvent: gig.fbEvent,
+                details: gig.details,
+                ticket: gig.ticketLink
+            };
+        }, function () {
+            $scope.errors.serviceError = true;
+        });
+    };
+    $scope.deleteGig = function (gigID) {
+        debugger;
+    };
+    $scope.cancelGig = function (gigID) {
+        debugger;
+    };
+    
     // Return AngularJS's input information
     $scope.getFieldData = function(field) {
         return $scope.agendaForm[field];

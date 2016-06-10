@@ -87,9 +87,9 @@
                     <tr>
                         <td colspan="5">
                             <div class="row context-buttons" ng-show="isLoggedIn()">
-                                <button class="col-xs-12 col-sm-4">Bewerken</button>
-                                <button class="col-xs-6 col-sm-4">Verwijderen</button>
-                                <button class="col-xs-6 col-sm-4">Annuleren</button>
+                                <button class="col-xs-12 col-sm-4" ng-click="editGig(gig._id)">Bewerken</button>
+                                <button class="col-xs-6 col-sm-4" ng-click="deleteGig(gig._id)">Verwijderen</button>
+                                <button class="col-xs-6 col-sm-4" ng-click="cancelGig(gig._id)">Annuleren</button>
                             </div>
                         </td>
                     </tr>
@@ -119,8 +119,8 @@
                     <tr>
                         <td colspan="5">
                             <div class="row context-buttons" ng-show="isLoggedIn()">
-                                <button class="col-xs-12 col-sm-6">Bewerken</button>
-                                <button class="col-xs-12 col-sm-6">Verwijderen</button>
+                                <button class="col-xs-12 col-sm-6" ng-click="editGig(gig._id)">Bewerken</button>
+                                <button class="col-xs-12 col-sm-6" ng-click="deleteGig(gig._id)">Verwijderen</button>
                             </div>
                         </td>
                     </tr>
