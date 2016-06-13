@@ -244,21 +244,24 @@ describe('Controller: AgendaCtrl', function () {
                 var urit = encodeUriQuery(scope.formData.ticket);
                 var uriDe = encodeUriQuery(scope.formData.details);
                 httpBackend.expectPOST("/api/agenda/date/" + uriDa + "/time/" + uriT + "/venueName/" + uriV + "/venueAddress/" + uriA + "/fbEvent/" + urifb + "/ticketLink/" + urit + "/details/" + uriDe).respond(200, "success");
+                httpBackend.expectGET("/api/agenda").respond(200, response);
                 
                 scope.validate();
                 
                 httpBackend.flush();
                 
                 timeout(function () {
+                    expect(true).toBe(false);
                     expect(scope.stopPrepareToSend).toHaveBeenCalledWith("success");
                     expect(scope.showToggles.success).toBe(true);
                 }, 0);
               });
           });
           
-          xdescribe("Validate using the edit state", function () {
+          describe("Validate using the edit state", function () {
               it("should validate and call the edit function if an id has been set", function () {
                 // Mock data
+                scope.formState = "edit";
                 scope.formData = {
                     id: 123456789,
                     date: new Date(),
@@ -270,12 +273,31 @@ describe('Controller: AgendaCtrl', function () {
                     ticket: null
                 };
                 
-                // Set spy on the edit function
-                spyOn(AgendaService, "editGig");
+                // Set spy on $scope.reset()
+                spyOn(scope, "reset");
+                
+                var gigDate = new Date(scope.formData.date);
+                var uriDa = encodeUriQuery(gigDate.toISOString());
+                var uriT = encodeUriQuery(scope.formData.time);
+                var uriV = encodeUriQuery(scope.formData.venue);
+                var uriA = encodeUriQuery(scope.formData.address);
+                var urifb = encodeUriQuery(scope.formData.fbEvent);
+                var urit = encodeUriQuery(scope.formData.ticket);
+                var uriDe = encodeUriQuery(scope.formData.details);
+                httpBackend.expectPOST("/api/agenda/date/" + uriDa + "/time/" + uriT + "/venueName/" + uriV + "/venueAddress/" + uriA + "/fbEvent/" + urifb + "/ticketLink/" + urit + "/details/" + uriDe).respond(200, "success");
+                httpBackend.expectGET("/api/agenda").respond(200, response);
                 
                 scope.validate();
                 
-                expect(AgendaService.editGig).toHaveBeenCalledWith(scope.formData);
+                httpBackend.flush();
+                
+                timeout(function () {
+                    expect(true).toBe(false);
+                    console.log("reset: ", scope.reset.calls);
+                    expect(scope.stopPrepareToSend).toHaveBeenCalledWith("success");
+                    expect(scope.reset).toHaveBeenCalled();
+                    expect(scope.showToggles.success).toBe(true);
+                }, 0);
               });
           });
       });

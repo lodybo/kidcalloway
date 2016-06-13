@@ -58,9 +58,32 @@ angular.module('kidCallowayApp')
         }).$promise;
     };
     
+    var _editGig = function(newGig) {
+        // First: get the existing gig from the server
+        var endpoint = $resource(apiURL + "id/:id", {
+            id: "@id"
+        });
+        
+        var gig =  endpoint.get({
+            id: newGig.id
+        });
+        
+        // SAVE!
+        return gig.$save({
+            date: newGig.date,
+            time: newGig.time,
+            venue: newGig.venue,
+            address: newGig.address,
+            fbEvent: newGig.fbEvent,
+            ticket: newGig.ticket,
+            details: newGig.details
+        });
+    };
+    
     // Return public functions
     return {
         get: __get,
-        addGig: _addGig
+        addGig: _addGig,
+        editGig: _editGig
     };
   });

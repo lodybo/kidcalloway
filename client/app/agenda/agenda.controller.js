@@ -147,6 +147,11 @@ angular.module('kidCallowayApp')
         
         // First check if every required field has been entered
         Object.keys($scope.formData).forEach(function (key) {
+            // Exit if key is 'id'
+            if (key === "id") {
+                return;
+            }
+            
             var field = $scope.getFieldData(key);
             if (field.$required) {
                 if (!$scope.isNotEmpty($scope.formData[key])) {
@@ -169,10 +174,11 @@ angular.module('kidCallowayApp')
         }
         
         // No errors, let's send!
-        // Based on the value of the id parameter, we either need to create a new gig or edit an existing one
-        if ($scope.formData.id === null) {
+        // Based on the form state, we either need to create a new gig or edit an existing one
+        if ($scope.formState.state === "edit") {
             // Edit an existing one
             AgendaService.editGig($scope.formData).then(function () {
+                $scope.stopPrepareToSend("success");
                 // Reset the edit state of the form
                 $scope.reset();
                 
