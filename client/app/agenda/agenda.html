@@ -53,7 +53,9 @@
                         <textarea class="form-control" rows="3" name="details" ng-model="formData.details"></textarea>
                     </label>
                     
-                    <button ng-bind="submitButtonCaption" ng-click="validate()"></button>
+                    <button ng-bind="formState.submitButtonCaption" ng-click="validate()" ng-show="formState.state === 'new'"></button>
+                    <button ng-bind="formState.editButtonCaption" ng-click="validate()" ng-show="formState.state === 'edit'"></button>
+                    <button ng-bind="formState.resetButtonCaption" ng-click="reset()" ng-show="formState.state === 'edit'"></button>
                 </div>
             </form>
             <div class="loader" ng-class="{animate : showToggles.animateLoader}" ng-show="showToggles.loader"></div>

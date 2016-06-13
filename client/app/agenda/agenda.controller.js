@@ -14,6 +14,7 @@ angular.module('kidCallowayApp')
     };
     
     $scope.formData = {
+        id: null,
         date: new Date(),
         time: "20:00",
         venue: "Cafe De Kroeg",
@@ -40,8 +41,12 @@ angular.module('kidCallowayApp')
     
     // State of the editing form: new or edit.
     // Caption of the submit button adjusts to this state
-    $scope.formState = "new";
-    $scope.submitButtonCaption = "Gig toevoegen aan agenda";
+    $scope.formState = {
+        state: "new",
+        submitButtonCaption: "Gig toevoegen aan agenda",
+        editButtonCaption: "Gig bewerken",
+        resetButtonCaption: "Stop met bewerken",
+    };
     
     // Pass the isLoggedIn function from the Auth service to the view
     $scope.isLoggedIn = Auth.isLoggedIn;
@@ -59,12 +64,18 @@ angular.module('kidCallowayApp')
     
     // *** ADD OR EDIT GIGS
     $scope.editGig = function (gigID) {
+        // Set the form state to edit
+        $scope.formState.state = "edit";
+        
+        // Show the form if it's still hidden
         if (!$scope.showToggles.form) {
             $scope.showToggles.form = true;
         }
         
+        // First get the gig we need to edit, and fill the form with its data
         AgendaService.get(gigID).then(function (gig) {
             $scope.formData = {
+                id: gigID,
                 date: new Date(gig.date.raw),
                 time: gig.time,
                 venue: gig.venueName,
@@ -82,6 +93,24 @@ angular.module('kidCallowayApp')
     };
     $scope.cancelGig = function (gigID) {
         debugger;
+    };
+    
+    // Reset the edit mode
+    $scope.reset = function () {
+        // Reset the form state
+        $scope.formState.state = "new";
+        
+        // Reset form data
+        $scope.formData = {
+            id: null,
+            date: new Date(),
+            time: "20:00",
+            venue: "Cafe De Kroeg",
+            address: "Kroegseweg 12, Eindhoven",
+            fbEvent: "http://www.facebook.com/",
+            details: null,
+            ticket: null
+        };
     };
     
     // Return AngularJS's input information
