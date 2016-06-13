@@ -75,7 +75,7 @@ angular.module('kidCallowayApp')
         // First get the gig we need to edit, and fill the form with its data
         AgendaService.get(gigID).then(function (gig) {
             $scope.formData = {
-                id: gigID,
+                id: gig._id,
                 date: new Date(gig.date.raw),
                 time: gig.time,
                 venue: gig.venueName,
@@ -88,11 +88,11 @@ angular.module('kidCallowayApp')
             $scope.errors.serviceError = true;
         });
     };
-    $scope.deleteGig = function (gigID) {
-        debugger;
+    $scope.deleteGig = function () {
+        //debugger;
     };
-    $scope.cancelGig = function (gigID) {
-        debugger;
+    $scope.cancelGig = function () {
+        //debugger;
     };
     
     // Reset the edit mode
@@ -169,6 +169,26 @@ angular.module('kidCallowayApp')
         }
         
         // No errors, let's send!
+        // Based on the value of the id parameter, we either need to create a new gig or edit an existing one
+        if ($scope.formData.id === null) {
+            // Edit an existing one
+            AgendaService.editGig($scope.formData).then(function () {
+                // Reset the edit state of the form
+                $scope.reset();
+                
+                // Refresh gig list
+                $scope.gigs = [];
+                $scope.getAllGigs();
+            }, function (errors) {
+                $scope.errors = errors;
+                $scope.stopPrepareToSend("error");
+            });
+            
+            // Exit function
+            return;
+        }
+        
+        // No id, so we need to add a new one
         AgendaService.addGig($scope.formData).then(function() {
             $scope.stopPrepareToSend("success");
             // Let's get the new gig list
