@@ -64,20 +64,22 @@ angular.module('kidCallowayApp')
             id: "@id"
         });
         
-        var gig =  endpoint.get({
+        var gig = endpoint.get({
             id: newGig.id
-        });
-        
-        // SAVE!
-        return gig.$save({
-            date: newGig.date,
-            time: newGig.time,
-            venue: newGig.venue,
-            address: newGig.address,
-            fbEvent: newGig.fbEvent,
-            ticket: newGig.ticket,
-            details: newGig.details
-        });
+        }, function (gig) {
+            console.log("before $save:", newGig);
+            return gig.$save({
+                date: newGig.date,
+                time: newGig.time,
+                venue: newGig.venue,
+                address: newGig.address,
+                fbEvent: newGig.fbEvent,
+                ticket: newGig.ticket,
+                details: newGig.details
+            });
+        }).$promise;
+
+        return gig;
     };
     
     // Return public functions

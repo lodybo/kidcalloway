@@ -179,6 +179,7 @@ angular.module('kidCallowayApp')
             // Edit an existing one
             AgendaService.editGig($scope.formData).then(function () {
                 $scope.stopPrepareToSend("success");
+                $scope.showToggles.form = false;
                 // Reset the edit state of the form
                 $scope.reset();
                 
