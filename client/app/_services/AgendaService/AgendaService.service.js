@@ -63,23 +63,18 @@ angular.module('kidCallowayApp')
         var endpoint = $resource(apiURL + "id/:id", {
             id: "@id"
         });
-        
-        var gig = endpoint.get({
-            id: newGig.id
-        }, function (gig) {
-            console.log("before $save:", newGig);
-            return gig.$save({
-                date: newGig.date,
-                time: newGig.time,
-                venue: newGig.venue,
-                address: newGig.address,
-                fbEvent: newGig.fbEvent,
-                ticket: newGig.ticket,
-                details: newGig.details
-            });
-        }).$promise;
 
-        return gig;
+        return endpoint.save({
+            id: newGig.id
+        }, {
+            date: newGig.date,
+            time: newGig.time,
+            venue: newGig.venue,
+            address: newGig.address,
+            fbEvent: newGig.fbEvent,
+            ticket: newGig.ticket,
+            details: newGig.details
+        }).$promise;
     };
     
     // Return public functions

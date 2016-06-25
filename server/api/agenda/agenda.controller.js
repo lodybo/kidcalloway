@@ -51,8 +51,7 @@ exports.create = function(req, res) {
 
 // Updates an existing agenda in the DB.
 exports.update = function(req, res) {
-  console.log("params", req.params, "body", req.body);
-  if(req.body._id) { delete req.body._id; }
+  if(req.params._id) { delete req.params._id; }
   Agenda.findById(req.params.id, function (err, agenda) {
     if (err) { return handleError(res, err); }
     if(!agenda) { return res.send(404); }
