@@ -76,11 +76,22 @@ angular.module('kidCallowayApp')
             details: newGig.details
         }).$promise;
     };
+
+    var _deleteGig = function(id) {
+        var endpoint = $resource(apiURL + "id/:id", {
+            id: "@id"
+        });
+
+        return endpoint.delete({
+            id: id
+        }).$promise;
+    };
     
     // Return public functions
     return {
         get: __get,
         addGig: _addGig,
-        editGig: _editGig
+        editGig: _editGig,
+        deleteGig: _deleteGig
     };
   });

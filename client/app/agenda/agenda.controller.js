@@ -88,8 +88,12 @@ angular.module('kidCallowayApp')
             $scope.errors.serviceError = true;
         });
     };
-    $scope.deleteGig = function () {
-        //debugger;
+    $scope.deleteGig = function (gigID) {
+        // Delete gig
+        AgendaService.deleteGig(gigID).then(function () {
+            // Refresh gig list
+            $scope.getAllGigs();
+        });
     };
     $scope.cancelGig = function () {
         //debugger;
