@@ -95,8 +95,12 @@ angular.module('kidCallowayApp')
             $scope.getAllGigs();
         });
     };
-    $scope.cancelGig = function () {
-        //debugger;
+    $scope.cancelGig = function (gigID) {
+        // Cancel gig
+        AgendaService.cancelGig(gigID).then(function () {
+            // Refresh gig list
+            $scope.getAllGigs();
+        });
     };
     
     // Reset the edit mode

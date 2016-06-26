@@ -75,6 +75,30 @@ exports.destroy = function(req, res) {
   });
 };
 
+// Sets an agenda item to "cancelled"
+exports.cancel = function(req, res) {
+  Agenda.findById(req.params.id, function (err, agendaItem) {
+    if (err) {
+      return handleError(res, err);
+    }
+
+    if (!agendaItem) {
+      return res.send(404);
+    }
+
+    // Cancelled must be set to true, so that we can merge the objects together and save it
+    req.body.cancelled = true;
+    var updated = _.merge(agendaItem, req.body);
+    updated.save(function (err) {
+      if (err) {
+        return handleError(res, err);
+      }
+
+      return res.json(200, agendaItem);
+    });
+  });
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }

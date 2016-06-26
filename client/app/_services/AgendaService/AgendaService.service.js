@@ -86,12 +86,27 @@ angular.module('kidCallowayApp')
             id: id
         }).$promise;
     };
+
+    var _cancelGig = function (id) {
+        var endpoint = $resource(apiURL + "id/:id/cancel/true", {
+            id: "@id"
+        }, {
+            "cancel": {
+                method: "PUT"
+            }
+        });
+
+        return endpoint.cancel({
+            id: id
+        }).$promise;
+    };
     
     // Return public functions
     return {
         get: __get,
         addGig: _addGig,
         editGig: _editGig,
-        deleteGig: _deleteGig
+        deleteGig: _deleteGig,
+        cancelGig: _cancelGig
     };
   });
