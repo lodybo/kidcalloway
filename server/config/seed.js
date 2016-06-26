@@ -94,7 +94,7 @@ Agenda.find({}).remove(function() {
         date: {raw: new Date("2016-02-20")},
         time: "21:30",
         played: false,
-        cancelled: false
+        cancelled: true
     }, function () {
         console.log("Finished populating agenda");
     });

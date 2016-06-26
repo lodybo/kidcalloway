@@ -74,7 +74,8 @@
                         <td class="venue col-sm-3" >
                             <span ng-bind-html="gig.venueName"></span> <small><a ng-href="https://www.google.com/maps/place/{{gig.venueAddress}}" target="_blank" ng-bind="gig.venueAddress"></a></small>
                         </td>
-                        <td class="timecol-sm-1" ng-bind="gig.time"></td>
+                        <td class="time col-sm-1" ng-bind="gig.time" ng-hide="gig.cancelled"></td>
+                        <td class="time col-sm-1" ng-show="gig.cancelled">Geannulleerd</td>
                         <td class="details hidden-xs col-sm-5" ng-bind="gig.details"></td>
                         <td class="links hidden-xs col-sm-1">
                             <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
@@ -91,7 +92,7 @@
                             <div class="row context-buttons" ng-show="isLoggedIn()">
                                 <button class="col-xs-12 col-sm-4" ng-click="editGig(gig._id)">Bewerken</button>
                                 <button class="col-xs-6 col-sm-4" ng-click="deleteGig(gig._id)">Verwijderen</button>
-                                <button class="col-xs-6 col-sm-4" ng-click="cancelGig(gig._id)">Annuleren</button>
+                                <button class="col-xs-6 col-sm-4" ng-click="cancelGig(gig._id)" ng-class="{disabled: gig.cancelled}" ng-disabled="gig.cancelled">Annuleren</button>
                             </div>
                         </td>
                     </tr>
