@@ -7,37 +7,63 @@
 var _ = require('lodash');
 var Setting = require('./settings.model');
 
+// GET ALL THE SETTINGS!
+exports.index = function (req, res) {
+  Setting.find({}, function (err, settings) {
+    if (err) {
+      return handleError(res, err);
+    }
+
+    if (!settings) {
+      return res.send(404);
+    }
+
+    return res.json(200, settings);
+  });
+};
+
 // Get a single setting
 exports.get = function(req, res) {
-  Setting.find(req.params.setting, function (err, setting) {
+  console.log("req", req.params.setting);
+  Setting.find(req.params.setting, function (err, settings) {
     if(err) { return handleError(res, err); }
-    if(!setting) { return res.send(404); }
-    return res.json(200, setting.settingValue);
+    if(!settings) { return res.send(404); }
+    // Get the first setting from response
+    var setting = settings[0];
+    // Delete setting name from response, we don't need it because we already have the name
+    // It's json, so 'delete setting.settingName' doesn't work, but setting it to 'undefined' does..
+    setting.settingName = undefined;
+    return res.json(200, setting);
   });
 };
 
 // Add new setting in the DB.
 exports.add = function(req, res) {
-  if(req.params._id) { delete req.params._id; }
-  Sgenda.findById(req.params.id, function (err, setting) {
+  // Create new setting
+  var setting = {
+    settingName: req.params.setting,
+    settingValue: req.params.value
+  };
+
+  // Save it!
+  Setting.create(setting, function (err, setting) {
     if (err) { return handleError(res, err); }
-    if(!setting) { return res.send(404); }
-    var updated = _.merge(setting, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, setting);
-    });
-  });
+    return res.json(201, setting);
+  });;
 };
 
 // Updates an existing setting in the DB.
 exports.update = function(req, res) {
-  if(req.params._id) { delete req.params._id; }
-  Sgenda.findById(req.params.id, function (err, setting) {
+  console.log("req.params", req.params);
+  Setting.find(req.params.setting, function (err, settings) {
+    console.log("setting", setting);
     if (err) { return handleError(res, err); }
-    if(!setting) { return res.send(404); }
-    var updated = _.merge(setting, req.body);
-    updated.save(function (err) {
+    if(!settings) { return res.send(404); }
+    // Get the one setting
+    var setting = settings[0];
+    // Update setting
+    setting.settingValue = req.params.value;
+    setting.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, setting);
     });

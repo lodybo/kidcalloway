@@ -5,7 +5,7 @@ import request from 'supertest';
 
 describe('Settings API:', function() {
 
-  describe('GET /api/settingss', function() {
+  describe('GET /api/settings', function() {
     var settingss;
 
     beforeEach(function(done) {
