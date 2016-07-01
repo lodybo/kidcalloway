@@ -32,8 +32,8 @@ User.find({}).remove(function() {
 Settings.find({}).remove(function() {
     Settings.create({
         provider: "local",
-        settingName: "heroVideo",
-        settingValue: "https://www.youtube.com/watch?v=HXtCXE9jlbQ"
+        name: "heroVideo",
+        value: "https://www.youtube.com/embed/HXtCXE9jlbQ"
     }, function() {
       console.log('finished populating settings');
     });

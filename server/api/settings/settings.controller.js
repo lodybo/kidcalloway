@@ -24,7 +24,6 @@ exports.index = function (req, res) {
 
 // Get a single setting
 exports.get = function(req, res) {
-  console.log("req", req.params.setting);
   Setting.find(req.params.setting, function (err, settings) {
     if(err) { return handleError(res, err); }
     if(!settings) { return res.send(404); }
@@ -32,7 +31,7 @@ exports.get = function(req, res) {
     var setting = settings[0];
     // Delete setting name from response, we don't need it because we already have the name
     // It's json, so 'delete setting.settingName' doesn't work, but setting it to 'undefined' does..
-    setting.settingName = undefined;
+    setting.name = undefined;
     return res.json(200, setting);
   });
 };
@@ -54,9 +53,7 @@ exports.add = function(req, res) {
 
 // Updates an existing setting in the DB.
 exports.update = function(req, res) {
-  console.log("req.params", req.params);
   Setting.find(req.params.setting, function (err, settings) {
-    console.log("setting", setting);
     if (err) { return handleError(res, err); }
     if(!settings) { return res.send(404); }
     // Get the one setting

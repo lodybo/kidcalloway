@@ -6,8 +6,8 @@ var moment = require("moment");
 moment.locale("nl");
 
 var SettingsSchema = new Schema({
-  settingName: String,
-  settingValue: String
+  name: String,
+  value: String
 });
 
 module.exports = mongoose.model('Settings', SettingsSchema);
