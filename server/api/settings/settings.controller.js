@@ -40,8 +40,8 @@ exports.get = function(req, res) {
 exports.add = function(req, res) {
   // Create new setting
   var setting = {
-    settingName: req.params.setting,
-    settingValue: req.params.value
+    name: req.params.setting,
+    value: req.params.value
   };
 
   // Save it!
@@ -53,13 +53,16 @@ exports.add = function(req, res) {
 
 // Updates an existing setting in the DB.
 exports.update = function(req, res) {
+  console.log("update, req:", req.params, "body:", req.body);
   Setting.find(req.params.setting, function (err, settings) {
     if (err) { return handleError(res, err); }
     if(!settings) { return res.send(404); }
     // Get the one setting
     var setting = settings[0];
+    console.log("before update:", setting);
     // Update setting
-    setting.settingValue = req.params.value;
+    setting.value = req.params.value;
+    console.log("after update:", setting);
     setting.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, setting);

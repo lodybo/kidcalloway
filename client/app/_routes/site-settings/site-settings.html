@@ -1,3 +1,33 @@
-<div class="col-md-12">
-This is the site-settings view.
+<!-- Load navigation -->
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div id="site-settings" class="container">
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <h1>Site settings</h1>
+      <div class="errors row" ng-show="errors.show">
+        <div class="col-sm-12">
+          <p ng-bind="errors.message"></p>
+        </div>
+      </div>
+    </div>
+
+    <form class="form-horizontal" name="hero-video-url">
+      <div class="form-group">
+        <label for="heroVideoURL" class="col-sm-2 control-label">Hero video url</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="heroVideoURL" placeholder="https://youtu.be/videoURL" ng-model="settingsForm.heroVideo">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" ng-click="submitSettings('heroVideo');">Opslaan</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
 </div>
+
+<!-- Load footer with links and more info -->
+<div ng-include="'components/footer/footer.html'"></div>
