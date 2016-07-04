@@ -5,7 +5,7 @@ angular.module('kidCallowayApp')
     $scope.message = 'Hello';
     $scope.heroOptions = {
       videoURL: undefined
-    }
+    };
 
     // Get the YT url for the header
     SettingsService.get("heroVideo").then(function(setting) {
