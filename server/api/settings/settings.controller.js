@@ -48,7 +48,7 @@ exports.add = function(req, res) {
   Setting.create(setting, function (err, setting) {
     if (err) { return handleError(res, err); }
     return res.json(201, setting);
-  });;
+  });
 };
 
 // Updates an existing setting in the DB.
@@ -66,3 +66,7 @@ exports.update = function(req, res) {
     });
   });
 };
+
+function handleError(res, err) {
+  return res.send(500, err);
+}

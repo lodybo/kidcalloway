@@ -17,7 +17,7 @@ angular.module('kidCallowayApp')
       var endpoint = $resource(apiEindpoint + "/name/" + settingName);
 
       return endpoint.get().$promise;
-    }
+    };
 
     // *** Public functions
     // Get either one or all the settings
@@ -30,7 +30,7 @@ angular.module('kidCallowayApp')
 
       // Get one setting
       return __getOne(name);
-    }
+    };
 
     return {
       get: _get
