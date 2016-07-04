@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
+<div class="navbar navbar-default navbar-fixed-top" ng-controller="NavbarCtrl">
   <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
@@ -23,10 +23,10 @@
 <div class="navbar navbar-default navbar-fixed-bottom" ng-controller="NavbarCtrl" ng-show="isLoggedIn()">
     <div class="container">
         <ul class="nav navbar-nav">
-            <li ng-repeat="item in menu | filter: {restriction: 'loggedIn'}" ng-show="checkRestriction(item.restriction)" ng-class="{active: isActive(item.link)}">
+            <li ng-repeat="item in menu | filter: {restriction: '!all'}" ng-show="checkRestriction(item.restriction)" ng-class="{active: isActive(item.link)}">
                 <a ng-href="{{item.link}}"><i ng-class="['fa', 'fa-{{item.icon}}', 'fa-2x']"></i> </a>
             </li>
-            <li ng-show="checkRestriction('admin')" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="fa fa-cog fa-2x"></span></a></li>
+            <li ng-show="checkRestriction('loggedIn')" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="fa fa-cog fa-2x"></span></a></li>
             <li ng-show="checkRestriction('loggedIn')" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()"><span class="fa fa-sign-out fa-2x"></span></a></li>
         </ul>
     </div>

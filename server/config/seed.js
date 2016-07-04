@@ -8,6 +8,7 @@
 // Get Classes and Objects from the Data Models
 var User = require('../api/user/user.model');
 var Agenda = require("../api/agenda/agenda.model");
+var Settings = require("../api/settings/settings.model");
 
 // Fill the Database
 User.find({}).remove(function() {
@@ -26,6 +27,16 @@ User.find({}).remove(function() {
       console.log('finished populating users');
     }
   );
+});
+
+Settings.find({}).remove(function() {
+    Settings.create({
+        provider: "local",
+        name: "heroVideo",
+        value: "https://www.youtube.com/embed/HXtCXE9jlbQ"
+    }, function() {
+      console.log('finished populating settings');
+    });
 });
 
 Agenda.find({}).remove(function() {
@@ -94,7 +105,7 @@ Agenda.find({}).remove(function() {
         date: {raw: new Date("2016-02-20")},
         time: "21:30",
         played: false,
-        cancelled: false
+        cancelled: true
     }, function () {
         console.log("Finished populating agenda");
     });

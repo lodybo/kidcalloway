@@ -17,7 +17,8 @@ module.exports = function (grunt) {
     cdnify: 'grunt-google-cdn',
     protractor: 'grunt-protractor-runner',
     injector: 'grunt-asset-injector',
-    buildcontrol: 'grunt-build-control'
+    buildcontrol: 'grunt-build-control',
+    pagespeed: "grunt-pagespeed"
   });
 
   // Time how long tasks take. Can help when optimizing build times
@@ -35,7 +36,7 @@ module.exports = function (grunt) {
     },
     express: {
       options: {
-        port: process.env.PORT || 9000
+        port: process.env.PORT || 9002
       },
       dev: {
         options: {
@@ -543,6 +544,44 @@ module.exports = function (grunt) {
         }
       }
     },
+    
+    // Setup pagespeed and ngrok for pagespeed testing
+    pagespeed: {
+      options: {
+        nokey: true
+      },
+      local: {
+        options: {
+          strategy: "desktop",
+          locale: "en_GB",
+          threshold: 80
+        }
+      },
+      mobile: {
+        options: {
+          strategy: "mobile",
+          locale: "en_GB",
+          threshold: 80
+        }
+      }
+    }
+  });
+  
+  grunt.registerTask("pagespeed-test", "Run pagespeed with ngrok", function () {
+    var done = this.async();
+    var port = 9292;
+    var ngrok = require("ngrok");
+    
+    ngrok.connect(port, function (err, url) {
+      if (err !== null) {
+        grunt.fatal.fail(err);
+        return done();
+      }
+      
+      grunt.config.set("pagespeed.options.url", url);
+      grunt.task.run("pagespeed");
+      done();
+    });
   });
 
   // Used for delaying livereload until after server has restarted

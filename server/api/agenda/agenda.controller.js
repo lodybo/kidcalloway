@@ -51,7 +51,7 @@ exports.create = function(req, res) {
 
 // Updates an existing agenda in the DB.
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
+  if(req.params._id) { delete req.params._id; }
   Agenda.findById(req.params.id, function (err, agenda) {
     if (err) { return handleError(res, err); }
     if(!agenda) { return res.send(404); }
@@ -71,6 +71,30 @@ exports.destroy = function(req, res) {
     agenda.remove(function(err) {
       if(err) { return handleError(res, err); }
       return res.send(204);
+    });
+  });
+};
+
+// Sets an agenda item to "cancelled"
+exports.cancel = function(req, res) {
+  Agenda.findById(req.params.id, function (err, agendaItem) {
+    if (err) {
+      return handleError(res, err);
+    }
+
+    if (!agendaItem) {
+      return res.send(404);
+    }
+
+    // Cancelled must be set to true, so that we can merge the objects together and save it
+    req.body.cancelled = true;
+    var updated = _.merge(agendaItem, req.body);
+    updated.save(function (err) {
+      if (err) {
+        return handleError(res, err);
+      }
+
+      return res.json(200, agendaItem);
     });
   });
 };

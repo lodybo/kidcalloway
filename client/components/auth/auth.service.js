@@ -167,7 +167,7 @@ angular.module('kidCallowayApp')
 
           case "admin":
             // This should only be able to users with admin role
-            return this.isAdmin();
+            return this.isLoggedIn() && this.isAdmin();
 
           default:
             // Custom roles should end up here, let's see if the role is known

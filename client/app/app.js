@@ -52,4 +52,12 @@ angular.module('kidCallowayApp', [
         }
       });
     });
+  })
+  
+  .config(function($sceDelegateProvider) {
+    // Whitelist some important external resources, like YouTube!
+    $sceDelegateProvider.resourceUrlWhitelist([
+      'self',
+      'https://www.youtube.com/**'
+    ]);
   });

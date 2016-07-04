@@ -14,6 +14,7 @@ angular.module('kidCallowayApp')
     };
     
     $scope.formData = {
+        id: null,
         date: new Date(),
         time: "20:00",
         venue: "Cafe De Kroeg",
@@ -40,8 +41,12 @@ angular.module('kidCallowayApp')
     
     // State of the editing form: new or edit.
     // Caption of the submit button adjusts to this state
-    $scope.formState = "new";
-    $scope.submitButtonCaption = "Gig toevoegen aan agenda";
+    $scope.formState = {
+        state: "new",
+        submitButtonCaption: "Gig toevoegen aan agenda",
+        editButtonCaption: "Gig bewerken",
+        resetButtonCaption: "Stop met bewerken",
+    };
     
     // Pass the isLoggedIn function from the Auth service to the view
     $scope.isLoggedIn = Auth.isLoggedIn;
@@ -58,6 +63,64 @@ angular.module('kidCallowayApp')
     $scope.getAllGigs();
     
     // *** ADD OR EDIT GIGS
+    $scope.editGig = function (gigID) {
+        // Set the form state to edit
+        $scope.formState.state = "edit";
+        
+        // Show the form if it's still hidden
+        if (!$scope.showToggles.form) {
+            $scope.showToggles.form = true;
+        }
+        
+        // First get the gig we need to edit, and fill the form with its data
+        AgendaService.get(gigID).then(function (gig) {
+            $scope.formData = {
+                id: gig._id,
+                date: new Date(gig.date.raw),
+                time: gig.time,
+                venue: gig.venueName,
+                address: gig.venueAddress,
+                fbEvent: gig.fbEvent,
+                details: gig.details,
+                ticket: gig.ticketLink
+            };
+        }, function () {
+            $scope.errors.serviceError = true;
+        });
+    };
+    $scope.deleteGig = function (gigID) {
+        // Delete gig
+        AgendaService.deleteGig(gigID).then(function () {
+            // Refresh gig list
+            $scope.getAllGigs();
+        });
+    };
+    $scope.cancelGig = function (gigID) {
+        // Cancel gig
+        AgendaService.cancelGig(gigID).then(function () {
+            // Refresh gig list
+            $scope.getAllGigs();
+        });
+    };
+    
+    // Reset the edit mode
+    $scope.reset = function () {
+        // Reset the form state
+        $scope.formState.state = "new";
+        
+        // Reset form data
+        $scope.formData = {
+            id: null,
+            date: new Date(),
+            time: "20:00",
+            venue: "Cafe De Kroeg",
+            address: "Kroegseweg 12, Eindhoven",
+            fbEvent: "http://www.facebook.com/",
+            details: null,
+            ticket: null
+        };
+    };
+    
     // Return AngularJS's input information
     $scope.getFieldData = function(field) {
         return $scope.agendaForm[field];
@@ -92,6 +155,11 @@ angular.module('kidCallowayApp')
         
         // First check if every required field has been entered
         Object.keys($scope.formData).forEach(function (key) {
+            // Exit if key is 'id'
+            if (key === "id") {
+                return;
+            }
+            
             var field = $scope.getFieldData(key);
             if (field.$required) {
                 if (!$scope.isNotEmpty($scope.formData[key])) {
@@ -114,8 +182,33 @@ angular.module('kidCallowayApp')
         }
         
         // No errors, let's send!
+        // Based on the form state, we either need to create a new gig or edit an existing one
+        if ($scope.formState.state === "edit") {
+            // Edit an existing one
+            AgendaService.editGig($scope.formData).then(function () {
+                $scope.stopPrepareToSend("success");
+                $scope.showToggles.form = false;
+                // Reset the edit state of the form
+                $scope.reset();
+                
+                // Refresh gig list
+                $scope.gigs = [];
+                $scope.getAllGigs();
+            }, function (errors) {
+                $scope.errors = errors;
+                $scope.stopPrepareToSend("error");
+            });
+            
+            // Exit function
+            return;
+        }
+        
+        // No id, so we need to add a new one
         AgendaService.addGig($scope.formData).then(function() {
             $scope.stopPrepareToSend("success");
+            // Let's get the new gig list
+            $scope.gigs = [];
+            $scope.getAllGigs();
         }, function (errors) {
             $scope.errors = errors;
             $scope.stopPrepareToSend("error");
