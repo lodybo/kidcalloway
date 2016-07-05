@@ -31,7 +31,9 @@ exports.get = function(req, res) {
     var setting = settings[0];
     // Delete setting name from response, we don't need it because we already have the name
     // It's json, so 'delete setting.settingName' doesn't work, but setting it to 'undefined' does..
-    setting.name = undefined;
+    if (setting && setting.name) {
+      setting.name = undefined;
+    }
     return res.json(200, setting);
   });
 };
