@@ -1,6 +1,6 @@
 <div class="container">
   <div class="hero row" ng-controller="HeroCtrl">
-    <div class="loader"></div>
+    <div class="loader col-xs-1 col-sm-push-5 col-md-push-5" ng-class="{animate: heroOptions.animateLoader}"></div>
     <div class='embed-container col-xs-12'><iframe ng-src="{{heroOptions.videoURL}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe></div>
   </div> <!-- hero -->
 </div>
