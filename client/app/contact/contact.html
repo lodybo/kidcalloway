@@ -1,5 +1,5 @@
 <div id="contact" class="contact container">
-    <div class="row">
+    <div class="row" ng-controller="ContactCtrl">
         <div class="col-sm-12">
             <h1><i class="fa fa-envelope"></i>Contact</h1>
 
@@ -13,8 +13,8 @@
             </div>
         
             <p>
-                <a href="" id="mail-link">info [at] Kid Calloway .nl</a> <br />
-                <a href="" id="tel-link">+31 (0)6 15 07 040 08</a>
+                <a href="" ng-click="changeContactDetails($event, 'mail')">info [at] Kid Calloway .nl</a> <br />
+                <a href="" ng-click="changeContactDetails($event, 'phone')">+31 (0)6 15 07 040 08</a>
             </p>
 
             <p>
