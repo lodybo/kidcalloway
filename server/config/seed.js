@@ -34,6 +34,13 @@ Settings.find({}).remove(function() {
         provider: "local",
         name: "heroVideo",
         value: "https://www.youtube.com/embed/HXtCXE9jlbQ"
+    }, {
+        provider: "local",
+        name: "heroMobile",
+        value: JSON.stringify({
+            "image": "assets/images/achin-youtube.jpg",
+            "linkTo": "https://www.youtube.com/watch?v=HXtCXE9jlbQ"
+        })
     }, function() {
       console.log('finished populating settings');
     });
