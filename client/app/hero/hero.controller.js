@@ -4,13 +4,18 @@ angular.module('kidCallowayApp')
   .controller('HeroCtrl', function ($scope, SettingsService) {
     $scope.message = 'Hello';
     $scope.heroOptions = {
-      videoURL: undefined,
-      animateLoader: true
+      videoURL: undefined
+    };
+    $scope.loaderScope = {
+      classes: "col-xs-1 col-sm-push-5 col-md-push-5",
+      animate: true,
+      visible: true
     };
 
     // Get the YT url for the header
-    SettingsService.get("heroVideo").then(function(setting) {debugger;
+    SettingsService.get("heroVideo").then(function(setting) {
       $scope.heroOptions.videoURL = setting.value;
-      $scope.heroOptions.animateLoader = false;
+      $scope.loaderScope.animate = false;
+      $scope.loaderScope.visible = false;
     });
   });

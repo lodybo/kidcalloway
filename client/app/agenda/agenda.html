@@ -58,7 +58,7 @@
                     <button ng-bind="formState.resetButtonCaption" ng-click="reset()" ng-show="formState.state === 'edit'"></button>
                 </div>
             </form>
-            <div class="loader" ng-class="{animate : showToggles.animateLoader}" ng-show="showToggles.loader"></div>
+            <loader loader-scope="loaderScope"></loader>
         </div>
 
         <div class="col-xs-12 errors text-center" ng-show=errors.serviceError>

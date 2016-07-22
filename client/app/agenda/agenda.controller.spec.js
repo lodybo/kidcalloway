@@ -172,22 +172,22 @@ describe('Controller: AgendaCtrl', function () {
               scope.prepareToSend();
               
               expect(scope.showToggles.form).toBe(false);
-              expect(scope.showToggles.loader).toBe(true);
-              expect(scope.showToggles.animateLoader).toBe(true);
+              expect(scope.loaderScope.visible).toBe(true);
+              expect(scope.loaderScope.animate).toBe(true);
           });
           
           it ("should show the form and hide (and stop) the loader when stopping send", function() {
               scope.prepareToSend();
               
               expect(scope.showToggles.form).toBe(false);
-              expect(scope.showToggles.loader).toBe(true);
-              expect(scope.showToggles.animateLoader).toBe(true);
+              expect(scope.loaderScope.visible).toBe(true);
+              expect(scope.loaderScope.animate).toBe(true);
               
               scope.stopPrepareToSend();
               
               expect(scope.showToggles.form).toBe(true);
-              expect(scope.showToggles.loader).toBe(false);
-              expect(scope.showToggles.animateLoader).toBe(false);
+              expect(scope.loaderScope.visible).toBe(false);
+              expect(scope.loaderScope.animate).toBe(false);
           });
           
           describe("Showing a cue based on the status of the stop prepare", function () {

@@ -26,12 +26,16 @@ angular.module('kidCallowayApp')
     
     // Toggles for the loader icon, success result and error result and the order form
     $scope.showToggles = {
-        loader: false,
-        animateLoader: false,
         success: false,
         error: false,
         form: false
     };
+
+    $scope.loaderScope = {
+        classes: "",
+        animate: false,
+        visible: false,
+    },
     
     $scope.sortByDate = function (date) {
         var offTheJedi = new Date(date.date.raw);
@@ -222,8 +226,8 @@ angular.module('kidCallowayApp')
     $scope.prepareToSend = function () {
         // Hide form, show and animate loader
         $scope.showToggles.form = false;
-        $scope.showToggles.loader = true;
-        $scope.showToggles.animateLoader = true;
+        $scope.loaderScope.visible = true;
+        $scope.loaderScope.animate = true;
         
         // Hide visual cues for state
         $scope.showToggles.success = false;
@@ -234,8 +238,8 @@ angular.module('kidCallowayApp')
     $scope.stopPrepareToSend = function (state) {
         // Show form, hide loader and stop animation
         $scope.showToggles.form = true;
-        $scope.showToggles.loader = false;
-        $scope.showToggles.animateLoader = false;
+        $scope.loaderScope.visible = false;
+        $scope.loaderScope.animate = false;
         
         // Show visual cue for state
         $scope.showToggles[state] = true;
