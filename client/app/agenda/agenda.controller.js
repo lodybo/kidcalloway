@@ -37,11 +37,13 @@ angular.module('kidCallowayApp')
         visible: false,
     },
     
+    /* jshint ignore:start */
     $scope.sortByDate = function (date) {
         var offTheJedi = new Date(date.date.raw);
         
         return offTheJedi; // Haha!
     };
+    /* jshint ignore:end */
     
     // State of the editing form: new or edit.
     // Caption of the submit button adjusts to this state
@@ -211,7 +213,8 @@ angular.module('kidCallowayApp')
         }
         
         // No id, so we need to add a new one
-        AgendaService.addGig($scope.formData).then(function() {console.debug("BBBBB");
+        AgendaService.addGig($scope.formData).then(function() {
+            //console.debug("BBBBB");
             $scope.stopPrepareToSend("success");
             // Let's get the new gig list
             $scope.gigs = [];

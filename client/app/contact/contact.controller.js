@@ -8,7 +8,6 @@ angular.module('kidCallowayApp')
     };
 
     $scope.changeContactDetails = function ($event, detail) {
-      debugger;
       var elem = angular.element($event.currentTarget);
       elem.attr("href", $scope.contactDetails[detail]);
     };

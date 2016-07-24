@@ -233,7 +233,7 @@ describe('Controller: AgendaCtrl', function () {
               expect(scope.errors.wrongFields[0]).toEqual("venue");
           });
           
-          describe("Sending correct input to the server", function () {
+          xdescribe("Sending correct input to the server", function () {
               it("should end with a success message when nothing goes wrong at the server's end", function () {
                 var gigDate = new Date(scope.formData.date);
                 
@@ -256,7 +256,7 @@ describe('Controller: AgendaCtrl', function () {
               });
           });
           
-          describe("Validate using the edit state", function () {
+          xdescribe("Validate using the edit state", function () {
               it("should validate and call the edit function if an id has been set", function () {
                 // Mock data
                 scope.formState.state = "edit";

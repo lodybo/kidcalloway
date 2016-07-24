@@ -36,6 +36,7 @@
     "xdescribe": true,
     "xit": true,
     "afterEach": true,
-    "spyOn": true
+    "spyOn": true,
+    "YT": true
   }
 }

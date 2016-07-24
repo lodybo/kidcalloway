@@ -90,7 +90,7 @@ angular.module('kidCallowayApp')
 
             // Stop loader
             $scope.stopLoader();
-          }
+          };
         });
       }
     };

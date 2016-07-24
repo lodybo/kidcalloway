@@ -16,6 +16,6 @@ describe('Directive: loader', function () {
     element = angular.element('<loader></loader>');
     element = $compile(element)(scope);
     scope.$apply();
-    expect(element.text()).toBe('this is the loader directive');
+    expect(element).not.toBe(undefined);
   }));
 });
