@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kidCallowayApp')
-  .controller('HeroCtrl', function ($scope, SettingsService, $window) {
+  .controller('HeroCtrl', function ($scope, SettingsService, $window, $timeout) {
     $scope.message = 'Hello';
     $scope.heroOptions = {
       videoURL: undefined,
@@ -9,10 +9,19 @@ angular.module('kidCallowayApp')
       mobileVersionLoaded: false,
       mobile: true
     };
+
     $scope.loaderScope = {
       classes: "col-xs-1 col-sm-push-5 col-md-push-5",
       animate: true,
       visible: true
+    };
+
+    // Stop loader
+    $scope.stopLoader = function () {
+      $timeout(function() {
+        $scope.loaderScope.animate = false;
+        $scope.loaderScope.visible = false;
+      });
     };
 
     // Check the page width: if it's larger than a medium sized screen (769px),
@@ -43,9 +52,8 @@ angular.module('kidCallowayApp')
             mobilePlayer.append(anchor);
           }
 
-          // Hide loader
-          $scope.loaderScope.animate = false;
-          $scope.loaderScope.visible = false;
+          // Stop loader
+          $scope.stopLoader();
 
           // Show image
           $scope.heroOptions.mobile = true;
@@ -55,8 +63,6 @@ angular.module('kidCallowayApp')
         SettingsService.get("heroVideo").then(function(setting) {
           $scope.heroOptions.mobile = false;
           $scope.heroOptions.videoURL = setting.value;
-          $scope.loaderScope.animate = false;
-          $scope.loaderScope.visible = false;
 
           // Get the YouTube video ID by splitting the video URL by "/" and picking the last array item
           var splittedVideoURL = $scope.heroOptions.videoURL.split("/");
@@ -81,11 +87,17 @@ angular.module('kidCallowayApp')
               width: '640',
               videoId: "HXtCXE9jlbQ"
             });
+
+            // Stop loader
+            $scope.stopLoader();
           }
         });
       }
     };
 
-    angular.element($window).on("resize", $scope.determineMedia);
-    $scope.determineMedia();
+    // Bind everything when everything has been loaded
+    $timeout(function () {
+      angular.element($window).on("resize", $scope.determineMedia);
+      $scope.determineMedia();
+    });
   });
