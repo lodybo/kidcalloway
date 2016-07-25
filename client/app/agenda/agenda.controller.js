@@ -26,11 +26,15 @@ angular.module('kidCallowayApp')
     
     // Toggles for the loader icon, success result and error result and the order form
     $scope.showToggles = {
-        loader: false,
-        animateLoader: false,
         success: false,
         error: false,
         form: false
+    };
+
+    $scope.loaderScope = {
+        classes: "",
+        animate: false,
+        visible: false,
     };
     
     $scope.sortByDate = function (date) {
@@ -185,7 +189,10 @@ angular.module('kidCallowayApp')
         // Based on the form state, we either need to create a new gig or edit an existing one
         if ($scope.formState.state === "edit") {
             // Edit an existing one
-            AgendaService.editGig($scope.formData).then(function () {
+            var editGig = AgendaService.editGig($scope.formData);
+            //console.log("--- DEBUG editGig:", editGig);
+            editGig.then(function () {
+                //console.log("--- DEBUG in editGig");
                 $scope.stopPrepareToSend("success");
                 $scope.showToggles.form = false;
                 // Reset the edit state of the form
@@ -205,6 +212,7 @@ angular.module('kidCallowayApp')
         
         // No id, so we need to add a new one
         AgendaService.addGig($scope.formData).then(function() {
+            //console.debug("BBBBB");
             $scope.stopPrepareToSend("success");
             // Let's get the new gig list
             $scope.gigs = [];
@@ -219,8 +227,8 @@ angular.module('kidCallowayApp')
     $scope.prepareToSend = function () {
         // Hide form, show and animate loader
         $scope.showToggles.form = false;
-        $scope.showToggles.loader = true;
-        $scope.showToggles.animateLoader = true;
+        $scope.loaderScope.visible = true;
+        $scope.loaderScope.animate = true;
         
         // Hide visual cues for state
         $scope.showToggles.success = false;
@@ -231,8 +239,8 @@ angular.module('kidCallowayApp')
     $scope.stopPrepareToSend = function (state) {
         // Show form, hide loader and stop animation
         $scope.showToggles.form = true;
-        $scope.showToggles.loader = false;
-        $scope.showToggles.animateLoader = false;
+        $scope.loaderScope.visible = false;
+        $scope.loaderScope.animate = false;
         
         // Show visual cue for state
         $scope.showToggles[state] = true;

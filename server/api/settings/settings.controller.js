@@ -24,7 +24,7 @@ exports.index = function (req, res) {
 
 // Get a single setting
 exports.get = function(req, res) {
-  Setting.find(req.params.setting, function (err, settings) {
+  Setting.find({name: req.params.setting}, function (err, settings) {
     if(err) { return handleError(res, err); }
     if(!settings) { return res.send(404); }
     // Get the first setting from response

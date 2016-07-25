@@ -58,7 +58,7 @@
                     <button ng-bind="formState.resetButtonCaption" ng-click="reset()" ng-show="formState.state === 'edit'"></button>
                 </div>
             </form>
-            <div class="loader" ng-class="{animate : showToggles.animateLoader}" ng-show="showToggles.loader"></div>
+            <loader loader-scope="loaderScope"></loader>
         </div>
 
         <div class="col-xs-12 errors text-center" ng-show=errors.serviceError>
@@ -78,13 +78,13 @@
                         <td class="time col-sm-1" ng-show="gig.cancelled">Geannulleerd</td>
                         <td class="details hidden-xs col-sm-5" ng-bind="gig.details"></td>
                         <td class="links hidden-xs col-sm-1">
-                            <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                            <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-lg fa-facebook-official"></i></a>
                         </td>
                     </tr>
                     <tr class="visible-xs">
                         <td class="details" colspan="2" ng-bind="gig.details"></td>
                         <td class="links">
-                            <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                            <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-lg fa-facebook-official"></i></a>
                         </td>
                     </tr>
                     <tr>
@@ -110,13 +110,13 @@
                         <td class="timecol-sm-1" ng-bind="gig.time"></td>
                         <td class="details hidden-xs col-sm-5" ng-bind="gig.details"></td>
                         <td class="links hidden-xs col-sm-1">
-                            <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                            <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-lg fa-facebook-official"></i></a>
                         </td>
                     </tr>
                     <tr class="visible-xs">
                         <td class="details" colspan="2" ng-bind="gig.details"></td>
                         <td class="links">
-                            <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-facebook-official"></i></a>
+                            <a ng-href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-lg fa-facebook-official"></i></a>
                         </td>
                     </tr>
                     <tr>
