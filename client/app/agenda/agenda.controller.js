@@ -35,15 +35,13 @@ angular.module('kidCallowayApp')
         classes: "",
         animate: false,
         visible: false,
-    },
+    };
     
-    /* jshint ignore:start */
     $scope.sortByDate = function (date) {
         var offTheJedi = new Date(date.date.raw);
         
         return offTheJedi; // Haha!
     };
-    /* jshint ignore:end */
     
     // State of the editing form: new or edit.
     // Caption of the submit button adjusts to this state
