@@ -10,6 +10,22 @@
     max-width: 100%;
     z-index: 10;
   }
+  
+  .player-mobile-image {
+    margin: 0 auto;
+  }
+
+  #player-mobile-play-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 3em;
+    color: color("link");
+
+    @media (min-width: 400px) {
+      font-size: 4em;
+    }
+  }
 
   .embed-container iframe, .embed-container object, .embed-container embed {
     position: absolute;

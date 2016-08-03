@@ -2,7 +2,9 @@
   <div class="hero row" ng-controller="HeroCtrl">
     <loader loader-scope="loaderScope"></loader>
     <div class='embed-container col-xs-12'>
-      <div id="player-mobile" ng-show="heroOptions.mobile"></div>
+      <div id="player-mobile" ng-show="heroOptions.mobile">
+        <span id="player-mobile-play-button" class="glyphicon glyphicon-play-circle" style="visibility: hidden" aria-hidden="true"></span>
+      </div>
       <div id="player-wrapper" ng-hide="heroOptions.mobile">
         <div id="player"></div>
       </div>

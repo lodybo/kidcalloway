@@ -32,15 +32,8 @@ User.find({}).remove(function() {
 Settings.find({}).remove(function() {
     Settings.create({
         provider: "local",
-        name: "heroVideo",
-        value: "https://www.youtube.com/embed/HXtCXE9jlbQ"
-    }, {
-        provider: "local",
-        name: "heroMobile",
-        value: JSON.stringify({
-            "image": "assets/images/achin-youtube.jpg",
-            "linkTo": "https://www.youtube.com/watch?v=HXtCXE9jlbQ"
-        })
+        name: "heroYouTubeID",
+        value: "HXtCXE9jlbQ"
     }, function() {
       console.log('finished populating settings');
     });
