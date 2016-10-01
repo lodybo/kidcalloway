@@ -1,1 +1,0 @@
-Repository for the Kid Calloway website
