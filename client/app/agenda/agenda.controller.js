@@ -19,7 +19,7 @@ angular.module('kidCallowayApp')
         time: "20:00",
         venue: "Cafe De Kroeg",
         address: "Kroegseweg 12, Eindhoven",
-        fbEvent: "http://www.facebook.com/",
+        fbEvent: null,
         details: null,
         ticket: null
     };
@@ -119,7 +119,7 @@ angular.module('kidCallowayApp')
             time: "20:00",
             venue: "Cafe De Kroeg",
             address: "Kroegseweg 12, Eindhoven",
-            fbEvent: "http://www.facebook.com/",
+            fbEvent: null,
             details: null,
             ticket: null
         };
