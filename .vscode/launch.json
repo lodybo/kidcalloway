@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch",
+            "name": "Launch NodeJS",
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/server/app.js",
@@ -22,7 +22,7 @@
             "outDir": null
         },
         {
-            "name": "Attach",
+            "name": "Attach NodeJS",
             "type": "node",
             "request": "attach",
             "port": 5858,
@@ -34,13 +34,28 @@
             "remoteRoot": null
         },
         {
-            "name": "Attach to Process",
+            "name": "Attach to NodeJS Process",
             "type": "node",
             "request": "attach",
             "processId": "${command.PickProcess}",
             "port": 5858,
             "sourceMaps": false,
             "outDir": null
+        },
+        {
+            "name": "Launch Chrome",
+            "type": "chrome",
+            "request": "launch",
+            "url": "localhost:9002/*",
+            "webRoot": "${workspaceRoot}/client"
+        },
+        {
+            "name": "Attach Chrome",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222,
+            "url": "localhost:9000",
+            "webRoot": "${workspaceRoot}/client"
         }
     ]
 }
