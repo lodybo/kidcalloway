@@ -123,6 +123,9 @@ angular.module('kidCallowayApp')
             details: null,
             ticket: null
         };
+
+        // Hide form
+        $scope.showToggles.form = false;
     };
     
     // Return AngularJS's input information
@@ -194,7 +197,7 @@ angular.module('kidCallowayApp')
             editGig.then(function () {
                 //console.log("--- DEBUG in editGig");
                 $scope.stopPrepareToSend("success");
-                $scope.showToggles.form = false;
+
                 // Reset the edit state of the form
                 $scope.reset();
                 
