@@ -22,24 +22,13 @@ exports.show = function(req, res) {
 
 // Creates a new agenda in the DB.
 exports.create = function(req, res) {
-  // Depending on the environment, we need to use different ways to add a date
-  var rawDate = {raw: req.params.date};
-  
-  req.params.date = rawDate;
-  // Remove the string "null" and change it into an actual null
-  // For both the ticketLink as the details
-  if (req.params.ticketLink === "null") {
-    req.params.ticketLink = null;
-  }
-  
-  if (req.params.details === "null") {
-    req.params.details = null;
-  }
+  // Prep for storage
+  req.params = prepForDB(req.params);
   
   // Add 'played' and 'cancelled' flags, set them to 'false'
   req.params.played = false;
   req.params.cancelled = false;
-  console.log("AGENDA -- CREATE: ", req.params);
+  
   Agenda.create(req.params, function(err, agenda) {
     if(err) { return handleError(res, err); }
     return res.json(201, agenda);
@@ -48,11 +37,16 @@ exports.create = function(req, res) {
 
 // Updates an existing agenda in the DB.
 exports.update = function(req, res) {
-  if(req.params._id) { delete req.params._id; }
+  if (req.params._id) { delete req.params._id; }
+  // Prep for storage
+  req.body = prepForDB(req.body);
+
   Agenda.findById(req.params.id, function (err, agenda) {
     if (err) { return handleError(res, err); }
     if(!agenda) { return res.send(404); }
+    console.log(agenda.details);
     var updated = _.merge(agenda, req.body);
+    console.log(agenda.details);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, agenda);
@@ -95,6 +89,25 @@ exports.cancel = function(req, res) {
     });
   });
 };
+
+// Prepare agenda item for storage/update in DB
+function prepForDB(item) {
+  // Convert date into an object
+  var rawDate = {raw: item.date};
+  item.date = rawDate;
+  
+  // Remove the string "null" and change it into an actual null
+  // For both the ticketLink as the details
+  if (item.ticketLink === "null") {
+    item.ticketLink = null;
+  }
+  
+  if (item.details === "null") {
+    item.details = null;
+  }
+
+  return item;
+}
 
 function handleError(res, err) {
   return res.send(500, err);
