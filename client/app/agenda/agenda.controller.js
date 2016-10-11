@@ -200,6 +200,18 @@ angular.module('kidCallowayApp')
 
                 // Reset the edit state of the form
                 $scope.reset();
+
+                // Reset form data
+                $scope.formData = {
+                    id: null,
+                    date: new Date(),
+                    time: "20:00",
+                    venue: "Cafe De Kroeg",
+                    address: "Kroegseweg 12, Eindhoven",
+                    fbEvent: null,
+                    details: null,
+                    ticket: null
+                };
                 
                 // Refresh gig list
                 $scope.gigs = [];
