@@ -28,7 +28,7 @@ exports.create = function(req, res) {
   // Add 'played' and 'cancelled' flags, set them to 'false'
   req.params.played = false;
   req.params.cancelled = false;
-  
+
   Agenda.create(req.params, function(err, agenda) {
     if(err) { return handleError(res, err); }
     return res.json(201, agenda);
@@ -97,9 +97,13 @@ function prepForDB(item) {
   item.date = rawDate;
   
   // Remove the string "null" and change it into an actual null
-  // For both the ticketLink as the details
+  // For the ticketLink, facebookLink and the details
   if (item.ticketLink === "null") {
     item.ticketLink = null;
+  }
+
+  if (item.fbEvent === "null") {
+    item.fbEvent = null;
   }
   
   if (item.details === "null") {

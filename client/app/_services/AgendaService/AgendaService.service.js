@@ -32,9 +32,10 @@ angular.module('kidCallowayApp')
     };
     
     var _addGig = function (gig) {
-        // First: if 'ticket' and 'details' are null, change that to a string form. We'll strip it on the server
-        var ticket, details;
+        // First: if 'ticket', 'facebook' and 'details' are null, change that to a string form. We'll strip it on the server
+        var ticket, details, fbEvent;
         ticket = gig.ticket === null ? "null" : gig.ticket;
+        fbEvent = gig.fbEvent === null ? "null" : gig.fbEvent;
         details = gig.details === null ? "null" : gig.details;
         
         var endpoint = $resource(apiURL + "date/:date/time/:time/venueName/:venue/venueAddress/:address/fbEvent/:fbEvent/ticketLink/:ticket/details/:details", {
@@ -52,7 +53,7 @@ angular.module('kidCallowayApp')
             time: gig.time,
             venue: gig.venue,
             address: gig.address,
-            fbEvent: gig.fbEvent,
+            fbEvent: fbEvent,
             ticket: ticket,
             details: details
         }).$promise;
