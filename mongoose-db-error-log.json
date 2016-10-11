@@ -1,0 +1,1 @@
+{"message":"Agenda validation failed","name":"ValidationError","errors":{"date":{"message":"Cast to Object failed for value \"2016-10-23T22:00:00.000Z\" at path \"date\"","name":"CastError","kind":"Object","value":"2016-10-23T22:00:00.000Z","path":"date"}}}

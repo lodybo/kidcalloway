@@ -94,7 +94,8 @@ exports.cancel = function(req, res) {
 function prepForDB(item) {
   // Convert date into an object
   var rawDate = {raw: item.date};
-  item.date = rawDate;
+  //item.date = rawDate;
+  item.date = 123;
   
   // Remove the string "null" and change it into an actual null
   // For the ticketLink, facebookLink and the details
