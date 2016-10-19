@@ -33,7 +33,15 @@ angular.module('kidCallowayApp')
     $scope.showToggles = {
         success: false,
         error: false,
-        form: false
+        form: false,
+        status: false
+    };
+      
+    // Toggles for (mostly success) states
+    $scope.status = {
+        createSuccess: false,
+        editSuccess: false,
+        deleteSuccess: false
     };
 
     $scope.loaderScope = {
@@ -75,6 +83,7 @@ angular.module('kidCallowayApp')
     $scope.editGig = function (gigID) {
         // Set the form state to edit
         $scope.formState.state = "edit";
+        $scope.resetStatuses();;
         
         // Show the form if it's still hidden
         if (!$scope.showToggles.form) {
@@ -98,17 +107,29 @@ angular.module('kidCallowayApp')
         });
     };
     $scope.deleteGig = function (gigID) {
+        $scope.resetStatuses();
+        
         // Delete gig
         AgendaService.deleteGig(gigID).then(function () {
             // Refresh gig list
             $scope.getAllGigs();
+
+            // Show message
+            $scope.showToggles.status = true;
+            $scope.status.deleteSuccess = true;
+        }, function (errors) { 
+            $scope.handleErrors(true, errors);
         });
     };
     $scope.cancelGig = function (gigID) {
+        $scope.resetStatuses();
+
         // Cancel gig
         AgendaService.cancelGig(gigID).then(function () {
             // Refresh gig list
             $scope.getAllGigs();
+        }, function (errors) {
+            $scope.handleErrors(true, errors);
         });
     };
     
@@ -131,6 +152,7 @@ angular.module('kidCallowayApp')
 
         // Hide form
         $scope.showToggles.form = false;
+        $scope.resetStatuses();
     };
     
     // Return AngularJS's input information
@@ -217,6 +239,9 @@ angular.module('kidCallowayApp')
                 // Refresh gig list
                 $scope.gigs = [];
                 $scope.getAllGigs();
+
+                $scope.showToggles.status = true;
+                $scope.status.editSuccess = true;
             }, function (errors) {
                 $scope.handleErrors(true, errors);
             });
@@ -232,6 +257,8 @@ angular.module('kidCallowayApp')
             // Let's get the new gig list
             $scope.gigs = [];
             $scope.getAllGigs();
+            $scope.showToggles.status = true;
+            $scope.status.createSuccess = true;
         }, function (errors) {
             $scope.handleErrors(true, errors);
         });
@@ -247,6 +274,7 @@ angular.module('kidCallowayApp')
         // Hide visual cues for state
         $scope.showToggles.success = false;
         $scope.showToggles.error = false;
+        $scope.resetStatuses();
     };
     
     // Stop visual cues for preparing sending input and show the form
@@ -290,7 +318,7 @@ angular.module('kidCallowayApp')
         }
     };
       
-      // Reset the error object
+    // Reset the error object
     $scope.resetErrors = function () {
         // Hide errors
         $scope.showToggles.error = false;
@@ -306,6 +334,17 @@ angular.module('kidCallowayApp')
                 serviceErrorMessage: "",
                 validationError: false
             }
+        };
+    };
+      
+    // Reset statuses
+    $scope.resetStatuses = function () {
+        $scope.showToggles.status = false;
+
+        $scope.status = {
+            createSuccess: false,
+            editSuccess: false,
+            deleteSuccess: false
         };
     };
   });

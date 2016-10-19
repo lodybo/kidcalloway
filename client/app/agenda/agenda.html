@@ -7,6 +7,12 @@
             <h1><i class="fa fa-music"></i>Live</h1>
         </div>
 
+        <div class="col-xs-12 text-center" ng-messages="status" ng-show="showToggles.status" ng-messages-multiple="true">
+            <p class="success" ng-message="createSuccess">Optreden is met success toegevoegd</p>
+            <p class="success" ng-message="editSuccess">Optreden is met success bijgewerkt</p>
+            <p class="success" ng-message="deleteSuccess">Optreden is met success verwijderd</p>
+        </div>
+
         <div class="col-xs-12 text-center" ng-messages="errors" ng-show="showToggles.error" ng-messages-multiple="true">
             <p class="errors" ng-message="missingParameters">Sommige velden zijn niet ingevuld</p>
             <p class="errors" ng-message="wrongInput">Sommige velden zijn verkeerd ingevuld</p>
