@@ -29,7 +29,7 @@ exports.create = function(req, res) {
   req.params.played = false;
   req.params.cancelled = false;
 
-  Agenda.create(req.params, function(err, agenda) {
+  Agenda.create(req.params, function (err, agenda) {
     if(err) { return handleError(res, err); }
     return res.json(201, agenda);
   });
@@ -94,8 +94,7 @@ exports.cancel = function(req, res) {
 function prepForDB(item) {
   // Convert date into an object
   var rawDate = {raw: item.date};
-  //item.date = rawDate;
-  item.date = 123;
+  item.date = rawDate;
   
   // Remove the string "null" and change it into an actual null
   // For the ticketLink, facebookLink and the details

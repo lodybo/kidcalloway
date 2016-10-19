@@ -6,6 +6,21 @@
         <div class="top col-xs-12">
             <h1><i class="fa fa-music"></i>Live</h1>
         </div>
+
+        <div class="col-xs-12 text-center" ng-messages="errors" ng-show="showToggles.error" ng-messages-multiple="true">
+            <p class="errors" ng-message="missingParameters">Sommige velden zijn niet ingevuld</p>
+            <p class="errors" ng-message="wrongInput">Sommige velden zijn verkeerd ingevuld</p>
+        
+            <div ng-messages="errors.serviceMessages" ng-show="errors.serviceError" ng-messages-multiple="true">
+                <p class="errors" ng-message="serviceUnavailable">Er is iets fout gegaan met het ophalen van de shows. Maar niet getreurd: <a href="https://www.facebook.com/kidcallowaymusic/events?_rdr" target="_blank">je kan ze hier vinden</a>!
+                </p>
+
+                <p class="errors" ng-message="validationError">
+                    Bij het invoeren van de gegevens is het valideren mislukt. De server kwam terug met: <br />
+                    <em ng-bind="errors.serviceMessages.serviceErrorMessage"></em>
+                </p>
+            </div>
+        </div>
         
         <div class="form col-xs-12">
             <button class="center-block" ng-click="showToggles.form = !showToggles.form" ng-show="isLoggedIn()">Optreden toevoegen</button>
@@ -61,11 +76,7 @@
             <loader loader-scope="loaderScope"></loader>
         </div>
 
-        <div class="col-xs-12 errors text-center" ng-show=errors.serviceError>
-            Er is iets fout gegaan met het ophalen van de shows. Maar niet getreurd: <a href="https://www.facebook.com/kidcallowaymusic/events?_rdr" target="_blank">je kan ze hier vinden</a>!
-        </div>
-        
-        <div class="row" ng-hide=errors.serviceError>
+        <div class="row" ng-hide="errors.serviceMessages.serviceUnavailable">
             <h3 class="col-xs-12">Aankomende shows</h3>
             <table class="table col-xs-12">
                 <tbody ng-repeat="gig in gigs | filter:{played: false} | orderBy: sortByDate : reverse" ng-class="{cancelled: gig.cancelled}" >
