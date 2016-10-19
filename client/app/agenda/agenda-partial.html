@@ -20,13 +20,25 @@
                         <td class="timecol-sm-1" ng-bind="gig.time"></td>
                         <td class="details hidden-xs col-sm-5" ng-bind="gig.details"></td>
                         <td class="links hidden-xs col-sm-1">
-                            <a href="{{gig.fbEvent}}" ng-show="gig.fbEvent" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-lg fa-facebook-official"></i></a>
+                            <a ng-href="{{gig.ticketLink}}" ng-if="gig.ticketLink" target="_blank" title="Haal hier je tickets!">
+                                <i class="fa fa-lg fa-ticket"></i>
+                            </a>
+                            
+                            <a href="{{gig.fbEvent}}" ng-show="gig.fbEvent" target="_blank" title="Geef je op voor het Facebookevent!">
+                                <i class="fa fa-lg fa-facebook-official"></i>
+                            </a>
                         </td>
                     </tr>
                     <tr class="visible-xs">
                         <td class="details" colspan="2" ng-bind="gig.details"></td>
                         <td class="links">
-                            <a href="{{gig.fbEvent}}" ng-show="gig.fbEvent" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-lg fa-facebook-official"></i></a>
+                            <a ng-href="{{gig.ticketLink}}" ng-if="gig.ticketLink" target="_blank" title="Haal hier je tickets!">
+                                <i class="fa fa-lg fa-ticket"></i>
+                            </a>
+                            
+                            <a href="{{gig.fbEvent}}" ng-show="gig.fbEvent" target="_blank" title="Geef je op voor het Facebookevent!">
+                                <i class="fa fa-lg fa-facebook-official"></i>
+                            </a>
                         </td>
                     </tr>
                 </tbody>
@@ -43,13 +55,25 @@
                         <td class="timecol-sm-1" ng-bind="gig.time"></td>
                         <td class="details hidden-xs col-sm-5" ng-bind="gig.details"></td>
                         <td class="links hidden-xs col-sm-1">
-                            <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-lg fa-facebook-official"></i></a>
+                            <a ng-href="{{gig.ticketLink}}" ng-if="gig.ticketLink" target="_blank" title="Haal hier je tickets!">
+                                <i class="fa fa-lg fa-ticket"></i>
+                            </a>
+
+                            <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!">
+                                <i class="fa fa-lg fa-facebook-official"></i>
+                            </a>
                         </td>
                     </tr>
                     <tr class="visible-xs">
                         <td class="details" colspan="2" ng-bind="gig.details"></td>
                         <td class="links">
-                            <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!"><i class="fa fa-lg fa-facebook-official"></i></a>
+                            <a ng-href="{{gig.ticketLink}}" ng-if="gig.ticketLink" target="_blank" title="Haal hier je tickets!">
+                                <i class="fa fa-lg fa-ticket"></i>
+                            </a>
+
+                            <a href="{{gig.fbEvent}}" target="_blank" title="Geef je op voor het Facebookevent!">
+                                <i class="fa fa-lg fa-facebook-official"></i>
+                            </a>
                         </td>
                     </tr>
                 </tbody>
