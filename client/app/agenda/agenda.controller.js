@@ -83,7 +83,7 @@ angular.module('kidCallowayApp')
     $scope.editGig = function (gigID) {
         // Set the form state to edit
         $scope.formState.state = "edit";
-        $scope.resetStatuses();;
+        $scope.resetStatuses();
         
         // Show the form if it's still hidden
         if (!$scope.showToggles.form) {

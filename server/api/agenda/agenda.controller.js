@@ -5,18 +5,20 @@ var Agenda = require('./agenda.model');
 
 // Get list of agendas
 exports.index = function(req, res) {
-  Agenda.find(function (err, agendas) {
-    if(err) { return handleError(res, err); }
+  Agenda.find({}).exec().then(function (agendas) {
     return res.json(200, agendas);
+  }).catch(function (err) {
+    handleError(res, err);
   });
 };
 
 // Get a single agenda
 exports.show = function(req, res) {
-  Agenda.findById(req.params.id, function (err, agenda) {
-    if(err) { return handleError(res, err); }
+  Agenda.findOne({ _id: req.params.id }).exec().then(function (agenda) {
     if(!agenda) { return res.send(404); }
     return res.json(agenda);
+  }).catch(function (err) {
+    handleError(res, err);
   });
 };
 
@@ -29,9 +31,10 @@ exports.create = function(req, res) {
   req.params.played = false;
   req.params.cancelled = false;
 
-  Agenda.create(req.params, function (err, agenda) {
-    if(err) { return handleError(res, err); }
+  Agenda.create(req.params).then(function (agenda) {
     return res.json(201, agenda);
+  }).catch(function (err) {
+    handleError(res, err);
   });
 };
 
@@ -40,39 +43,35 @@ exports.update = function(req, res) {
   if (req.params._id) { delete req.params._id; }
   // Prep for storage
   req.body = prepForDB(req.body);
-
-  Agenda.findById(req.params.id, function (err, agenda) {
-    if (err) { return handleError(res, err); }
+  
+  Agenda.findOne({ _id: req.params.id }).exec().then(function (agenda) {
     if(!agenda) { return res.send(404); }
-    console.log(agenda.details);
+    
     var updated = _.merge(agenda, req.body);
-    console.log(agenda.details);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, agenda);
-    });
+    
+    return updated.save();
+  }).then(function (item) {
+    return res.json(201, item);
+  }).catch(function (err) {
+    handleError(res, err);
   });
 };
 
 // Deletes a agenda from the DB.
-exports.destroy = function(req, res) {
-  Agenda.findById(req.params.id, function (err, agenda) {
-    if(err) { return handleError(res, err); }
+exports.destroy = function (req, res) {
+  Agenda.findOne({ _id: req.params.id }).exec().then(function (agenda) {
     if(!agenda) { return res.send(404); }
-    agenda.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.send(204);
-    });
+    return agenda.remove();
+  }).then(function (item) {
+    return res.send(204);
+  }).catch(function (err) {
+    handleError(res, err);
   });
 };
 
 // Sets an agenda item to "cancelled"
 exports.cancel = function(req, res) {
-  Agenda.findById(req.params.id, function (err, agendaItem) {
-    if (err) {
-      return handleError(res, err);
-    }
-
+  Agenda.findOne({ _id: req.params.id }).exec().then(function (agendaItem) {
     if (!agendaItem) {
       return res.send(404);
     }
@@ -80,13 +79,11 @@ exports.cancel = function(req, res) {
     // Cancelled must be set to true, so that we can merge the objects together and save it
     req.body.cancelled = true;
     var updated = _.merge(agendaItem, req.body);
-    updated.save(function (err) {
-      if (err) {
-        return handleError(res, err);
-      }
-
-      return res.json(200, agendaItem);
-    });
+    return updated.save();
+  }).then(function (updatedItem) {
+    return res.json(200, updatedItem);
+  }).catch(function (err) {
+    handleError(res, err);
   });
 };
 

@@ -19,6 +19,7 @@ module.exports = function(config) {
       'client/bower_components/angular-sanitize/angular-sanitize.js',
       'client/bower_components/angular-route/angular-route.js',
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'client/bower_components/angular-messages/angular-messages.js',
       'client/bower_components/lodash/dist/lodash.compat.js',
       'node_modules/phantomjs-polyfill/bind-polyfill.js',
       'client/app/app.js',
