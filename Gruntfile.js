@@ -600,6 +600,16 @@ module.exports = function (grunt) {
     this.async();
   });
 
+  grunt.registerTask("run-karma-with", function (args) {
+    if (!args) {
+      grunt.fail.fatal("You need to specify PATH-browsers for this task", 3);
+    }
+
+    var browsers = args.split(",");
+    grunt.config("karma.unit.browsers", browsers);
+    grunt.task.run(["karma:unit"]);
+  });
+
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'express-keepalive']);
