@@ -26,25 +26,33 @@ describe('User Model', function() {
   });
 
   it('should begin with no users', function(done) {
-    User.find({}, function(err, users) {
+    User.find().exec().then(function (users) {
       users.should.have.length(0);
       done();
+    }).catch(function (err) { 
+      should.fail();
     });
   });
 
   it('should fail when saving a duplicate user', function(done) {
-    user.save(function() {
+    User.find().exec().then(function (user) {
       var userDup = new User(user);
-      userDup.save(function(err) {
-        should.exist(err);
-        done();
-      });
+      return userDup.save();
+    }).then(function () {
+      should.fail();
+    }).catch(function (err) { 
+      should.exist(err);
+      done();
     });
   });
 
   it('should fail when saving without an email', function(done) {
-    user.email = '';
-    user.save(function(err) {
+    User.find().exec().then(function (user) {
+      user.email = '';
+      return user.save();
+    }).then(function () {
+      should.fail();
+    }).catch(function (err) {
       should.exist(err);
       done();
     });

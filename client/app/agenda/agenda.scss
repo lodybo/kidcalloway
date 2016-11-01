@@ -1,6 +1,14 @@
 #live {	
-	.errors {
+	.errors, .success {
 		margin-bottom: 50px;
+		border: color("error") solid 1px;
+		color: color("error");
+		padding: 15px;
+	}
+
+	.success {
+		border-color: color("success");
+		color: color("success");
 	}
 }
 
@@ -14,11 +22,6 @@
 	td {
 		border-top: 0 !important;
 	}
-
-	td.time {
-		//@include pad($fg $fg2 $fg $fg);
-		// @include span-columns(1 of 10);
-	};
 
 	.date {font-weight: bold;}
 

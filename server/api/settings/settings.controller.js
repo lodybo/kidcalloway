@@ -9,24 +9,21 @@ var Setting = require('./settings.model');
 
 // GET ALL THE SETTINGS!
 exports.index = function (req, res) {
-  Setting.find({}, function (err, settings) {
-    if (err) {
-      return handleError(res, err);
-    }
-
+  Setting.find({}).exec().then(function (settings) {
     if (!settings) {
       return res.send(404);
     }
 
     return res.json(200, settings);
+  }).catch(function (err) {
+    handleError(res, err);
   });
 };
 
 // Get a single setting
 exports.get = function(req, res) {
-  Setting.find({name: req.params.setting}, function (err, settings) {
-    if(err) { return handleError(res, err); }
-    if(!settings) { return res.send(404); }
+  Setting.find({ name: req.params.setting }).exec().then(function (settings) {
+    if (!settings) { return res.send(404); }
     // Get the first setting from response
     var setting = settings[0];
     // Delete setting name from response, we don't need it because we already have the name
@@ -35,6 +32,8 @@ exports.get = function(req, res) {
       setting.name = undefined;
     }
     return res.json(200, setting);
+  }).catch(function (err) {
+    handleError(res, err);
   });
 };
 
@@ -47,28 +46,26 @@ exports.add = function(req, res) {
   };
 
   // Save it!
-  Setting.create(setting, function (err, setting) {
-    if (err) { return handleError(res, err); }
+  Setting.create(setting).then(function (setting) {
     return res.json(201, setting);
+  }).catch(function (err) {
+    handleError(res, err);
   });
 };
 
 // Updates an existing setting in the DB.
 exports.update = function(req, res) {
-  console.log("update, req:", req.params, "body:", req.body);
-  Setting.find(req.params.setting, function (err, settings) {
-    if (err) { return handleError(res, err); }
-    if(!settings) { return res.send(404); }
+  Setting.find(req.params.setting).exec().then(function (settings) {
+    if (!settings) { return res.send(404); }
     // Get the one setting
     var setting = settings[0];
-    console.log("before update:", setting);
     // Update setting
     setting.value = req.params.value;
-    console.log("after update:", setting);
-    setting.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, setting);
-    });
+    return setting.save();
+  }).then(function (setting) {
+    return res.json(201, setting);
+  }).catch(function (err) {
+    handleError(res, err);
   });
 };
 
