@@ -69,7 +69,7 @@ describe('Controller: AgendaCtrl', function () {
         };
         
         var expectation = scope.sortByDate(dateObj);
-        expect(expectation).toEqual(date);
+        expect(expectation.toString()).toEqual(date.toString());
     });
   });
   
