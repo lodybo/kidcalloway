@@ -65,7 +65,7 @@ module.exports = function (config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: process.env.KARMA_BROWSERS.split(";"),
+    browsers: ["PhantomJS"],
 
 
     // Continuous Integration mode
