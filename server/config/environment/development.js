@@ -5,9 +5,9 @@
 var user, pass, db;
 
 /* jshint ignore:start */
-user = process.env.MLAB_USER ? process.env.MLAB_USER : ${MLAB_USER };
-pass = process.env.MLAB_USER ? process.env.MLAB_USER : ${MLAB_USER };
-db = process.env.MLAB_USER ? process.env.MLAB_USER : ${MLAB_USER };
+user = process.env.MLAB_USER ? process.env.MLAB_USER : $MLAB_USER;
+pass = process.env.MLAB_USER ? process.env.MLAB_USER : $MLAB_USER;
+db = process.env.MLAB_USER ? process.env.MLAB_USER : $MLAB_USER;
 /* jshint ignore:end */
 
 module.exports = {
