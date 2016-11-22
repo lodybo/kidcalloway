@@ -44,17 +44,14 @@ describe('Controller: AgendaCtrl', function () {
     });
     
     
-    it("should get a list from the service with all the gigs", function (done) {
+    it("should get a list from the service with all the gigs", function () {
         httpBackend.expectGET("/api/agenda").respond(200, response);
         
         expect(scope.gigs.length).toBe(0);
         
         httpBackend.flush();
         
-        timeout(function () {
-            expect(scope.gigs.length).toBe(response.length);
-            done();
-        }, 0);
+        expect(scope.gigs.length).toBe(response.length);
     });
     
     it("should fetch the date from the response for orderBy functionality", function () {
@@ -207,8 +204,8 @@ describe('Controller: AgendaCtrl', function () {
       
       describe("Running the validation function", function () {
           beforeEach(function () {
-              spyOn(scope, "prepareToSend");
-              spyOn(scope, "stopPrepareToSend");
+              spyOn(scope, "prepareToSend").and.callThrough();
+              spyOn(scope, "stopPrepareToSend").and.callThrough();
           });
           
           it("should end with an error when a required field has not been filled in", function () {
@@ -233,7 +230,7 @@ describe('Controller: AgendaCtrl', function () {
               expect(scope.errors.wrongFields[0]).toEqual("venue");
           });
           
-          xdescribe("Sending correct input to the server", function () {
+          describe("Sending correct input to the server", function () {
               it("should end with a success message when nothing goes wrong at the server's end", function () {
                 var gigDate = new Date(scope.formData.date);
                 
@@ -250,13 +247,13 @@ describe('Controller: AgendaCtrl', function () {
                 scope.validate();
                 
                 httpBackend.flush();
-
+                
                 expect(scope.stopPrepareToSend).toHaveBeenCalledWith("success");
                 expect(scope.showToggles.success).toBe(true);
               });
           });
           
-          xdescribe("Validate using the edit state", function () {
+          describe("Validate using the edit state", function () {
               it("should validate and call the edit function if an id has been set", function () {
                 // Mock data
                 scope.formState.state = "edit";
@@ -272,7 +269,7 @@ describe('Controller: AgendaCtrl', function () {
                 };
                 
                 // Set spy on $scope.reset()
-                spyOn(AgendaService, "editGig");
+                spyOn(AgendaService, "editGig").and.callThrough();
                 
                 var gigDate = new Date(scope.formData.date);
                 var uriDa = encodeUriQuery(gigDate.toISOString());
@@ -282,23 +279,21 @@ describe('Controller: AgendaCtrl', function () {
                 var urifb = encodeUriQuery(scope.formData.fbEvent);
                 var urit = encodeUriQuery(scope.formData.ticket);
                 var uriDe = encodeUriQuery(scope.formData.details);
-                httpBackend.expectPOST("/api/agenda/date/" + uriDa + "/time/" + uriT + "/venueName/" + uriV + "/venueAddress/" + uriA + "/fbEvent/" + urifb + "/ticketLink/" + urit + "/details/" + uriDe).respond(201, "success");
-                httpBackend.expect("GET", "/api/agenda/id/" + scope.formData.id).respond(200, scope.formData);
-                // httpBackend.expect("POST", "/api/agenda/id/" + scope.formData.id, {
-                //     date: scope.formData.date,
-                //     time: scope.formData.time,
-                //     venue: scope.formData.venue,
-                //     address: scope.formData.address,
-                //     fbEvent: scope.formData.fbEvent,
-                //     ticket: scope.formData.ticket,
-                //     details: scope.formData.details
-                // }).respond(201, scope.formData);
-                //httpBackend.expectGET("/api/agenda").respond(200, response);
+                httpBackend.expect("POST", "/api/agenda/id/" + scope.formData.id, {
+                    date: scope.formData.date,
+                    time: scope.formData.time,
+                    venue: scope.formData.venue,
+                    address: scope.formData.address,
+                    fbEvent: scope.formData.fbEvent,
+                    ticket: scope.formData.ticket,
+                    details: scope.formData.details
+                }).respond(201, scope.formData);
+                httpBackend.expectGET("/api/agenda").respond(200, response);
                 
                 scope.validate();
                 httpBackend.flush();
 
-                //expect(AgendaService.editGig).toHaveBeenCalled();
+                expect(AgendaService.editGig).toHaveBeenCalled();
 
                 timeout(function () {
                     httpBackend.flush();
