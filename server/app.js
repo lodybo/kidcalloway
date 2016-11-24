@@ -10,6 +10,15 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var express = require('express');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
+var rollbar = require('rollbar');
+
+// Set up Rollbar for NodeJS
+rollbar.init(process.env.ROLLBAR_TOKEN, {
+  environment: process.env.NODE_ENV,
+  root: process.env.ROOT,
+  reportLevel: "debug"
+});
+rollbar.handleUncaughtExceptionsAndRejections();
 
 // Set promise
 mongoose.Promise = global.Promise;
@@ -28,6 +37,13 @@ require('./routes')(app);
 
 // Start server
 server.listen(config.port, config.ip, function () {
+  rollbar.reportMessageWithPayloadData("Express server is listening", {
+    level: "info",
+    app: {
+      port: config.port,
+      environment: app.get('env')
+    }
+  });
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
 
@@ -36,7 +52,6 @@ var scheduler = require("node-schedule");
 var Agenda = require("./api/agenda/agenda.model");
 var moment = require("moment");
 
-console.log(">> Setting up scheduler..");
 var schedule = new scheduler.RecurrenceRule();
 schedule.hour = 0;
 schedule.minute = 1;
@@ -50,8 +65,6 @@ var cron = scheduler.scheduleJob(schedule, function () {
   // For this, we're doing a "dirty"" string concatenation
   var todayMidnightString = today + "T00:00:00.000Z";
   var yesterdayMidnightString = yesterday + "T00:00:00.000Z";
-  
-  console.log(">> Running scheduler.. generated days: [yesterday: " + yesterdayMidnightString + ", today: " + todayMidnightString + "]");
   
   updateAgenda(yesterdayMidnightString, todayMidnightString);
 });
@@ -68,6 +81,9 @@ function updateAgenda(yesterday, today) {
     // Check for errors
     if (err) {
       console.log(">> Error updating played gigs: ", err);
+      rollbar.reportMessage("Error updating played gigs", {
+
+      });
       return;
     }
     
