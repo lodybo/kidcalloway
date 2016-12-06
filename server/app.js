@@ -20,6 +20,12 @@ rollbar.init(process.env.ROLLBAR_TOKEN, {
 });
 rollbar.handleUncaughtExceptionsAndRejections();
 
+// Disable Rollbar when on test
+if (process.env.NODE_ENV === "test") {
+  rollbar.enabled = false;
+  console.log("Rollbar disabled due to test environment");
+}
+
 // Set promise
 mongoose.Promise = global.Promise;
 
@@ -52,6 +58,10 @@ var scheduler = require("node-schedule");
 var Agenda = require("./api/agenda/agenda.model");
 var moment = require("moment");
 
+rollbar.reportMessageWithPayloadData("Setting up scheduler", {
+  level: "info"
+});
+
 var schedule = new scheduler.RecurrenceRule();
 schedule.hour = 0;
 schedule.minute = 1;
@@ -80,29 +90,16 @@ function updateAgenda(yesterday, today) {
   }, function (err, response) {
     // Check for errors
     if (err) {
-      console.log(">> Error updating played gigs: ", err);
-      rollbar.reportMessage("Error updating played gigs", {
-
-      });
+      rollbar.handleError(err);
       return;
     }
     
-    console.log(">> Succeeded in updating played gigs. Mongo's response: ", response);
+    rollbar.reportMessageWithPayloadData("Succeeded in updating played gigs", {
+      level: "info",
+      mongoResponse: response
+    });
   });
 }
-
-// For testing the agenda updating logic...
-// console.log("******** Preparing to update agenda...");
-// var timeOut = setTimeout(function () {
-  // console.log("******** Setup for updating agenda...");
-  // var today = moment().format("YYYY-MM-DD");
-  // var yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
-  // console.log("yesterday: " + yesterday, "today: " + today);
-  // updateAgenda(yesterday, today);
-  // Agenda.find({"date.raw": {$gte: new Date(yesterday), $lt: new Date(today)}, "played": false}, {}, function (err, res) {
-  //   console.log("* Agenda.find", err, res);
-  // });
-// }, 5000);
 
 // Expose app
 exports = module.exports = app;

@@ -6,6 +6,7 @@
 'use strict';
 var _ = require('lodash');
 var Setting = require('./settings.model');
+var rollbar = require("rollbar");
 
 // GET ALL THE SETTINGS!
 exports.index = function (req, res) {
@@ -16,14 +17,14 @@ exports.index = function (req, res) {
 
     return res.json(200, settings);
   }).catch(function (err) {
-    handleError(res, err);
+    handleError(err, res, req);
   });
 };
 
 // Get a single setting
 exports.get = function(req, res) {
   Setting.find({ name: req.params.setting }).exec().then(function (settings) {
-    if (!settings) { return res.send(404); }
+    if (!settings) { throw Error("No setting found"); }
     // Get the first setting from response
     var setting = settings[0];
     // Delete setting name from response, we don't need it because we already have the name
@@ -33,7 +34,7 @@ exports.get = function(req, res) {
     }
     return res.json(200, setting);
   }).catch(function (err) {
-    handleError(res, err);
+    handleError(err, res, req);
   });
 };
 
@@ -49,7 +50,7 @@ exports.add = function(req, res) {
   Setting.create(setting).then(function (setting) {
     return res.json(201, setting);
   }).catch(function (err) {
-    handleError(res, err);
+    handleError(err, res, req);
   });
 };
 
@@ -65,10 +66,15 @@ exports.update = function(req, res) {
   }).then(function (setting) {
     return res.json(201, setting);
   }).catch(function (err) {
-    handleError(res, err);
+    handleError(err, res, req);
   });
 };
 
-function handleError(res, err) {
+function handleError(err, res, req) {
+  rollbar.handleErrorWithPayloadData(err, {
+    level: "error",
+    response: res
+  }, req);
+  
   return res.send(500, err);
 }
