@@ -38,6 +38,16 @@ exports.get = function(req, res) {
   });
 };
 
+// Get Rollbar settings
+exports.getRollbarSettings = function (req, res) {
+  var rollbarSettings = {
+    token: process.env.ROLLBAR_CLIENT_TOKEN,
+    environment: process.env.NODE_ENV
+  };
+
+  return res.json(200, rollbarSettings);
+};
+
 // Add new setting in the DB.
 exports.add = function(req, res) {
   // Create new setting
