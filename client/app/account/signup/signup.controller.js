@@ -1,11 +1,19 @@
 'use strict';
 
 angular.module('kidCallowayApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location) {
+  .controller('SignupCtrl', function ($scope, Auth, $location, Rollbar) {
     $scope.user = {};
     $scope.errors = {};
 
-    $scope.register = function(form) {
+    $scope.register = function (form) {
+      // No signup possible, register error to Rollbar
+      Rollbar.error("Illegal signup attempted", $scope.user);
+
+      // Redirect to home
+      $location.path("/");
+    };
+
+    /*$scope.register = function(form) {
       $scope.submitted = true;
 
       if(form.$valid) {
@@ -29,6 +37,6 @@ angular.module('kidCallowayApp')
           });
         });
       }
-    };
+    };*/
 
   });
