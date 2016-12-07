@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Agenda = require('./agenda.model');
+var rollbar = require("rollbar");
 
 // Get list of agendas
 exports.index = function(req, res) {
