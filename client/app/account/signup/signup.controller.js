@@ -5,7 +5,7 @@ angular.module('kidCallowayApp')
     $scope.user = {};
     $scope.errors = {};
 
-    $scope.register = function (form) {
+    $scope.register = function () {
       // No signup possible, register error to Rollbar
       Rollbar.error("Illegal signup attempted", $scope.user);
 

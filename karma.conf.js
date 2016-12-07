@@ -21,6 +21,7 @@ module.exports = function (config) {
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'client/bower_components/angular-messages/angular-messages.js',
       'client/bower_components/lodash/dist/lodash.compat.js',
+      'client/bower_components/ng-rollbar/ng-rollbar.js',
       'node_modules/phantomjs-polyfill/bind-polyfill.js',
       'client/app/app.js',
       'client/app/**/*.js',

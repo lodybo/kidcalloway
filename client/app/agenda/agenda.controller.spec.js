@@ -26,6 +26,9 @@ describe('Controller: AgendaCtrl', function () {
     httpBackend = $httpBackend;
     timeout = $timeout;
     AgendaService = _AgendaService_;
+
+    httpBackend.expect("GET", "/api/settings/rollbarsettings").respond (200, {});
+    httpBackend.flush();
     
     AgendaCtrl = $controller('AgendaCtrl', {
       $scope: scope
@@ -271,14 +274,6 @@ describe('Controller: AgendaCtrl', function () {
                 // Set spy on $scope.reset()
                 spyOn(AgendaService, "editGig").and.callThrough();
                 
-                var gigDate = new Date(scope.formData.date);
-                var uriDa = encodeUriQuery(gigDate.toISOString());
-                var uriT = encodeUriQuery(scope.formData.time);
-                var uriV = encodeUriQuery(scope.formData.venue);
-                var uriA = encodeUriQuery(scope.formData.address);
-                var urifb = encodeUriQuery(scope.formData.fbEvent);
-                var urit = encodeUriQuery(scope.formData.ticket);
-                var uriDe = encodeUriQuery(scope.formData.details);
                 httpBackend.expect("POST", "/api/agenda/id/" + scope.formData.id, {
                     date: scope.formData.date,
                     time: scope.formData.time,

@@ -6,10 +6,14 @@ describe('Directive: loader', function () {
   beforeEach(module('kidCallowayApp'));
   beforeEach(module('app/_directives/loader/loader.html'));
 
-  var element, scope;
+  var element, scope, httpBackend;
 
-  beforeEach(inject(function ($rootScope) {
+  beforeEach(inject(function ($rootScope, $httpBackend) {
     scope = $rootScope.$new();
+    httpBackend = $httpBackend;
+
+    httpBackend.expect("GET", "/api/settings/rollbarsettings").respond (200, {});
+    httpBackend.flush();
   }));
 
   it('should make hidden element visible', inject(function ($compile) {

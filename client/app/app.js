@@ -72,7 +72,7 @@ angular.module('kidCallowayApp', [
   .config(function (RollbarProvider) {
     rollbarProvider = RollbarProvider;
   })
-  .run(function (RollbarSettings, Rollbar) {
+  .run(function (RollbarSettings) {
     RollbarSettings.then(function (rollbarSettings) {
       rollbarProvider.init({
         accessToken: rollbarSettings.data.token,
