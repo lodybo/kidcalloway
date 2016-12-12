@@ -1,6 +1,6 @@
 'use strict';
 
-fdescribe('Controller: SiteSettingsCtrl', function () {
+describe('Controller: SiteSettingsCtrl', function () {
 
   // load the controller's module
   beforeEach(module('kidCallowayApp'));
@@ -31,6 +31,11 @@ fdescribe('Controller: SiteSettingsCtrl', function () {
       $scope: scope
     });
   }));
+    
+  afterEach(function() {
+     httpBackend.verifyNoOutstandingExpectation();
+     httpBackend.verifyNoOutstandingRequest();
+   });
 
   it('should retreive the settings', function () {
     httpBackend.expect("GET", "/api/settings").respond(200, settings);
