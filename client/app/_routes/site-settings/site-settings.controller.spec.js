@@ -50,4 +50,16 @@ fdescribe('Controller: SiteSettingsCtrl', function () {
     expect(scope.errors.show).toBe(true);
     expect(scope.errors.message).toBe("Er is iets fout gegaan met het ophalen van de settings.");
   });
+    
+  it("should update settings", function() {
+      httpBackend.expect("GET", "/api/settings").respond(200, settings);
+      expect(scope.settingsForm.another).toBe(settings.another);
+      
+      scope.settingsForm.another = "test-setting";
+      
+      httpBackend.expect("PUT", "/api/settings/name/another/value/test-setting").respond(200);
+      scope.submitSettings("another");
+
+      httpBackend.flush();
+  });
 });
