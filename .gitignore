@@ -7,11 +7,10 @@ client/bower_components
 dist
 /server/config/local.env.js
 .idea/
-<<<<<<< HEAD
 build/
 docs/sassdoc
 docs/jsdoc
 test/
 =======
 typings/
->>>>>>> mean
+npm-debug.log
