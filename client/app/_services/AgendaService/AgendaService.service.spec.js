@@ -77,7 +77,37 @@ fdescribe('Service: AgendaService', function () {
   });
 
   it("should add a gig", function () {
-    httpBackend.expect("POST", "/api/agenda/")
-  });
+    var newGig = {
+      id: 0,
+      date: new Date(),
+      time: "15:00",
+      venue: "Uitbater Willems",
+      address: "Veenhof 2203, 6423 AB Wijchen",
+      fbEvent: null,
+      ticket: null,
+      details: null
+    };
 
+    httpBackend.expect("POST", "/api/agenda/date/" + encodeURI(newGig.date.toISOString()) +
+      "/time/" + encodeURI(newGig.time) +
+      "/venueName/" + encodeURI(newGig.venue) +
+      "/venueAddress/" + encodeURI(newGig.address) +
+      "/fbEvent/" + encodeURI(newGig.fbEvent) +
+      "/ticketLink/" + encodeURI(newGig.ticket) +
+      "/details/" + encodeURI(newGig.details)).respond(201, newGig);
+
+    var promise = AgendaService.addGig(newGig);
+    httpBackend.flush();
+
+    promise.then(function (gig) {
+      for (var i = 0; i < Object.keys(response[0]).length; i++) {
+        var prop = Object.keys(response)[i];
+        if (response[0].hasOwnProperty(prop)) {
+          expect(item[prop]).toBe(response[0][prop]);
+        }
+      }
+    }).catch(function (error) {
+      throw new Error(error);
+    });
+  });
 });
