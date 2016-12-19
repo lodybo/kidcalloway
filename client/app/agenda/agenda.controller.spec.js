@@ -21,17 +21,21 @@ describe('Testing the Agenda controller', function () {
     }
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $httpBackend, $timeout, _AgendaService_) {
+  beforeEach(inject(function ($controller, $rootScope, $httpBackend, $timeout, _AgendaService_, $window) {
     scope = $rootScope.$new();
     httpBackend = $httpBackend;
     timeout = $timeout;
-    AgendaService = _AgendaService_;
+    AgendaService = _AgendaService_;  
 
-    httpBackend.expect("GET", "/api/settings/rollbarsettings").respond (200, {});
+    httpBackend.expect("GET", "/api/settings/rollbarsettings").respond(200, {
+        token: "",
+        environment: "test"
+    });
     httpBackend.flush();
     
     AgendaCtrl = $controller('AgendaCtrl', {
-      $scope: scope
+        $scope: scope,
+        $window: window  
     });
   }));
   
