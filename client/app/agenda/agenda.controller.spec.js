@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: AgendaCtrl', function () {
+describe('Testing the Agenda controller', function () {
 
   // load the controller's module
   beforeEach(module('kidCallowayApp'));
