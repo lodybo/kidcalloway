@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: MediaCtrl', function () {
+describe('Testing the Media controller', function () {
 
   // load the controller's module
   beforeEach(module('kidCallowayApp'));
@@ -15,7 +15,7 @@ describe('Controller: MediaCtrl', function () {
     });
   }));
 
-  it('should ...', function () {
+  xit('should ...', function () {
     expect(1).toEqual(1);
   });
 });
