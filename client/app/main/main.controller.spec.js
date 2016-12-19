@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Testing the Main controller', function () {
 
   // load the controller's module
   beforeEach(module('kidCallowayApp'));
