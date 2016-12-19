@@ -1,6 +1,6 @@
 'use strict';
 
-fdescribe('Service: AgendaService', function () {
+describe('Service: AgendaService', function () {
 
   // load the service's module
   beforeEach(module('kidCallowayApp'));
