@@ -1,6 +1,6 @@
 "use strict";
 
-fdescribe("Testing the Admin controller", function () {
+describe("Testing the Admin controller", function () {
     beforeEach(module("kidCallowayApp"));
 
     var AdminCtrl, scope, UserService;
