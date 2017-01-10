@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('kidCallowayApp')
-  .controller('MediaCtrl', function ($scope) {
+  .controller('MediaCtrl', function () {
     
   });
