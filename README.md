@@ -29,4 +29,7 @@ grunt run-karma-with:Chrome # Runs Karma with Chrome
 grunt run-karma-with:Chrome,Firefox # Runs Karma in both Chrome and Firefox
 ````
 This is ideal for quickly testing in real browsers.
-> *Important to know*: the `grunt run-karma-with:` tsask will fail if no browser name is added. The `grunt karma:unit` task is meant for a quick unit test run with PhantomJS. This task is semantically named for a reason ;)
+
+The same thing can be done for debugging unit tests in (a) specific browser(s). Just subtitute `run-karma-with` with `debug-karma-with`
+
+> *Important to know*: the `grunt run(/debug)-karma-with:` task will fail if no browser name is added. The `grunt karma:unit` task is meant for a quick unit test run with PhantomJS. This task is semantically named for a reason ;)

@@ -600,7 +600,7 @@ module.exports = function (grunt) {
     this.async();
   });
 
-  grunt.registerTask("run-karma-with", function (args) {
+  function runKarmaWithBrowsers (args) {
     if (!args) {
       grunt.fail.fatal("You need to specify PATH-browsers for this task", 3);
     }
@@ -608,6 +608,13 @@ module.exports = function (grunt) {
     var browsers = args.split(",");
     grunt.config("karma.unit.browsers", browsers);
     grunt.task.run(["karma:unit"]);
+  }
+
+  grunt.registerTask("run-karma-with", runKarmaWithBrowsers);
+
+  grunt.registerTask("debug-karma-with", function (args) {
+    grunt.config("karma.unit.singleRun", false);
+    runKarmaWithBrowsers(args);
   });
 
   grunt.registerTask('serve', function (target) {
