@@ -252,7 +252,7 @@ describe('Testing the Agenda controller', function () {
                 httpBackend.expectGET("/api/agenda").respond(200, response);
                 
                 scope.validate();
-                
+                scope.$apply();
                 httpBackend.flush();
                 
                 expect(scope.stopPrepareToSend).toHaveBeenCalledWith("success");
