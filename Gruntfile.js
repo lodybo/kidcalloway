@@ -607,6 +607,7 @@ module.exports = function (grunt) {
 
     var browsers = args.split(",");
     grunt.config("karma.unit.browsers", browsers);
+    console.log("Skipping initialization of RollbarJS due to TEST environment.");
     grunt.task.run(["env:test", "karma:unit"]);
   }
 

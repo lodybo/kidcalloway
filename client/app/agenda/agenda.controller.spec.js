@@ -238,7 +238,7 @@ describe('Testing the Agenda controller', function () {
           });
           
           describe("Sending correct input to the server", function () {
-              it("should end with a success message when nothing goes wrong at the server's end", function () {
+              it("should end with a success message when nothing goes wrong at the server's end", function (done) {
                 var gigDate = new Date(scope.formData.date);
                 
                 var uriDa = encodeUriQuery(gigDate.toISOString());
@@ -253,10 +253,15 @@ describe('Testing the Agenda controller', function () {
                 
                 scope.validate();
                 scope.$apply();
-                httpBackend.flush();
                 
-                expect(scope.stopPrepareToSend).toHaveBeenCalledWith("success");
-                expect(scope.showToggles.success).toBe(true);
+                timeout(function () {
+                    httpBackend.flush();
+                
+                    expect(scope.stopPrepareToSend).toHaveBeenCalledWith("success");
+                    expect(scope.showToggles.success).toBe(true);
+                    done();
+                }, 0);
+                timeout.flush();  
               });
           });
           
