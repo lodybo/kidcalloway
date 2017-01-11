@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: BioCtrl', function () {
+describe('Testing the Bio controller', function () {
 
   // load the controller's module
   beforeEach(module('kidCallowayApp'));
@@ -15,7 +15,7 @@ describe('Controller: BioCtrl', function () {
     });
   }));
 
-  it('should ...', function () {
+  xit('should ...', function () {
     expect(1).toEqual(1);
   });
 });

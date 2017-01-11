@@ -2,13 +2,14 @@
 
 var _ = require('lodash');
 var Agenda = require('./agenda.model');
+var rollbar = require("rollbar");
 
 // Get list of agendas
 exports.index = function(req, res) {
   Agenda.find({}).exec().then(function (agendas) {
     return res.json(200, agendas);
   }).catch(function (err) {
-    handleError(res, err);
+    handleError(err, res, req);
   });
 };
 
@@ -18,7 +19,7 @@ exports.show = function(req, res) {
     if(!agenda) { return res.send(404); }
     return res.json(agenda);
   }).catch(function (err) {
-    handleError(res, err);
+    handleError(err, res, req);
   });
 };
 
@@ -34,7 +35,7 @@ exports.create = function(req, res) {
   Agenda.create(req.params).then(function (agenda) {
     return res.json(201, agenda);
   }).catch(function (err) {
-    handleError(res, err);
+    handleError(err, res, req);
   });
 };
 
@@ -53,7 +54,7 @@ exports.update = function(req, res) {
   }).then(function (item) {
     return res.json(201, item);
   }).catch(function (err) {
-    handleError(res, err);
+    handleError(err, res, req);
   });
 };
 
@@ -65,7 +66,7 @@ exports.destroy = function (req, res) {
   }).then(function (item) {
     return res.send(204);
   }).catch(function (err) {
-    handleError(res, err);
+    handleError(err, res, req);
   });
 };
 
@@ -83,7 +84,7 @@ exports.cancel = function(req, res) {
   }).then(function (updatedItem) {
     return res.json(200, updatedItem);
   }).catch(function (err) {
-    handleError(res, err);
+    handleError(err, res, req);
   });
 };
 
@@ -110,6 +111,11 @@ function prepForDB(item) {
   return item;
 }
 
-function handleError(res, err) {
+function handleError(err, res, req) {
+  rollbar.handleErrorWithPayloadData(err, {
+    level: "error",
+    response: res
+  }, req);
+  
   return res.send(500, err);
 }

@@ -15,7 +15,14 @@
                 "--nolazy"
             ],
             "env": {
-                "NODE_ENV": "development"
+                "NODE_ENV": "development",
+                "MLAB_USER": "db_admin",
+                "MLAB_PASSWORD": "KC_Adm1n",
+                "MLAB_DATABASE": "kidcalloway-development",
+                "ROLLBAR_SERVER_TOKEN": "fe022319eb0048178b18ad1c3b132b5a",
+                "ROLLBAR_CLIENT_TOKEN": "913a580ef371404c89b853df64a2115a",
+                "ROLLBAR_HOST": "http://localhost:9002/",
+                "ROLLBAR_ROOT": "/server/"
             },
             "console": "internalConsole",
             "sourceMaps": false,

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kidCallowayApp')
-  .controller('SiteSettingsCtrl', function ($scope, SettingsService) {
+  .controller('SiteSettingsCtrl', function ($scope, SettingsService, Rollbar) {
     // Models
     $scope.settingsForm = {};
     $scope.errors = {
@@ -22,7 +22,7 @@ angular.module('kidCallowayApp')
       $scope.errors.message = "Er is iets fout gegaan met het ophalen van de settings.";
 
       // Output server error to console
-      console.error("Fout bij het ophalen van de settings:", error);
+      Rollbar.error("Error while retreiving settings from API", error);
     });
 
     // Submit the settings from the form

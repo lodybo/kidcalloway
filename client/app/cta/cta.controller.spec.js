@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: CtaCtrl', function () {
+describe('Testing the Cta controller', function () {
 
   // load the controller's module
   beforeEach(module('kidCallowayApp'));
@@ -15,7 +15,7 @@ describe('Controller: CtaCtrl', function () {
     });
   }));
 
-  it('should ...', function () {
+  xit('should ...', function () {
     expect(1).toEqual(1);
   });
 });

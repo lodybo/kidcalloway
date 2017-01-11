@@ -1,11 +1,11 @@
 'use strict';
 
-describe('Controller: AgendaCtrl', function () {
+describe('Testing the Agenda controller', function () {
 
   // load the controller's module
   beforeEach(module('kidCallowayApp'));
 
-  var AgendaCtrl, scope, httpBackend, timeout, AgendaService;
+  var AgendaCtrl, scope, httpBackend, timeout, AgendaService, window;
   
   var response = [{"_id":"57029107e9b358540d524ab8","venueName":"Kaffee Lambiek","venueAddress":"Wilhelminapark 66, 5041 ED Tilburg, Netherlands","details":"Kid Calloway speelt samen met Endfield bij Kaffee Lambiek!","fbEvent":"https://www.facebook.com/events/1666492276937175/","ticketLink":"","date":"2016-04-04T16:06:31.000Z","time":"20:00","played":false,"cancelled":false,"__v":0},{"_id":"57029107e9b358540d524ab9","venueName":"Kingsday at the <a href='http://www.bluecollarhotel.nl/'>Blue Collar Hotel</a>","venueAddress":"Klokgebouw 10 Strijp S Eindhoven","details":"Kom met Kid Calloway Koningsdag 2016 vieren in de parkeergarage tegenover het Blue Collar Hotel!","fbEvent":"https://www.facebook.com/events/443752132491052/","ticketLink":"","date":"2016-04-04T16:06:31.000Z","time":"Tussen 14:00 en 16:00","played":false,"cancelled":false,"__v":0},{"_id":"57029107e9b358540d524aba","venueName":"Velvet Music IN STORE","venueAddress":"Torenallee 60-02 unit 8, 5617 BD Eindhoven","details":"28 maart viert Velvet Music Pasen in haar splinternieuwe zaak in de Urban Shopper op Strijp-S en Kid Calloway is erbij, met wel een heel speciaal optreden!","fbEvent":"https://www.facebook.com/events/1740638226152484/","ticketLink":"","date":"2016-04-04T16:06:31.000Z","time":"15:00","played":true,"cancelled":false,"__v":0},{"_id":"57029107e9b358540d524abb","venueName":"Stage Music Cafe","venueAddress":"Stratumseind 25, 5611 EN Eindhoven","details":"Kid Calloway doet mee aan de 3e Rocktocht Eindhoven 2016","fbEvent":"https://www.facebook.com/events/922352567860696/","ticketLink":"","date":"2016-04-04T16:06:31.000Z","time":"16:30","played":true,"cancelled":false,"__v":0},{"_id":"57029107e9b358540d524abc","venueName":"Cafe 't Spektakel","venueAddress":"Prins Bernhardstraat 44, 5721 GC Asten","details":"Kid Calloway viert het weekend in Cafe 't Spektakel","fbEvent":"https://www.facebook.com/events/1678462842424757/","ticketLink":"","date":"2016-04-04T16:06:31.000Z","time":"21:30","played":false,"cancelled":false,"__v":0}];
   
@@ -26,9 +26,16 @@ describe('Controller: AgendaCtrl', function () {
     httpBackend = $httpBackend;
     timeout = $timeout;
     AgendaService = _AgendaService_;
+
+    httpBackend.expect("GET", "/api/settings/rollbarsettings").respond(200, {
+        token: "",
+        environment: "test"
+    });
+    httpBackend.flush();
     
     AgendaCtrl = $controller('AgendaCtrl', {
-      $scope: scope
+        $scope: scope,
+        $window: window 
     });
   }));
   
@@ -44,17 +51,14 @@ describe('Controller: AgendaCtrl', function () {
     });
     
     
-    it("should get a list from the service with all the gigs", function (done) {
+    it("should get a list from the service with all the gigs", function () {
         httpBackend.expectGET("/api/agenda").respond(200, response);
         
         expect(scope.gigs.length).toBe(0);
         
         httpBackend.flush();
         
-        timeout(function () {
-            expect(scope.gigs.length).toBe(response.length);
-            done();
-        }, 0);
+        expect(scope.gigs.length).toBe(response.length);
     });
     
     it("should fetch the date from the response for orderBy functionality", function () {
@@ -69,7 +73,7 @@ describe('Controller: AgendaCtrl', function () {
         };
         
         var expectation = scope.sortByDate(dateObj);
-        expect(expectation).toEqual(date);
+        expect(expectation.toString()).toEqual(date.toString());
     });
   });
   
@@ -207,8 +211,8 @@ describe('Controller: AgendaCtrl', function () {
       
       describe("Running the validation function", function () {
           beforeEach(function () {
-              spyOn(scope, "prepareToSend");
-              spyOn(scope, "stopPrepareToSend");
+              spyOn(scope, "prepareToSend").and.callThrough();
+              spyOn(scope, "stopPrepareToSend").and.callThrough();
           });
           
           it("should end with an error when a required field has not been filled in", function () {
@@ -233,8 +237,8 @@ describe('Controller: AgendaCtrl', function () {
               expect(scope.errors.wrongFields[0]).toEqual("venue");
           });
           
-          xdescribe("Sending correct input to the server", function () {
-              it("should end with a success message when nothing goes wrong at the server's end", function () {
+          describe("Sending correct input to the server", function () {
+              xit("should end with a success message when nothing goes wrong at the server's end", function (done) {
                 var gigDate = new Date(scope.formData.date);
                 
                 var uriDa = encodeUriQuery(gigDate.toISOString());
@@ -247,17 +251,24 @@ describe('Controller: AgendaCtrl', function () {
                 httpBackend.expectPOST("/api/agenda/date/" + uriDa + "/time/" + uriT + "/venueName/" + uriV + "/venueAddress/" + uriA + "/fbEvent/" + urifb + "/ticketLink/" + urit + "/details/" + uriDe).respond(200, "success");
                 httpBackend.expectGET("/api/agenda").respond(200, response);
                 
-                scope.validate();
-                
-                httpBackend.flush();
+                spyOn(AgendaService, "addGig").and.callThrough();
 
-                expect(scope.stopPrepareToSend).toHaveBeenCalledWith("success");
-                expect(scope.showToggles.success).toBe(true);
+                scope.validate();
+                scope.$apply();
+                
+                timeout(function () {
+                    // httpBackend.flush();
+                    //expect(AgendaService.addGig).toHaveBeenCalled();
+                    expect(scope.stopPrepareToSend).toHaveBeenCalledWith("success");
+                    expect(scope.showToggles.success).toBe(true);
+                    done();
+                }, 0);
+                timeout.flush();  
               });
           });
           
-          xdescribe("Validate using the edit state", function () {
-              it("should validate and call the edit function if an id has been set", function () {
+          describe("Validate using the edit state", function () {
+              xit("should validate and call the edit function if an id has been set", function () {
                 // Mock data
                 scope.formState.state = "edit";
                 scope.formData = {
@@ -272,33 +283,23 @@ describe('Controller: AgendaCtrl', function () {
                 };
                 
                 // Set spy on $scope.reset()
-                spyOn(AgendaService, "editGig");
+                spyOn(AgendaService, "editGig").and.callThrough();
                 
-                var gigDate = new Date(scope.formData.date);
-                var uriDa = encodeUriQuery(gigDate.toISOString());
-                var uriT = encodeUriQuery(scope.formData.time);
-                var uriV = encodeUriQuery(scope.formData.venue);
-                var uriA = encodeUriQuery(scope.formData.address);
-                var urifb = encodeUriQuery(scope.formData.fbEvent);
-                var urit = encodeUriQuery(scope.formData.ticket);
-                var uriDe = encodeUriQuery(scope.formData.details);
-                httpBackend.expectPOST("/api/agenda/date/" + uriDa + "/time/" + uriT + "/venueName/" + uriV + "/venueAddress/" + uriA + "/fbEvent/" + urifb + "/ticketLink/" + urit + "/details/" + uriDe).respond(201, "success");
-                httpBackend.expect("GET", "/api/agenda/id/" + scope.formData.id).respond(200, scope.formData);
-                // httpBackend.expect("POST", "/api/agenda/id/" + scope.formData.id, {
-                //     date: scope.formData.date,
-                //     time: scope.formData.time,
-                //     venue: scope.formData.venue,
-                //     address: scope.formData.address,
-                //     fbEvent: scope.formData.fbEvent,
-                //     ticket: scope.formData.ticket,
-                //     details: scope.formData.details
-                // }).respond(201, scope.formData);
-                //httpBackend.expectGET("/api/agenda").respond(200, response);
+                httpBackend.expect("POST", "/api/agenda/id/" + scope.formData.id, {
+                    date: scope.formData.date,
+                    time: scope.formData.time,
+                    venue: scope.formData.venue,
+                    address: scope.formData.address,
+                    fbEvent: scope.formData.fbEvent,
+                    ticket: scope.formData.ticket,
+                    details: scope.formData.details
+                }).respond(201, scope.formData);
+                httpBackend.expectGET("/api/agenda").respond(200, response);
                 
                 scope.validate();
                 httpBackend.flush();
 
-                //expect(AgendaService.editGig).toHaveBeenCalled();
+                expect(AgendaService.editGig).toHaveBeenCalled();
 
                 timeout(function () {
                     httpBackend.flush();

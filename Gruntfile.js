@@ -600,6 +600,24 @@ module.exports = function (grunt) {
     this.async();
   });
 
+  function runKarmaWithBrowsers (args) {
+    if (!args) {
+      grunt.fail.fatal("You need to specify PATH-browsers for this task", 3);
+    }
+
+    var browsers = args.split(",");
+    grunt.config("karma.unit.browsers", browsers);
+    console.log("Skipping initialization of RollbarJS due to TEST environment.");
+    grunt.task.run(["env:test", "karma:unit"]);
+  }
+
+  grunt.registerTask("run-karma-with", runKarmaWithBrowsers);
+
+  grunt.registerTask("debug-karma-with", function (args) {
+    grunt.config("karma.unit.singleRun", false);
+    runKarmaWithBrowsers(args);
+  });
+
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'express-keepalive']);

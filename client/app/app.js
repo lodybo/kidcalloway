@@ -1,4 +1,5 @@
 'use strict';
+var rollbarProvider = null;
 
 angular.module('kidCallowayApp', [
   'ngCookies',
@@ -6,7 +7,8 @@ angular.module('kidCallowayApp', [
   'ngSanitize',
   'ngRoute',
   'ngMessages',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'tandibar/ng-rollbar'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
@@ -44,6 +46,10 @@ angular.module('kidCallowayApp', [
     };
   })
 
+  .factory("RollbarSettings", function ($http) {
+    return $http.get("/api/settings/rollbarsettings");
+  })
+
   .run(function ($rootScope, $location, Auth) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$routeChangeStart', function (event, next) {
@@ -61,4 +67,26 @@ angular.module('kidCallowayApp', [
       'self',
       'https://www.youtube.com/**'
     ]);
+  })
+  
+  .config(function (RollbarProvider) {
+    rollbarProvider = RollbarProvider;
+  })
+  .run(function (RollbarSettings) {
+    RollbarSettings.then(function (rollbarSettings) {
+      if (rollbarSettings.data.environment === "test") {
+        return;
+      }
+
+      rollbarProvider.init({
+        accessToken: rollbarSettings.data.token,
+        captureUncaught: true,
+        captureUnhandledRejections: true,
+        payload: {
+          environment: rollbarSettings.data.environment
+        }
+      });
+
+      rollbarProvider = null;
+    });
   });

@@ -18,7 +18,7 @@ describe('Testing the Settings API', function (done) {
         });
     });
 
-    it('should return only one setting if a name is passed: /api/setting/name/it', function (done) {
+    it('should return only one setting if a name is passed: /api/settings/name/it', function (done) {
       request(app)
         .post('/api/settings/name/it/value/works')
         .expect(201)
@@ -36,6 +36,23 @@ describe('Testing the Settings API', function (done) {
 
               done();
             });
+        });
+    });
+
+    it('should return Rollbar settings if /rollbarsettings endpoint is hit', function (done) {
+      request(app)
+        .get('/api/settings/rollbarsettings')
+        .expect(200)
+        .end(function (err, res) {
+          if (err) return done(err);
+
+          res.body.should.have.property("token");
+          res.body.token.should.equal(process.env.ROLLBAR_CLIENT_TOKEN);
+
+          res.body.should.have.property("environment");
+          res.body.environment.should.equal(process.env.NODE_ENV);
+
+          done();
         });
     });
   });

@@ -10,6 +10,21 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var express = require('express');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
+var rollbar = require('rollbar');
+
+// Set up Rollbar for NodeJS
+rollbar.init(process.env.ROLLBAR_TOKEN, {
+  environment: process.env.NODE_ENV,
+  root: process.env.ROOT,
+  reportLevel: "debug"
+});
+rollbar.handleUncaughtExceptionsAndRejections();
+
+// Disable Rollbar when on test
+if (process.env.NODE_ENV === "test") {
+  rollbar.enabled = false;
+  console.log("Rollbar disabled due to test environment");
+}
 
 // Set promise
 mongoose.Promise = global.Promise;
@@ -28,6 +43,13 @@ require('./routes')(app);
 
 // Start server
 server.listen(config.port, config.ip, function () {
+  rollbar.reportMessageWithPayloadData("Express server is listening", {
+    level: "info",
+    app: {
+      port: config.port,
+      environment: app.get('env')
+    }
+  });
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
 
@@ -36,7 +58,10 @@ var scheduler = require("node-schedule");
 var Agenda = require("./api/agenda/agenda.model");
 var moment = require("moment");
 
-console.log(">> Setting up scheduler..");
+rollbar.reportMessageWithPayloadData("Setting up scheduler", {
+  level: "info"
+});
+
 var schedule = new scheduler.RecurrenceRule();
 schedule.hour = 0;
 schedule.minute = 1;
@@ -50,8 +75,6 @@ var cron = scheduler.scheduleJob(schedule, function () {
   // For this, we're doing a "dirty"" string concatenation
   var todayMidnightString = today + "T00:00:00.000Z";
   var yesterdayMidnightString = yesterday + "T00:00:00.000Z";
-  
-  console.log(">> Running scheduler.. generated days: [yesterday: " + yesterdayMidnightString + ", today: " + todayMidnightString + "]");
   
   updateAgenda(yesterdayMidnightString, todayMidnightString);
 });
@@ -67,26 +90,16 @@ function updateAgenda(yesterday, today) {
   }, function (err, response) {
     // Check for errors
     if (err) {
-      console.log(">> Error updating played gigs: ", err);
+      rollbar.handleError(err);
       return;
     }
     
-    console.log(">> Succeeded in updating played gigs. Mongo's response: ", response);
+    rollbar.reportMessageWithPayloadData("Succeeded in updating played gigs", {
+      level: "info",
+      mongoResponse: response
+    });
   });
 }
-
-// For testing the agenda updating logic...
-// console.log("******** Preparing to update agenda...");
-// var timeOut = setTimeout(function () {
-  // console.log("******** Setup for updating agenda...");
-  // var today = moment().format("YYYY-MM-DD");
-  // var yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
-  // console.log("yesterday: " + yesterday, "today: " + today);
-  // updateAgenda(yesterday, today);
-  // Agenda.find({"date.raw": {$gte: new Date(yesterday), $lt: new Date(today)}, "played": false}, {}, function (err, res) {
-  //   console.log("* Agenda.find", err, res);
-  // });
-// }, 5000);
 
 // Expose app
 exports = module.exports = app;
