@@ -251,12 +251,14 @@ describe('Testing the Agenda controller', function () {
                 httpBackend.expectPOST("/api/agenda/date/" + uriDa + "/time/" + uriT + "/venueName/" + uriV + "/venueAddress/" + uriA + "/fbEvent/" + urifb + "/ticketLink/" + urit + "/details/" + uriDe).respond(200, "success");
                 httpBackend.expectGET("/api/agenda").respond(200, response);
                 
+                spyOn(AgendaService, "addGig").and.callThrough();
+
                 scope.validate();
                 scope.$apply();
                 
                 timeout(function () {
                     httpBackend.flush();
-                
+                    expect(AgendaService.addGig).toHaveBeenCalled();
                     expect(scope.stopPrepareToSend).toHaveBeenCalledWith("success");
                     expect(scope.showToggles.success).toBe(true);
                     done();
