@@ -74,6 +74,11 @@ angular.module('kidCallowayApp', [
   })
   .run(function (RollbarSettings) {
     RollbarSettings.then(function (rollbarSettings) {
+      if (rollbarSettings.data.environment === "test") {
+        console.log("Skipping initialization of RollbarJS due to TEST environment.");
+        return;
+      }
+
       rollbarProvider.init({
         accessToken: rollbarSettings.data.token,
         captureUncaught: true,

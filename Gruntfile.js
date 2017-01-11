@@ -607,7 +607,7 @@ module.exports = function (grunt) {
 
     var browsers = args.split(",");
     grunt.config("karma.unit.browsers", browsers);
-    grunt.task.run(["karma:unit"]);
+    grunt.task.run(["env:test", "karma:unit"]);
   }
 
   grunt.registerTask("run-karma-with", runKarmaWithBrowsers);
