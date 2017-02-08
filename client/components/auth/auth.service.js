@@ -23,18 +23,18 @@ angular.module('kidCallowayApp')
       login: function(user, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
-
+        
         $http.post('/auth/local', {
           email: user.email,
           password: user.password
         }).
-        success(function(data) {
-          $cookieStore.put('token', data.token);
+        then(function (res) {
+          $cookieStore.put('token', res.data.token);
           currentUser = User.get();
-          deferred.resolve(data);
+          deferred.resolve(res);
           return cb();
         }).
-        error(function(err) {
+        catch(function(err) {
           this.logout();
           deferred.reject(err);
           return cb(err);
