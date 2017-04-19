@@ -20,7 +20,7 @@ Everything is en route to be (unit) tested in this project.
 You can run the server unit tests by running `grunt test:server`, and run a quick client unit test with `grunt test:client`.
 
 ### Client unit tests
-There are two ways for the unit tests to be run quickly, the method mentioned above (which also builds the code), and directly calling `grunt karma:unit`. Doing this will unit test you code in PhantomJS, which is quick and excellent for development.
+There are two ways for the unit tests to be run quickly, the method mentioned above (which also builds the code), and directly calling `grunt karma:unit`. Doing this will unit test you code in PhantomJS, which is quick and excellent for development. If you'd like to perform TDD, `grunt karma:tdd` will run karma with `autoWatch: true`.
 
 If you want to unit test the client side code in a real browsers, there is a specific grunt task for that: `grunt run-karma-with:<browser name>`. Replace `<browser name>` with a single name or a comma delimited name:
 
