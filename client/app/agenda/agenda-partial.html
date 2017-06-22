@@ -4,14 +4,23 @@
             <h1><i class="fa fa-music"></i>Live</h1>
         </div>
 
-        <div class="col-xs-12 errors text-center" ng-show=errors.serviceError>
+        <div class="col-xs-12 errors text-center" ng-show="errors.serviceError">
             Er is iets fout gegaan met het ophalen van de shows. Maar niet getreurd: <a href="https://www.facebook.com/kidcallowaymusic/events?_rdr" target="_blank">je kan ze hier vinden</a>!
         </div>
         
-        <div class="row" ng-hide=errors.serviceError>
+        <div class="row" ng-hide="errors.serviceError">
             <h3 class="col-xs-12">Aankomende shows</h3>
             <table class="table col-xs-12">
-                <tbody ng-repeat="gig in gigs | filter: {played: false} | orderBy: sortByDate : reverse" ng-class="{cancelled: gig.cancelled}">
+                <tbody ng-show="!getNumberOfPlayedGigs()">
+                    <tr>
+                        <td>
+                            <p>Er zijn momenteel geen optredens geplanned. Maar niet getreurd, ze komen er snel bij!</p>
+                            <p>Wil je meteen horen wanneer we ergens spelen? Volg ons dan op <a href="https://www.facebook.com/kidcallowaymusic/events?_rdr" target="_blank">Facebook</a>!</p>
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tbody ng-show="getNumberOfPlayedGigs()" ng-repeat="gig in gigs | filter: {played: false} | orderBy: sortByDate : reverse" ng-class="{cancelled: gig.cancelled}">
                     <tr>
                         <td class="date col-sm-2" ng-bind="gig.date.formatted"></td>
                         <td class="venue col-sm-3" >

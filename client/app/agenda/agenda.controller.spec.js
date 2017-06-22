@@ -75,6 +75,22 @@ describe('Testing the Agenda controller', function () {
         var expectation = scope.sortByDate(dateObj);
         expect(expectation.toString()).toEqual(date.toString());
     });
+
+    it('should return a number of the gigs that have not been played yet', function () {
+        httpBackend.expectGET("/api/agenda").respond(200, response);
+        httpBackend.flush();
+
+        var actualPlayedGigs = 0;
+        for (var i=0; i<scope.gigs.length; i++) {
+            if (!scope.gigs[i].played) {
+                actualPlayedGigs++;
+            }
+        }
+
+        var controllerFunctionPlayedGigs = scope.getNumberOfPlayedGigs();
+        
+        expect(controllerFunctionPlayedGigs).toEqual(actualPlayedGigs);
+    });
   });
   
   describe("Validating adding a new gig to the list", function () {

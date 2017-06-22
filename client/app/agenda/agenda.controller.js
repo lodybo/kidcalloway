@@ -55,6 +55,18 @@ angular.module('kidCallowayApp')
         
         return offTheJedi; // Haha!
     };
+
+    $scope.getNumberOfPlayedGigs = function () {
+        var result = 0;
+
+        for (var i=0; i<$scope.gigs.length; i++) {
+            if (!$scope.gigs[i].played) {
+                result++;
+            }
+        }
+
+        return result;
+    };
     
     // State of the editing form: new or edit.
     // Caption of the submit button adjusts to this state
