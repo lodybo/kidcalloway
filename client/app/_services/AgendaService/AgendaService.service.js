@@ -63,9 +63,11 @@ angular.module('kidCallowayApp')
         // First: get the existing gig from the server
         var endpoint = $resource(apiURL + "id/:id", {
             id: "@id"
+        }, {
+            'update': { method:'PUT' }
         });
 
-        return endpoint.save({
+        return endpoint.update({
             id: newGig.id
         }, {
             date: newGig.date,
