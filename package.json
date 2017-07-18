@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "connect-livereload": "^0.6.0",
-    "grunt": "^1.0.1",
+    "grunt": "^0.4.1",
     "grunt-angular-templates": "^1.1.0",
     "grunt-asset-injector": "^0.1.0",
     "grunt-autoprefixer": "^3.0.4",
@@ -78,6 +78,7 @@
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-requirejs": "^1.1.0",
     "karma-script-launcher": "^1.0.0",
+    "mocha": "^3.4.2",
     "ngrok": "^2.2.14",
     "open": "^0.0.5",
     "phantomjs-polyfill": "^0.0.2",
