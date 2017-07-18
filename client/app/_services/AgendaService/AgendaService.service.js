@@ -4,16 +4,6 @@ angular.module('kidCallowayApp')
   .service('AgendaService', function ($resource) {
     var apiURL = "/api/agenda/";
     
-    // *** Private methods
-    // Switch between get and getAll based on args
-    var __get = function (id) {
-        if (id) {
-            return _getOne(id);
-        }
-        
-        return _getAll();
-    };
-    
     // *** Public methods
     var _getAll = function() {
         // Get all records and return them
@@ -102,6 +92,16 @@ angular.module('kidCallowayApp')
         return endpoint.cancel({
             id: id
         }).$promise;
+    };
+
+    // *** Private methods
+    // Switch between get and getAll based on args
+    var __get = function (id) {
+        if (id) {
+            return _getOne(id);
+        }
+        
+        return _getAll();
     };
     
     // Return public functions
