@@ -23,7 +23,7 @@
     "node-schedule": "^1.2.3",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "rollbar": "^2.1.0",
+    "rollbar": "^0.6.3",
     "serve-favicon": "^2.4.3"
   },
   "devDependencies": {
