@@ -66,7 +66,13 @@ module.exports = function (config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ["PhantomJS"],
+    browsers: ["ChromeHeadless"],
+    customLaunchers: {
+      ChromeHeadless: {
+        base: 'Chrome',
+        flags: ['--headless', '--disable-translate', '--disable-extensions', '--disable-gpu', '--remote-debugging-port=9222', '--no-sandbox']
+      }
+    },
 
 
     // Continuous Integration mode
