@@ -20,12 +20,26 @@ module.exports = function(app) {
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);
+   
+   app.route('/*').get(function (r, e, n) { console.log('a'); n()});
 
   // All other routes should redirect to the index.html
   app.route('/*')
   //app.route('/')
     .get(function(req, res) {
-      // res.sendFile('../public/index.html', {root: __dirname});
-      res.sendFile(path.join(__dirname, '../public', 'index.html'));
+      var rootDir = process.env.NODE_ENV === 'production' ? '../public' : '../client';
+      res.sendFile(path.join(__dirname, rootDir, 'index.html'));
     });
+
+  // Redirect root domain to https://www on production
+  // if (process.env.NODE_ENV === 'production') {
+    app.route('*', function(req, res, next) {
+      console.log('In redirect', req.headers.host);
+      if (req.headers.host.slice(0, 3) != 'www') {
+        res.redirect('http://www.' + req.headers.host + req.url, 301);
+      } else {
+        next();
+      }
+    });
+  // }
 };
