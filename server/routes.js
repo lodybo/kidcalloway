@@ -5,6 +5,7 @@
 'use strict';
 
 var errors = require('./components/errors');
+var path = require('path');
 
 module.exports = function(app) {
 
@@ -24,6 +25,7 @@ module.exports = function(app) {
   app.route('/*')
   //app.route('/')
     .get(function(req, res) {
-      res.sendfile(app.get('appPath') + '/index.html');
+      // res.sendFile('../public/index.html', {root: __dirname});
+      res.sendFile(path.join(__dirname, '../public', 'index.html'));
     });
 };

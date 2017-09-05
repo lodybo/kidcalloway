@@ -15,7 +15,7 @@ exports.index = function (req, res) {
       return res.send(404);
     }
 
-    return res.json(200, settings);
+    return res.status(200).json(settings);
   }).catch(function (err) {
     handleError(err, res, req);
   });
@@ -32,7 +32,7 @@ exports.get = function(req, res) {
     if (setting && setting.name) {
       setting.name = undefined;
     }
-    return res.json(200, setting);
+    return res.status(200).json(setting);
   }).catch(function (err) {
     handleError(err, res, req);
   });
@@ -45,7 +45,7 @@ exports.getRollbarSettings = function (req, res) {
     environment: process.env.NODE_ENV
   };
 
-  return res.json(200, rollbarSettings);
+  return res.status(200).json(rollbarSettings);
 };
 
 // Add new setting in the DB.
@@ -58,7 +58,7 @@ exports.add = function(req, res) {
 
   // Save it!
   Setting.create(setting).then(function (setting) {
-    return res.json(201, setting);
+    return res.status(201).json(setting);
   }).catch(function (err) {
     handleError(err, res, req);
   });
@@ -74,7 +74,7 @@ exports.update = function(req, res) {
     setting.value = req.params.value;
     return setting.save();
   }).then(function (setting) {
-    return res.json(201, setting);
+    return res.status(201).json(setting);
   }).catch(function (err) {
     handleError(err, res, req);
   });

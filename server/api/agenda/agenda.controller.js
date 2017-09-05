@@ -7,7 +7,7 @@ var rollbar = require("rollbar");
 // Get list of agendas
 exports.index = function(req, res) {
   Agenda.find({}).exec().then(function (agendas) {
-    return res.json(200, agendas);
+    return res.status(200).json(agendas);
   }).catch(function (err) {
     handleError(err, res, req);
   });
@@ -33,7 +33,7 @@ exports.create = function(req, res) {
   req.params.cancelled = false;
 
   Agenda.create(req.params).then(function (agenda) {
-    return res.json(201, agenda);
+    return res.status(201).json(agenda);
   }).catch(function (err) {
     handleError(err, res, req);
   });
@@ -52,7 +52,7 @@ exports.update = function(req, res) {
     
     return updated.save();
   }).then(function (item) {
-    return res.json(201, item);
+    return res.status(201).json(item);
   }).catch(function (err) {
     handleError(err, res, req);
   });
@@ -82,7 +82,7 @@ exports.cancel = function(req, res) {
     var updated = _.merge(agendaItem, req.body);
     return updated.save();
   }).then(function (updatedItem) {
-    return res.json(200, updatedItem);
+    return res.status(200).json(updatedItem);
   }).catch(function (err) {
     handleError(err, res, req);
   });
