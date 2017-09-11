@@ -39,7 +39,7 @@ describe('Service: AgendaService', function () {
     }
   ];
 
-  beforeEach(inject(function (_AgendaService_, $httpBackend, $rootScope, $q, $timeout) {
+  beforeEach(inject(function (_AgendaService_, $httpBackend, $rootScope, $q, $timeout, $window) {
     httpBackend = $httpBackend;
     AgendaService = _AgendaService_;
     q = $q;
@@ -47,7 +47,7 @@ describe('Service: AgendaService', function () {
 
     httpBackend.expect("GET", "/api/settings/rollbarsettings").respond(200, {
       token: "1234567890",
-      environment: "dev"
+      environment: "test"
     });
     httpBackend.flush();
   }));
