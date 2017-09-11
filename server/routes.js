@@ -8,18 +8,6 @@ var errors = require('./components/errors');
 var path = require('path');
 
 module.exports = function(app) {
-  // Redirect root domain to https://www on production
-  // if (process.env.NODE_ENV === 'production') {
-    app.route('*', function(req, res, next) {
-      console.log('In redirect', req.headers.host);
-      if (req.headers.host.slice(0, 3) != 'www') {
-        res.redirect('http://www.' + req.headers.host + req.url, 301);
-      } else {
-        next();
-      }
-    });
-  // }
-  
   // Insert routes below
   app.use('/api/settings', require('./api/settings'));
   app.use('/api/agenda', require('./api/agenda'));
@@ -27,8 +15,6 @@ module.exports = function(app) {
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth'));
-
-  // app.route('').get(function (r, e, n) { console.log('a'); n()});
   
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
