@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+
         {
             "name": "Launch NodeJS",
             "type": "node",
@@ -28,6 +29,16 @@
             "console": "internalConsole",
             "sourceMaps": false,
             "outDir": null
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Karma",
+            "program": "${workspaceRoot}/node_modules/.bin/karma",
+            "args": [
+                "start",
+                "karma.conf.js"
+            ]
         },
         {
             "name": "Attach NodeJS",
