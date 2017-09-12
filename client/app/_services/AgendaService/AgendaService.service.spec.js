@@ -39,7 +39,7 @@ describe('Service: AgendaService', function () {
     }
   ];
 
-  beforeEach(inject(function (_AgendaService_, $httpBackend, $rootScope, $q, $timeout, $window) {
+  beforeEach(inject(function (_AgendaService_, $httpBackend, $rootScope, $q, $timeout) {
     httpBackend = $httpBackend;
     AgendaService = _AgendaService_;
     q = $q;
