@@ -25,8 +25,7 @@ bio {
 
     figure {
       display: inline-block;
-      margin: 0 auto 15px;  
-      // margin-right: -5px;
+      margin: 0 auto 15px;
       width: 220px;
     }
 
@@ -53,6 +52,18 @@ bio {
   @media (min-width: 550px) {
     .band {
       flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .band {
+      flex-direction: row;
+      flex-wrap: nowrap;
+    
+      figure {
+        width: auto;
+      }
     }
   }
 
