@@ -436,7 +436,8 @@ module.exports = function (grunt) {
       },
       tdd: {
         configFile: 'karma.conf.js',
-        autoWatch: true
+        autoWatch: true,
+        browsers: ['Chrome']
       }
     },
 
