@@ -30,7 +30,11 @@ if (process.env.NODE_ENV === "test") {
 mongoose.Promise = global.Promise;
 
 // Connect to database
-mongoose.connect(config.mongo.uri, config.mongo.options);
+mongoose.connect(config.mongo.uri, config.mongo.options).then((success) => {
+  console.log(`after connect, success`);
+}, (error) => {
+  console.log(`after connect, error: ${error}`);
+});
 
 // Populate DB with sample data
 if(config.seedDB) { require('./config/seed'); }
