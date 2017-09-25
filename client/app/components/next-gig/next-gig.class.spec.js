@@ -33,9 +33,11 @@ fdescribe('The Next Gig Class', function () {
     httpBackend.verifyNoOutstandingRequest();
   });
 
-  xit('should sent out a request for a gigs', function () {
-    httpBackend.expectGET("/api/agenda").respond(200);
+  it('should sent out a request for a gigs', function () {
+    httpBackend.expectGET("/api/agenda/next").respond(200, response);
     
     var ctrl = componentController('nextGig', null, {});
+
+    httpBackend.flush();
   });
 });
