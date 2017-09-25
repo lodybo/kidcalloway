@@ -20,6 +20,19 @@ describe("Testing the Agenda API", function () {
         });
     });
 
+    it('should get one agenda item', function (done) {
+      request(app)
+        .get('/api/agenda/next')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end(function (err, res) {
+          if (err) return done(err);
+
+          res.body.should.be.instanceof(Object);
+          done();
+        });
+    });
+
     it("should get a specific agenda item", function (done) {
       request(app)
         .post(agendaItem)
