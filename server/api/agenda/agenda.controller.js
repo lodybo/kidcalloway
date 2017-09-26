@@ -25,7 +25,7 @@ exports.show = function(req, res) {
 
 exports.next = function (req, res) {
   Agenda.findOne({}).exec().then(function(agenda) {
-    if (!agenda) { return res.sendStatus(404); }
+    if (!agenda) { return res.status(200).json({message: 'No next gig found'}); }
     return res.status(200).json(agenda);
   }).catch(function (err) {
     handleError(err, res, req);

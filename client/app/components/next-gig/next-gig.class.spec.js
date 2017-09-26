@@ -1,7 +1,7 @@
 fdescribe('The Next Gig Class', function () {
   var httpBackend, componentController;
 
-  var response = [{
+  var response = {
     "_id": "57029107e9b358540d524ab8",
     "venueName": "Kaffee Lambiek",
     "venueAddress": "Wilhelminapark 66, 5041 ED Tilburg, Netherlands",
@@ -13,7 +13,7 @@ fdescribe('The Next Gig Class', function () {
     "played": false,
     "cancelled": false,
     "__v": 0
-  }];
+  };
 
   beforeEach(module('kidCallowayApp'));
 
@@ -33,11 +33,23 @@ fdescribe('The Next Gig Class', function () {
     httpBackend.verifyNoOutstandingRequest();
   });
 
-  it('should sent out a request for a gigs', function () {
+  it('should sent out a request for a gigs and store the response', function () {
     httpBackend.expectGET("/api/agenda/next").respond(200, response);
     
     var ctrl = componentController('nextGig', null, {});
 
     httpBackend.flush();
+
+    expect(ctrl.gig).toEqual(response);
+  });
+
+  it('should sent out a request but store nothing if no next gig is present', function () {
+    httpBackend.expectGET("/api/agenda/next").respond(200, {message: 'No next gig found'});
+
+    var ctrl = componentController('nextGig', null, {});
+    
+    httpBackend.flush();
+
+    expect(ctrl.gig).toBeUndefined();
   });
 });

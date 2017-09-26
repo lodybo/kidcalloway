@@ -7,8 +7,12 @@ angular.module('kidCallowayApp')
     controller: ['$resource', function ($resource) {
       var ctrl = this;
 
-      $resource('/api/agenda/next').get().$promise.then(function (nextGig) {
-        ctrl.next = nextGig;
+      $resource('/api/agenda/next').get(function (nextGig) {
+        var result = nextGig.toJSON();
+
+        if (!result.message) {
+          ctrl.gig = result;
+        }
       });
     }]
   });
