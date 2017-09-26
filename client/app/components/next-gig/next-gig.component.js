@@ -4,15 +4,11 @@ angular.module('kidCallowayApp')
   .component('nextGig', {
     templateUrl: 'app/components/next-gig/next-gig.component.html',
     bindings: { },
-    controller: ['$resource', function ($resource) {
+    controller: ['AgendaService', function (AgendaService) {
       var ctrl = this;
 
-      $resource('/api/agenda/next').get(function (nextGig) {
-        var result = nextGig.toJSON();
-
-        if (!result.message) {
-          ctrl.gig = result;
-        }
+      AgendaService.next().then(function (gig) {
+        ctrl.gig = gig;
       });
     }]
   });

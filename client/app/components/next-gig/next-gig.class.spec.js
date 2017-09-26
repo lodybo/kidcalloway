@@ -1,7 +1,9 @@
-fdescribe('The Next Gig Class', function () {
+'use strict';
+
+describe('The Next Gig Class', function () {
   var httpBackend, componentController;
 
-  var response = {
+  var successResponse = {
     "_id": "57029107e9b358540d524ab8",
     "venueName": "Kaffee Lambiek",
     "venueAddress": "Wilhelminapark 66, 5041 ED Tilburg, Netherlands",
@@ -13,6 +15,10 @@ fdescribe('The Next Gig Class', function () {
     "played": false,
     "cancelled": false,
     "__v": 0
+  };
+
+  var errorResponse = {
+    message: 'No next gig found'
   };
 
   beforeEach(module('kidCallowayApp'));
@@ -34,22 +40,32 @@ fdescribe('The Next Gig Class', function () {
   });
 
   it('should sent out a request for a gigs and store the response', function () {
-    httpBackend.expectGET("/api/agenda/next").respond(200, response);
-    
-    var ctrl = componentController('nextGig', null, {});
+    var mockAgendaService = new MockAgendaService(successResponse);
 
-    httpBackend.flush();
-
-    expect(ctrl.gig).toEqual(response);
+    var ctrl = componentController('nextGig', {AgendaService: mockAgendaService}, {});
+    expect(ctrl.gig).toEqual(successResponse);
   });
 
   it('should sent out a request but store nothing if no next gig is present', function () {
-    httpBackend.expectGET("/api/agenda/next").respond(200, {message: 'No next gig found'});
+    var mockAgendaService = new MockAgendaService();
 
-    var ctrl = componentController('nextGig', null, {});
-    
-    httpBackend.flush();
-
+    var ctrl = componentController('nextGig', {AgendaService: mockAgendaService}, {});
     expect(ctrl.gig).toBeUndefined();
   });
+
+  function MockAgendaService(response) {
+    this.response = response;
+  
+    var mockNext = function () {
+      return {
+        then: function (callback) {
+          callback(this.response);
+        }.bind(this)
+      };
+    }.bind(this);
+  
+    return {
+      next: mockNext
+    };
+  }
 });
