@@ -10,7 +10,7 @@ discography {
     height: 100%;
   }
 
-  .track-listing {
+  .track-list {
    padding: 0;
     list-style-position: inside;
 
@@ -30,5 +30,19 @@ discography {
     color: #919191;
     font-size: 0.8em;
     float: right;
+  }
+
+  .shops {
+    margin-top: 25px;
+    padding: 0;
+    list-style: none;
+    
+    display: flex;
+    justify-content: space-around;
+
+    img {
+      width: 50px;
+      height: auto;
+    }
   }
 }

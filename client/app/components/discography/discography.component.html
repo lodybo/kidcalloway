@@ -2,11 +2,29 @@
   <img ng-src="/{{$ctrl.album.coverImage}}" />
 </div>
 
-<div class="tracklist">
-  <ol class="track-listing">
-    <li ng-repeat="track in $ctrl.album.trackList">
-      <span class="track-name">{{track.name}}</span>
-      <em class="track-length">{{track.length}}</em>
-    </li>
-  </ol>
-</div>
+<ol class="track-list">
+  <li ng-repeat="track in $ctrl.album.trackList">
+    <span class="track-name">{{track.name}}</span>
+    <em class="track-length">{{track.length}}</em>
+  </li>
+</ol>
+
+<ul class="shops">
+  <li ng-repeat="shop in $ctrl.album.shops">
+    <a ng-href="{{shop.url}}" target="_blank">
+      <div ng-switch="shop.name">
+        <div ng-switch-when="Spotify">
+          <img src="/assets/images/spotify.png" />
+        </div>
+
+        <div ng-switch-when="Amazon">
+          <img src="/assets/images/amazon.png" />
+        </div>
+
+        <div ng-switch-when="Apple Music">
+          <img src="/assets/images/applemusic.png" />
+        </div>
+      </div>
+    </a>
+  </li>
+</ul>
