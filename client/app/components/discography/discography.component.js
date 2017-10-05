@@ -3,12 +3,16 @@
 angular.module('kidCallowayApp')
   .component('discography', {
     templateUrl: 'app/components/discography/discography.component.html',
-    bindings: {},
+    bindings: {
+      albumName: '@'
+    },
     controller: function (DiscographyService) {
       var ctrl = this;
 
-      DiscographyService.get('II').then(function (album) {
-        ctrl.album = album;
-      });
+      this.$onInit = function () {
+        DiscographyService.get(this.albumName).then(function (album) {
+          ctrl.album = album;
+        });
+      };
     }
   });
