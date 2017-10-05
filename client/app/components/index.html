@@ -34,7 +34,11 @@
   <div class="component-wrapper" ng-app="kidCallowayApp">
     <h1>KC's Component Playground</h1>
     <div class="component">
-      <discography></discography>
+      <div class="container">
+        <div class="col-xs-12 col-md-6">
+          <discography></discography>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -52,6 +56,7 @@
   <script src="../../app/app.js"></script>
   <script src="../../components/auth/auth.service.js"></script>
   <script src="../../components/auth/user.service.js"></script>
+  <script src="../../app/_services/DiscographyService/DiscographyService.service.js"></script>
 
   <script src="../../app/components/discography/discography.component.js"></script>
 </body>

@@ -1,1 +1,12 @@
-<h1>Discography</h1>
+<div class="cover">
+  <img ng-src="/{{$ctrl.album.coverImage}}" />
+</div>
+
+<div class="tracklist">
+  <ol class="track-listing">
+    <li ng-repeat="track in $ctrl.album.trackList">
+      <span class="track-name">{{track.name}}</span>
+      <em class="track-length">{{track.length}}</em>
+    </li>
+  </ol>
+</div>
