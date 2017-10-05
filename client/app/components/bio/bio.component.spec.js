@@ -1,3 +1,5 @@
+'use strict';
+
 describe('The Bio Component', function() {
   var compile, scope;
 

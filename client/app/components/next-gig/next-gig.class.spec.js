@@ -17,9 +17,25 @@ describe('The Next Gig Class', function () {
     "__v": 0
   };
 
-  var errorResponse = {
-    message: 'No next gig found'
-  };
+  // var errorResponse = {
+  //   message: 'No next gig found'
+  // };
+
+  function MockAgendaService(response) {
+    this.response = response;
+  
+    var mockNext = function () {
+      return {
+        then: function (callback) {
+          callback(this.response);
+        }.bind(this)
+      };
+    }.bind(this);
+  
+    return {
+      next: mockNext
+    };
+  }
 
   beforeEach(module('kidCallowayApp'));
 
@@ -32,7 +48,7 @@ describe('The Next Gig Class', function () {
       environment: "test"
     });
     httpBackend.flush();
-  }))
+  }));
 
   afterEach(function () {
     httpBackend.verifyNoOutstandingExpectation();
@@ -52,20 +68,4 @@ describe('The Next Gig Class', function () {
     var ctrl = componentController('nextGig', {AgendaService: mockAgendaService}, {});
     expect(ctrl.gig).toBeUndefined();
   });
-
-  function MockAgendaService(response) {
-    this.response = response;
-  
-    var mockNext = function () {
-      return {
-        then: function (callback) {
-          callback(this.response);
-        }.bind(this)
-      };
-    }.bind(this);
-  
-    return {
-      next: mockNext
-    };
-  }
 });
