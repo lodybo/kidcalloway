@@ -1,6 +1,6 @@
 'use strict';
 
-fdescribe('Service: DiscographyService', function () {
+describe('Service: DiscographyService', function () {
   beforeEach(module('kidCallowayApp'));
 
   var discographyService, httpBackend;
