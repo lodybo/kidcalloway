@@ -1,0 +1,88 @@
+bio {
+  display: block;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 15px;
+
+  h1 {
+    text-align: center;
+  }
+
+  .copy-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .copy {
+    width: 100%;
+
+    &:first-of-type {
+      margin-bottom: 15px;
+    }
+  }
+
+  .band {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    figure {
+      display: inline-block;
+      margin: 0 auto 15px;
+      width: 220px;
+    }
+
+    figcaption {
+      text-align: center;
+      margin-top: 10px;
+
+      p {
+        font-weight: bold;
+        margin: 0;
+      }
+
+      small {
+        font-style: italic;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 320px;
+    }
+  }
+
+  @media (min-width: 550px) {
+    .band {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .band {
+      flex-direction: row;
+      flex-wrap: nowrap;
+    
+      figure {
+        width: auto;
+      }
+    }
+  }
+
+  @media (min-width: 630px) {
+    .copy-wrapper {
+      flex-direction: row;
+    }
+
+    .copy {
+      width: 48%;
+
+      &:first-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

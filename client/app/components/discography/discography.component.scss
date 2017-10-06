@@ -1,0 +1,48 @@
+discography {
+  display: block;
+
+  .cover {
+    margin-bottom: 25px;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .track-list {
+   padding: 0;
+    list-style-position: inside;
+
+    li {
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      border-bottom: #919191 solid 1px;
+    }
+  }
+
+  .track-name {
+    margin-left: 15px;
+  }
+
+  .track-length {
+    font-style: normal;
+    color: #919191;
+    font-size: 0.8em;
+    float: right;
+  }
+
+  .shops {
+    margin-top: 25px;
+    padding: 0;
+    list-style: none;
+    
+    display: flex;
+    justify-content: space-around;
+
+    img {
+      width: 50px;
+      height: auto;
+    }
+  }
+}

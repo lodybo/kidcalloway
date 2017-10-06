@@ -20,6 +20,20 @@ angular.module('kidCallowayApp')
             id: gigID
         }).$promise;
     };
+
+    var _next = function () {
+        var endpoint = $resource(apiURL + 'next');
+
+        return endpoint.get().$promise.then(function (gig) {
+            var result = gig.toJSON();
+            
+            if (!result.message) {
+                return result;
+            }
+
+            return;
+        });
+    };
     
     var _addGig = function (gig) {
         // First: if 'ticket', 'facebook' and 'details' are null, change that to a string form. We'll strip it on the server
@@ -107,6 +121,7 @@ angular.module('kidCallowayApp')
     // Return public functions
     return {
         get: __get,
+        next: _next,
         addGig: _addGig,
         editGig: _editGig,
         deleteGig: _deleteGig,

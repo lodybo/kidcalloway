@@ -17,11 +17,20 @@ exports.index = function(req, res) {
 exports.show = function(req, res) {
   Agenda.findOne({ _id: req.params.id }).exec().then(function (agenda) {
     if(!agenda) { return res.send(404); }
-    return res.json(agenda);
+    return res.status(200).json(agenda);
   }).catch(function (err) {
     handleError(err, res, req);
   });
 };
+
+exports.next = function (req, res) {
+  Agenda.findOne({}).exec().then(function(agenda) {
+    if (!agenda) { return res.status(200).json({message: 'No next gig found'}); }
+    return res.status(200).json(agenda);
+  }).catch(function (err) {
+    handleError(err, res, req);
+  });
+}
 
 // Creates a new agenda in the DB.
 exports.create = function(req, res) {

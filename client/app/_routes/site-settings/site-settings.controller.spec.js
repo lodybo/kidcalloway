@@ -24,7 +24,7 @@ describe('Controller: SiteSettingsCtrl', function () {
 
     httpBackend.expect("GET", "/api/settings/rollbarsettings").respond(200, {
       token: "123456",
-      environment: "dev"
+      environment: "test"
     });
 
     SiteSettingsCtrl = $controller('SiteSettingsCtrl', {

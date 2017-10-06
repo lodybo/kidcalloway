@@ -1,6 +1,6 @@
 {
   "name": "kid-calloway",
-  "version": "3.39.0",
+  "version": "3.41.0",
   "main": "server/app.js",
   "dependencies": {
     "body-parser": "^1.17.0",
@@ -18,7 +18,7 @@
     "lodash": "^4.17.4",
     "method-override": "^2.3.9",
     "moment": "^2.18.1",
-    "mongoose": "^4.10.8",
+    "mongoose": "^4.11.12",
     "morgan": "^1.8.2",
     "node-schedule": "^1.2.3",
     "passport": "^0.3.2",

@@ -47,7 +47,7 @@ describe('Service: AgendaService', function () {
 
     httpBackend.expect("GET", "/api/settings/rollbarsettings").respond(200, {
       token: "1234567890",
-      environment: "dev"
+      environment: "test"
     });
     httpBackend.flush();
   }));
@@ -90,6 +90,32 @@ describe('Service: AgendaService', function () {
     }).catch(function (error) {
       throw new Error(error);
     });
+  });
+
+  it('should get the next gig', function (done) {
+    httpBackend.expectGET("/api/agenda/next").respond(200, response[0]);
+    
+    var promise = AgendaService.next();
+
+    promise.then(function (gig) {
+      expect(gig).toEqual(response[0]);
+      done();
+    }).catch(done.fail);
+
+    httpBackend.flush();
+  });
+
+  it('should return "undefined" if there is no next gig', function (done) {
+    httpBackend.expectGET("/api/agenda/next").respond(200, {message: 'No next gig found'});
+
+    var promise = AgendaService.next();
+
+    promise.then(function (gig) {
+      expect(gig).toBeUndefined();
+      done();
+    }).catch(done.fail);
+
+    httpBackend.flush();
   });
 
   it("should add a gig", function () {
