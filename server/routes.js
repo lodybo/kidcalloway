@@ -32,8 +32,8 @@ module.exports = function(app) {
   // app.route('/*')
   app.route('/')
     .get(function(req, res) {
-      // var rootDir = process.env.NODE_ENV === 'production' ? '../public' : '../client';
-      // res.sendFile(path.join(__dirname, rootDir, 'index.html'));
-      res.sendfile(app.get('appPath') + '/index.html');
+      var rootDir = process.env.NODE_ENV === 'production' ? '../public' : '../client';
+      res.sendFile(path.join(__dirname, rootDir, 'index.html'));
+      // res.sendfile(app.get('appPath') + '/index.html');
     });
 };

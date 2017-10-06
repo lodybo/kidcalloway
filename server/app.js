@@ -48,7 +48,7 @@ if (process.env.NODE_ENV === 'production') {
   app.all('/', function(req, res, next) {
     console.log('In redirect', req.headers.host, req.headers.host.slice(0, 3));
     if (req.headers.host.slice(0, 3) !== 'www') {
-      // res.redirect(301, 'https://www.' + req.headers.host + req.url);
+      res.redirect(301, 'https://www.' + req.headers.host + req.url);
     } else {
       next();
     }
