@@ -17,7 +17,7 @@ module.exports = function(app) {
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth'));
-  
+
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);
@@ -32,7 +32,8 @@ module.exports = function(app) {
   // app.route('/*')
   app.route('/')
     .get(function(req, res) {
-      var rootDir = process.env.NODE_ENV === 'production' ? '../public' : '../client';
-      res.sendFile(path.join(__dirname, rootDir, 'index.html'));
+      // var rootDir = process.env.NODE_ENV === 'production' ? '../public' : '../client';
+      // res.sendFile(path.join(__dirname, rootDir, 'index.html'));
+      res.sendfile(app.get('appPath') + '/index.html');
     });
 };
