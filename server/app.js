@@ -47,7 +47,8 @@ var server = require('http').createServer(app);
 if (process.env.NODE_ENV === 'production') {
   app.all('/', function(req, res, next) {
     console.log('In redirect', req.headers.host, req.headers.host.slice(0, 3));
-    if (req.headers.host.slice(0, 3) !== 'www') {
+    // if (req.headers.host.slice(0, 3) !== 'www') {
+      if (req.headers.host === 'kidcalloway.nl') {
       res.redirect(301, 'https://www.' + req.headers.host + req.url);
     } else {
       next();
@@ -87,12 +88,12 @@ var cron = scheduler.scheduleJob(schedule, function () {
   // Find everything from one day back
   var today = moment().format("YYYY-MM-DD");
   var yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
-  
+
   // Now set the times for both days to 0:00
   // For this, we're doing a "dirty"" string concatenation
   var todayMidnightString = today + "T00:00:00.000Z";
   var yesterdayMidnightString = yesterday + "T00:00:00.000Z";
-  
+
   updateAgenda(yesterdayMidnightString, todayMidnightString);
 });
 
@@ -110,7 +111,7 @@ function updateAgenda(yesterday, today) {
       rollbar.handleError(err);
       return;
     }
-    
+
     rollbar.reportMessageWithPayloadData("Succeeded in updating played gigs", {
       level: "info",
       mongoResponse: response
