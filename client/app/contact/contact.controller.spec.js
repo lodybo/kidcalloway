@@ -4,7 +4,6 @@ describe('Controller: ContactCtrl', function () {
 
   // load the controller's module
   beforeEach(module('kidCallowayApp'));
-  beforeEach(module('app/contact/contact.html'));
 
   var ContactCtrl, scope, elemPhone, elemMail, httpBackend;
 

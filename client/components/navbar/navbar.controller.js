@@ -4,22 +4,22 @@ angular.module('kidCallowayApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth, $window, $timeout) {
     $scope.menu = [{
       'title': 'Live',
-      'link': '!#live',
+      'link': '#live',
       'restriction': 'all',
       'icon': 'music',
     }, {
       'title': 'Birth',
-      'link': '!#birth',
+      'link': '#birth',
       'restriction': 'all',
       'icon': 'mars',
     }, {
-      'title': 'Experience',
-      'link': '!#experience',
+      'title': 'Albums',
+      'link': '#albums',
       'restriction': 'all',
-      'icon': 'play',
+      'icon': 'headphones',
     }, {
       'title': 'Contact',
-      'link': '!#contact',
+      'link': '#contact',
       'restriction': 'all',
       'icon': 'envelope',
     }, {
@@ -82,7 +82,7 @@ angular.module('kidCallowayApp')
       // We want the menu to show after the user has scrolled past the logo
       // So we need to know the position and height of the logo, the current scroll position and whether we've passed the threshold with the logo
       var logo = {
-        el: angular.element(".kidc-logo"),
+        el: $(".kidc-logo"),
       };
       logo.top = logo.el.position().top;
       logo.height = logo.el.height();
@@ -92,7 +92,7 @@ angular.module('kidCallowayApp')
       var currentScrollPosition = $window.pageYOffset;
       
       // Get the navbar
-      var navbar = angular.element(".navbar.navbar-fixed-top");
+      var navbar = $(".navbar.navbar-fixed-top");
       
       // Check if we've passed the threshold in our current scroll position
       if (currentScrollPosition > logo.threshold) {

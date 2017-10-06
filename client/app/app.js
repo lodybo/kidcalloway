@@ -11,10 +11,10 @@ angular.module('kidCallowayApp', [
   'tandibar/ng-rollbar'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
-    $routeProvider
-      .otherwise({
-        redirectTo: '/'
-      });
+    // $routeProvider
+    //   .otherwise({
+    //     redirectTo: '/'
+    //   });
 
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');

@@ -4,16 +4,6 @@ angular.module('kidCallowayApp')
   .service('AgendaService', function ($resource) {
     var apiURL = "/api/agenda/";
     
-    // *** Private methods
-    // Switch between get and getAll based on args
-    var __get = function (id) {
-        if (id) {
-            return _getOne(id);
-        }
-        
-        return _getAll();
-    };
-    
     // *** Public methods
     var _getAll = function() {
         // Get all records and return them
@@ -29,6 +19,20 @@ angular.module('kidCallowayApp')
         return endpoint.get({
             id: gigID
         }).$promise;
+    };
+
+    var _next = function () {
+        var endpoint = $resource(apiURL + 'next');
+
+        return endpoint.get().$promise.then(function (gig) {
+            var result = gig.toJSON();
+            
+            if (!result.message) {
+                return result;
+            }
+
+            return;
+        });
     };
     
     var _addGig = function (gig) {
@@ -63,9 +67,11 @@ angular.module('kidCallowayApp')
         // First: get the existing gig from the server
         var endpoint = $resource(apiURL + "id/:id", {
             id: "@id"
+        }, {
+            'update': { method:'PUT' }
         });
 
-        return endpoint.save({
+        return endpoint.update({
             id: newGig.id
         }, {
             date: newGig.date,
@@ -101,10 +107,21 @@ angular.module('kidCallowayApp')
             id: id
         }).$promise;
     };
+
+    // *** Private methods
+    // Switch between get and getAll based on args
+    var __get = function (id) {
+        if (id) {
+            return _getOne(id);
+        }
+        
+        return _getAll();
+    };
     
     // Return public functions
     return {
         get: __get,
+        next: _next,
         addGig: _addGig,
         editGig: _editGig,
         deleteGig: _deleteGig,

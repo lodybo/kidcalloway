@@ -6,7 +6,7 @@ describe('Service: AgendaService', function () {
   beforeEach(module('kidCallowayApp'));
 
   // instantiate service
-  var AgendaService, httpBackend, q;
+  var AgendaService, httpBackend, q, timeout;
   var response = [
     {
       id: 0,
@@ -39,21 +39,26 @@ describe('Service: AgendaService', function () {
     }
   ];
 
-  beforeEach(inject(function (_AgendaService_, $httpBackend, $rootScope, $q) {
+  beforeEach(inject(function (_AgendaService_, $httpBackend, $rootScope, $q, $timeout) {
     httpBackend = $httpBackend;
     AgendaService = _AgendaService_;
     q = $q;
+    timeout = $timeout;
 
     httpBackend.expect("GET", "/api/settings/rollbarsettings").respond(200, {
       token: "1234567890",
-      environment: "dev"
+      environment: "test"
     });
     httpBackend.flush();
   }));
 
   afterEach(function() {
-     httpBackend.verifyNoOutstandingExpectation();
-     httpBackend.verifyNoOutstandingRequest();
+    // $httpBackend.verifyNoOutstandingExpectation() triggers a $digest, but if a $digest is already running from $httpBackend.flush() (which is used in our tests)
+    // then we'll get a "$digest already in progress" error. To avoid this, we wrap the verifyX() methods in a timeout so that they're run after the $digest is complete
+    timeout(function () {
+      httpBackend.verifyNoOutstandingExpectation();
+      httpBackend.verifyNoOutstandingRequest();
+    });
    });
 
   it("should get all the gigs", function () {
@@ -85,6 +90,32 @@ describe('Service: AgendaService', function () {
     }).catch(function (error) {
       throw new Error(error);
     });
+  });
+
+  it('should get the next gig', function (done) {
+    httpBackend.expectGET("/api/agenda/next").respond(200, response[0]);
+    
+    var promise = AgendaService.next();
+
+    promise.then(function (gig) {
+      expect(gig).toEqual(response[0]);
+      done();
+    }).catch(done.fail);
+
+    httpBackend.flush();
+  });
+
+  it('should return "undefined" if there is no next gig', function (done) {
+    httpBackend.expectGET("/api/agenda/next").respond(200, {message: 'No next gig found'});
+
+    var promise = AgendaService.next();
+
+    promise.then(function (gig) {
+      expect(gig).toBeUndefined();
+      done();
+    }).catch(done.fail);
+
+    httpBackend.flush();
   });
 
   it("should add a gig", function () {
@@ -138,7 +169,7 @@ describe('Service: AgendaService', function () {
       details: response[1].details
     };
 
-    httpBackend.expect("POST", "/api/agenda/id/" + editedGig.id, {
+    httpBackend.expect("PUT", "/api/agenda/id/" + editedGig.id, {
       date: response[1].date,
       time: response[1].time,
       venue: "Edited Venue Name",

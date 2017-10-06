@@ -30,7 +30,11 @@ if (process.env.NODE_ENV === "test") {
 mongoose.Promise = global.Promise;
 
 // Connect to database
-mongoose.connect(config.mongo.uri, config.mongo.options);
+mongoose.connect(config.mongo.uri, config.mongo.options).then((success) => {
+  console.log(`after connect, success`);
+}, (error) => {
+  console.log(`after connect, error: ${error}`);
+});
 
 // Populate DB with sample data
 if(config.seedDB) { require('./config/seed'); }
@@ -38,6 +42,19 @@ if(config.seedDB) { require('./config/seed'); }
 // Setup server
 var app = express();
 var server = require('http').createServer(app);
+
+// Redirect root domain to https://www on production
+if (process.env.NODE_ENV === 'production') {
+  app.all('/', function(req, res, next) {
+    console.log('In redirect', req.headers.host, req.headers.host.slice(0, 3));
+    if (req.headers.host.slice(0, 3) !== 'www') {
+      res.redirect(301, 'https://www.' + req.headers.host + req.url);
+    } else {
+      next();
+    }
+  });
+}
+
 require('./config/express')(app);
 require('./routes')(app);
 

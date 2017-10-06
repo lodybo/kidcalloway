@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Born Again Man",
+    "coverImage": "assets/images/KidC_cover.jpg",
+    "releaseDate": "23-10-2015",
+    "length": "10 mins",
+    "trackList": [
+      {
+        "name": "Achin' for Your Love",
+        "length": "3:24"
+      },
+      {
+        "name": "Be Mine",
+        "length": "3:12"
+      },
+      {
+        "name": "Born Again Man",
+        "length": "3:58"
+      }
+    ],
+    "available": true,
+    "shops": [
+      {
+        "name": "Spotify",
+        "url": "https://open.spotify.com/album/5BgETtwK8ewldo7UNzBIT0"
+      },
+      {
+        "name": "Amazon",
+        "url": "https://www.amazon.com/Born-Again-Man-Kid-Calloway/dp/B016DVLAN0/"
+      },
+      {
+        "name": "Apple Music",
+        "url": "https://itunes.apple.com/us/album/born-again-man-single/id1047306577"
+      }
+    ]
+  },
+  {
+    "name": "II",
+    "coverImage": "assets/images/ep-II-cover.jpg",
+    "releaseDate": "21-09-2017",
+    "length": "10 mins",
+    "trackList": [
+      {
+        "name": "Witch",
+        "length": "2:54"
+      },
+      {
+        "name": "Little Billy",
+        "length": "3:40"
+      },
+      {
+        "name": "Laurels",
+        "length": "4:07"
+      }
+    ],
+    "available": true,
+    "shops": [
+      {
+        "name": "Spotify",
+        "url": "https://open.spotify.com/album/2C3Rf7mXqreLtqcC9nVa6E"
+      },
+      {
+        "name": "Amazon",
+        "url": "https://www.amazon.com/II-Kid-Calloway/dp/B075YBNJDG/"
+      },
+      {
+        "name": "Apple Music",
+        "url": "https://itunes.apple.com/us/album/ii-single/id1281318528"
+      }
+    ]
+  }
+]

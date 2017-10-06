@@ -1,11 +1,13 @@
 {
     "version": "0.2.0",
     "configurations": [
+
         {
             "name": "Launch NodeJS",
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/server/app.js",
+            "protocol": "inspector",
             "stopOnEntry": false,
             "args": [],
             "cwd": "${workspaceRoot}",
@@ -17,7 +19,7 @@
             "env": {
                 "NODE_ENV": "development",
                 "MLAB_USER": "db_admin",
-                "MLAB_PASSWORD": "KC_Adm1n",
+                "MLAB_PASSWORD": "KC_Adm1n!",
                 "MLAB_DATABASE": "kidcalloway-development",
                 "ROLLBAR_SERVER_TOKEN": "fe022319eb0048178b18ad1c3b132b5a",
                 "ROLLBAR_CLIENT_TOKEN": "913a580ef371404c89b853df64a2115a",
@@ -27,6 +29,16 @@
             "console": "internalConsole",
             "sourceMaps": false,
             "outDir": null
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Karma",
+            "program": "${workspaceRoot}/node_modules/.bin/karma",
+            "args": [
+                "start",
+                "karma.conf.js"
+            ]
         },
         {
             "name": "Attach NodeJS",

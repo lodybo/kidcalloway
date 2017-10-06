@@ -17,7 +17,10 @@ describe('Directive: loader', function () {
     scope = $rootScope.$new();
     httpBackend = $httpBackend;
 
-    httpBackend.expect("GET", "/api/settings/rollbarsettings").respond(200, {});
+    httpBackend.expect("GET", "/api/settings/rollbarsettings").respond(200, {
+      token: "1234567890",
+      environment: "test"
+    });
     httpBackend.flush();
   }));
 

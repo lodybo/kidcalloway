@@ -32,7 +32,7 @@ module.exports = function (config) {
 
     preprocessors: {
       '**/*.jade': 'ng-jade2js',
-      '**/*.html': 'html2js'
+      '**/*.html': 'ng-html2js'
     },
 
     ngHtml2JsPreprocessor: {
@@ -66,7 +66,7 @@ module.exports = function (config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ["PhantomJS"],
+    browsers: ["ChromeHeadless"],
 
 
     // Continuous Integration mode

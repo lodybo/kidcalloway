@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <base href="/">
+  <title>KC Component Playground</title>
+  <link href="app/app.css" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box }
+
+    body {
+      font-family: Tahoma, Verdana, Geneva, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .component-wrapper {
+      padding: 0 15px;
+      margin: 50px auto;
+    }
+
+    .component-wrapper > h1 {
+      text-align: center;
+      border-bottom: solid #ded 1px;
+      margin-bottom: 15px;
+      padding-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="component-wrapper" ng-app="kidCallowayApp">
+    <h1>KC's Component Playground</h1>
+    <div class="component">
+      <div class="container">
+        <div class="col-xs-12 col-sm-6">
+          <discography album-name="II"></discography>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+          <discography album-name="Born Again Man"></discography>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../bower_components/angular/angular.js"></script>
+  <script src="../../bower_components/jquery/dist/jquery.js"></script>
+  <script src="../../bower_components/angular-resource/angular-resource.js"></script>
+  <script src="../../bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="../../bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="../../bower_components/angular-route/angular-route.js"></script>
+  <script src="../../bower_components/angular-messages/angular-messages.js"></script>
+  <script src="../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="../../bower_components/lodash/lodash.js"></script>
+  <script src="../../bower_components/ng-rollbar/ng-rollbar.js"></script>
+
+  <script src="../../app/app.js"></script>
+  <script src="../../components/auth/auth.service.js"></script>
+  <script src="../../components/auth/user.service.js"></script>
+  <script src="../../app/_services/DiscographyService/DiscographyService.service.js"></script>
+
+  <script src="../../app/components/discography/discography.component.js"></script>
+</body>
+</html>

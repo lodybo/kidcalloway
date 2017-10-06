@@ -41,7 +41,7 @@ module.exports = function (grunt) {
       dev: {
         options: {
           script: 'server/app.js',
-          debug: true
+          debug: false
         }
       },
       prod: {
@@ -436,7 +436,8 @@ module.exports = function (grunt) {
       },
       tdd: {
         configFile: 'karma.conf.js',
-        autoWatch: true
+        autoWatch: true,
+        browsers: ['Chrome']
       }
     },
 
