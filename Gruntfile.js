@@ -351,7 +351,7 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.client %>',
           dest: '<%= yeoman.dist %>/public',
           src: [
-            '*.{ico,png,txt}',
+            '*.{ico,png,txt,json}',
             '.htaccess',
             'bower_components/**/*',
             'assets/images/{,*/}*.{webp}',
@@ -549,7 +549,7 @@ module.exports = function (grunt) {
         }
       }
     },
-    
+
     // Setup pagespeed and ngrok for pagespeed testing
     pagespeed: {
       options: {
@@ -571,18 +571,18 @@ module.exports = function (grunt) {
       }
     }
   });
-  
+
   grunt.registerTask("pagespeed-test", "Run pagespeed with ngrok", function () {
     var done = this.async();
     var port = 9292;
     var ngrok = require("ngrok");
-    
+
     ngrok.connect(port, function (err, url) {
       if (err !== null) {
         grunt.fatal.fail(err);
         return done();
       }
-      
+
       grunt.config.set("pagespeed.options.url", url);
       grunt.task.run("pagespeed");
       done();
@@ -632,7 +632,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:sass', 
+        'injector:sass',
         'concurrent:server',
         'injector',
         'wiredep',
@@ -644,7 +644,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'env:all',
-      'injector:sass', 
+      'injector:sass',
       'concurrent:server',
       'injector',
       'wiredep',
@@ -673,7 +673,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:sass', 
+        'injector:sass',
         'concurrent:test',
         'injector',
         'autoprefixer',
@@ -686,7 +686,7 @@ module.exports = function (grunt) {
         'clean:server',
         'env:all',
         'env:test',
-        'injector:sass', 
+        'injector:sass',
         'concurrent:test',
         'injector',
         'wiredep',
@@ -704,7 +704,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'injector:sass', 
+    'injector:sass',
     'concurrent:dist',
     'injector',
     'wiredep',

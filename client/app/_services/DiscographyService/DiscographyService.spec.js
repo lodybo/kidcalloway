@@ -65,7 +65,7 @@ describe('Service: DiscographyService', function () {
   });
 
   it('should get all gigs', function () {
-    httpBackend.expect('GET', '/assets/discography.json').respond(200, successResponse);
+    httpBackend.expect('GET', '/discography.json').respond(200, successResponse);
 
     var call = discographyService.get();
     httpBackend.flush();
@@ -78,7 +78,7 @@ describe('Service: DiscographyService', function () {
   });
 
   it('should get one specific gig', function () {
-    httpBackend.expect('GET', '/assets/discography.json').respond(200, successResponse);
+    httpBackend.expect('GET', '/discography.json').respond(200, successResponse);
 
     var call = discographyService.get('II');
     httpBackend.flush();

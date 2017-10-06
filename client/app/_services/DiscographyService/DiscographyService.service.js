@@ -2,7 +2,7 @@
 
 angular.module('kidCallowayApp')
   .service('DiscographyService', function ($resource) {
-    var apiUrl = "/assets/discography.json";
+    var apiUrl = "/discography.json";
 
     function _getAll() {
       var endpoint = $resource(apiUrl);
