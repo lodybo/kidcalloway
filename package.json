@@ -21,7 +21,7 @@
     "lodash": "^4.17.4",
     "method-override": "^2.3.9",
     "moment": "^2.18.1",
-    "mongoose": "^4.11.12",
+    "mongoose": "^5.7.5",
     "morgan": "^1.8.2",
     "node-schedule": "^1.2.3",
     "passport": "^0.3.2",
