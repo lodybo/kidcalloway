@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === "test") {
 mongoose.Promise = global.Promise;
 
 // Connect to database
-mongoose.connect(config.mongo.uri, config.mongo.options).then((success) => {
+mongoose.connect(config.mongo.uri, config.mongo.options).then(() => {
   console.log(`after connect, success`);
 }, (error) => {
   console.log(`after connect, error: ${error}`);
